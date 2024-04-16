@@ -216,8 +216,8 @@ control_5_MUNSON <- control_5 %>%
          "fire_year" = Beaver_P_3) %>% 
   select(-c(system.index, Beaver_P_1, .geo))
 
-control_6 <- data.frame(beaver_6)
-control_6_PAIGE <- beaver_6 %>% 
+control_6 <- data.frame(control_6)
+control_6_PAIGE <- control_6 %>% 
   rename("dam_num" = Beaver_P_5,
          "fire_name" = Beaver_P_2,
          "fire_year" = Beaver_P_3) %>% 
@@ -455,21 +455,56 @@ write.csv(control_NDWI_long, "Newdata/control_NDWI_long.csv")
 
 # Investigate individual fires --------------------------------------------
 
-processed_list_control_NDWI <- list(control_0_NDWI, control_1_NDWI, control_2_NDWI, control_3_NDWI, 
-                                    control_4_NDWI, control_5_NDWI, control_6_NDWI, control_7_NDWI, 
-                                    control_8_NDWI, control_9_NDWI, control_10_NDWI)
+#processed_list_control_NDWI <- list(control_0_NDWI, control_1_NDWI, control_2_NDWI, control_3_NDWI, 
+#                                    control_4_NDWI, control_5_NDWI, control_6_NDWI, control_7_NDWI, 
+#                                    control_8_NDWI, control_9_NDWI, control_10_NDWI)
+
+beaver_6_NDVI
+control_6_NDVI
 
 
-
-
-beaver_NDVI_combined <- bind_rows(processed_list_beaver_NDVI, .id = "Dataset")
-str(beaver_NDVI_combined)
-
-
-beaver_NDVI_long <- tidyr::pivot_longer(beaver_NDVI_combined, cols = starts_with("X"), 
+beaver_6_NDVI_long <- tidyr::pivot_longer(beaver_6_NDVI, cols = starts_with("X"), 
                                         names_to = "Point", values_to = "NDVI")
 
+beaver_6_NDVI_long <- beaver_6_NDVI_long %>% 
+  mutate("point_type" = rep("treatment",  n = 2479))
 
+
+control_6_NDVI_long <- tidyr::pivot_longer(control_6_NDVI, cols = starts_with("X"), 
+                                          names_to = "Point", values_to = "NDVI")
+
+control_6_NDVI_long <- control_6_NDVI_long %>% 
+  mutate("point_type" = rep("control",  n = 2479))
+
+
+combined_dataset <- bind_rows(beaver_6_NDVI_long, control_6_NDVI_long, .id = "Dataset")
+
+combined_dataset$point_type <- as.factor(combined_dataset$point_type)
+combined_dataset <- data.frame(combined_dataset)
+
+
+ggplot(combined_dataset, aes(x = DOY, y = NDVI)) +  #col = factor(point_type)
+  geom_smooth(aes(group = Point), se=F, col = "grey", alpha = 0.4)+
+  geom_point(aes(col = Point), size = 2)+
+  geom_smooth(se=T, fill = "lightblue", alpha = 0.6)+
+  labs(title = "Paige Fire", x = "", y = "Normalized Difference Vegetation Index", color = "Point") +
+  scale_color_viridis(discrete = TRUE) +  # Use the Viridis color palette
+  theme_cowplot()+
+  theme(legend.position = "none")
+
+
+str(combined_dataset)
+
+#This doesn't plot well because the treatment and control NDVI is pretty much identical for each area so they are overlapping..... 
+ggplot(combined_dataset, aes(x = DOY, y = NDVI)) +  #col = factor(point_type)
+  geom_smooth(aes(col = point_type, col = point_type), se = F, alpha = 0.8, linewidth = 2)+
+  geom_point(aes(shape = point_type, col = point_type), size = 3, alpha = 0.8)+
+  scale_color_manual(values = c("control" = "lightblue2", "treatment" = "red3"))+
+  #geom_smooth(se=T, fill = "lightblue", alpha = 0.6)+
+  labs(title = "Paige Creek Fire", x = "", y = "Normalized Difference Vegetation Index", color = "Point") +
+  #scale_color_viridis(discrete = TRUE) +  
+  theme_cowplot()#+
+  #theme(legend.position = "none")
 
 
 # Plot the time series ----------------------------------------------------
@@ -486,12 +521,12 @@ control_NDWI_long <- read.csv("Newdata/control_NDWI_long.csv")
 
 beaver_NDVI_plot <- ggplot(beaver_NDVI_long, aes(x = DOY, y = NDVI, group = Point, color = Point)) +
   geom_point()+
-  geom_smooth(se = F)+
+  geom_smooth(se = F,)+
   labs(title = "Beaver Ponds", x = "", y = "Normalized Difference Vegetation Index", color = "Point") +
   scale_color_viridis(discrete = TRUE) +  # Use the Viridis color palette
   theme_cowplot()+
   theme(legend.position = "none")
-#beaver_NDVI_plot
+beaver_NDVI_plot
 
 
 control_NDVI_plot <- ggplot(control_NDVI_long, aes(x = DOY, y = NDVI, group = Point, color = Point)) +
