@@ -73,8 +73,8 @@ Pond_processing <- function(x) {
 }
 
 
-#beaver_0.1 <- Pond_processing(beaver_0)
-#beaver_0.1
+beaver_0.1 <- Pond_processing(beaver_0)
+beaver_0.1
 
 processed_list <- lapply(input_list, Pond_processing)
 
