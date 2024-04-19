@@ -1,11 +1,10 @@
 ################################ Will Samuel ###################################
-################## Cambridge Bay stream temperature modeling ###################
-############################ Started on 4/9/2024 ##############################
+######### Beaver Riparian Resilience to Wildfire in a boreal biome #############
+############################ Started on 4/11/2024 ##############################
 
 
 library(tidyverse) #for data manipulation
 library(lubridate) #for data manipulation
-#library(data.table) #Changes format to help the analysis run quicker
 library(ggplot2)  #for plotting
 library(patchwork) #for making panels
 library(cowplot)  #for plotting
@@ -837,7 +836,7 @@ F0_NDWI_plot <- ggplot(F0_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
   labs(title = "Iniaknuk Lake Fire", x = "", y = "NDWI", 
        color = "", shape = "") +
   theme_cowplot()+
-  theme(legend.position = c(0.75, 0.1))+
+  theme(legend.position = c(0.75, 0.15))+
   guides(color = guide_legend(override.aes = list(shape = c(24, 21)),
                               title = NULL),
          fill = guide_legend(override.aes = list(shape = c(21, 24), color = c("red3", "deepskyblue2")),
@@ -926,7 +925,7 @@ F8_NDWI_plot <- ggplot(F8_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
   scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  labs(title = "Old Grouch Top Fire", x = "Day of Year", y = "", color = "Point") +
+  labs(title = "Old Grouch Top Fire", x = "", y = "", color = "Point") +
   theme_cowplot()+
   theme(legend.position = "none")
 
@@ -936,7 +935,7 @@ F9_NDWI_plot <- ggplot(F9_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
   scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  labs(title = "Victoria Mountain Fire", x = "Day of Year", y = "", color = "Point") +
+  labs(title = "Victoria Mountain Fire", x = "", y = "", color = "Point") +
   theme_cowplot()+
   theme(legend.position = "none")
 
@@ -1139,6 +1138,17 @@ ggsave(plot = Time_series_panel_2,
 
 
 
+
+
+
+
+
+# Summarize the data for each wildfire ------------------------------------
+
+
+
+
+# Analyzing the time series -----------------------------------------------
 
 
 
