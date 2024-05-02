@@ -925,6 +925,7 @@ F8_NDWI_plot <- ggplot(F8_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
   scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   labs(title = "H (Old Grouch Top Fire)", x = "", y = "", color = "Point") +
   theme_cowplot()+
   theme(legend.position = "none")
@@ -933,7 +934,7 @@ F9_NDWI_plot <- ggplot(F9_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
   geom_point(aes(shape = point_type, fill = point_type, group = point_type), size = 3, alpha = 0.6, col = "black")+
   scale_shape_manual(values = c("control" = 24, "treatment" = 21)) +  # Different shapes for control and treatment
   scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
+  geom_smooth(aes(col = point_type, group = point_type),  alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   labs(title = "I (Victoria Mountain Fire)", x = "", y = "", color = "Point") +
   theme_cowplot()+
@@ -1052,7 +1053,7 @@ individual_fires_NDVI_2 <- (F0_NDVI_plot + F1_NDVI_plot + F2_NDVI_plot) /
                            (F10_NDVI_plot + beaver_NDVI_plot + control_NDVI_plot)
 
 
-Make sure to adjust the axis labels on the new plots before saving
+#Make sure to adjust the axis labels on the new plots before saving
 ggsave(plot = individual_fires_NDVI_2, 
        "Figures/individual_fires_NDVI_2.jpeg", 
        width = 40, 
