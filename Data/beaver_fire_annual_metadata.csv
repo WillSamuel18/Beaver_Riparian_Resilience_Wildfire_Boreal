@@ -1,0 +1,9 @@
+Field,Description
+ID,"When combined with Type, a unique identifier. Fires are ID by their name, beavers and control points have numbers. Beaver point and control points with the same numbers are on the same stream or otherwise close spatially."
+Associated_fire,The name of the fire that the polygon overlaps with
+Type,"The type of the polygon. Fire, Beaver, or Control. Fire is a large burned area polygon. Beaver is a beaver pond. Control is a manually selected location on a stream were it was not visibly influenced by a beaver dam."
+Fire_Year,The year that the Associated_fire occurred
+ndvi,"The average normalized difference vegetation index of the polygon, as measured from a cloud-masked mean mosaic of Sentinel2 Level 1c images from June 1 to August 31 of the Measurement_year. =(NIR-Red)/(NIR+Red)"
+ndwi,"The average normalized difference water index of the polygon, as measured from a cloud-masked mean mosaic of Sentinel2 Level 1c images from June 1 to August 31 of the Measurement_year. =(Green-NIR)/(Green+NIR)"
+Measurement_year,The year that NDVI and NDWI measurements were collected from
+yrs_post_fire, = Measurement_year - Fire_Year
