@@ -16,8 +16,6 @@ library(viridis)  #For plotting color palettes
 set.seed(1)  
 
 
-setwd("C:/Users/npwil/OneDrive/Desktop/UAF Research Work/UAF Research Projects/Beaver riparian resilience/Beaver_Riparian_Resilience_Wildfire_Boreal")
-
 rm(list=ls(all=TRUE)) # clear the working environment
 
 
@@ -616,6 +614,7 @@ F0_NDVI_plot <- ggplot(F0_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_t
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   labs(title = "A (Iniaknuk Lake Fire)", x = "", y = "NDVI", 
        color = "", shape = "") +
+  scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
   theme(legend.position = c(0.75, 0.95))+
   guides(color = guide_legend(override.aes = list(shape = c(24, 21)),
@@ -634,6 +633,7 @@ F1_NDVI_plot <- ggplot(F1_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_t
   geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   labs(title = "B (Hogatza River Fire)", x = "", y = "", color = "Point") +
+  scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
   
@@ -645,6 +645,7 @@ F2_NDVI_plot <- ggplot(F2_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_t
   geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   labs(title = "C (Hog Fire)", x = "", y = "", color = "Point") +
+  scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
 
@@ -666,6 +667,7 @@ F4_NDVI_plot <- ggplot(F4_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_t
   geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   labs(title = "D (Sunshine Mountain Fire)", x = "", y = "NDVI", color = "Point") +
+  scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
 
@@ -676,6 +678,7 @@ F5_NDVI_plot <- ggplot(F5_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_t
   geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   labs(title = "E (Munson Creek Fire)", x = "", y = "", color = "Point") +
+  scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
 
@@ -687,6 +690,7 @@ F6_NDVI_plot <- ggplot(F6_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_t
   geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   labs(title = "F (Paige Mountain Fire)", x = "", y = "", color = "Point") +
+  scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
 
@@ -697,6 +701,7 @@ F7_NDVI_plot <- ggplot(F7_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_t
   geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   labs(title = "G (Hurst Creek Fire)", x = "", y = "NDVI", color = "Point") +
+  scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
 
@@ -707,6 +712,7 @@ F8_NDVI_plot <- ggplot(F8_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_t
   geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   labs(title = "H (Old Grouch Top Fire)", x = "", y = "", color = "Point") +
+  scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
 
@@ -717,6 +723,7 @@ F9_NDVI_plot <- ggplot(F9_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_t
   geom_smooth(aes(col = point_type, fill = point_type, group = point_type), se = T, alpha = 0.4, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   labs(title = "I (Victoria Mountain Fire)", x = "", y = "", color = "Point") +
+  scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
 
@@ -727,6 +734,7 @@ F10_NDVI_plot <- ggplot(F10_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point
   geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   labs(title = "J (Little Mud River Fire)", x = "Day of Year", y = "NDVI", color = "Point") +
+  scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
 
@@ -835,6 +843,7 @@ F0_NDWI_plot <- ggplot(F0_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   labs(title = "A (Iniaknuk Lake Fire)", x = "", y = "NDWI", 
        color = "", shape = "") +
+  scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   theme_cowplot()+
   theme(legend.position = c(0.75, 0.15))+
   guides(color = guide_legend(override.aes = list(shape = c(24, 21)),
@@ -853,6 +862,7 @@ F1_NDWI_plot <- ggplot(F1_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
   geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   labs(title = "B (Hogatza River Fire)", x = "", y = "", color = "Point") +
+  scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
 
@@ -863,6 +873,7 @@ F2_NDWI_plot <- ggplot(F2_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
   scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   labs(title = "C (Hog Fire)", x = "", y = "", color = "Point") +
   theme_cowplot()+
   theme(legend.position = "none")
@@ -885,6 +896,7 @@ F4_NDWI_plot <- ggplot(F4_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
   geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   labs(title = "D (Sunshine Mountain Fire)", x = "", y = "NDWI", color = "Point") +
+  scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
 
@@ -895,6 +907,7 @@ F5_NDWI_plot <- ggplot(F5_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
   geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   labs(title = "E (Munson Creek Fire)", x = "", y = "", color = "Point") +
+  scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
 
@@ -906,6 +919,7 @@ F6_NDWI_plot <- ggplot(F6_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
   geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   labs(title = "F (Paige Mountain Fire)", x = "", y = "", color = "Point") +
+  scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
 
@@ -916,6 +930,7 @@ F7_NDWI_plot <- ggplot(F7_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
   geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   labs(title = "G (Hurst Creek Fire)", x = "", y = "NDWI", color = "Point") +
+  scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
 
@@ -926,6 +941,7 @@ F8_NDWI_plot <- ggplot(F8_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
   geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   labs(title = "H (Old Grouch Top Fire)", x = "", y = "", color = "Point") +
+  scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
 
@@ -936,6 +952,7 @@ F9_NDWI_plot <- ggplot(F9_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
   geom_smooth(aes(col = point_type, fill = point_type, group = point_type),  alpha = 0.4, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   labs(title = "I (Victoria Mountain Fire)", x = "", y = "", color = "Point") +
+  scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
 F9_NDWI_plot
@@ -947,6 +964,7 @@ F10_NDWI_plot <- ggplot(F10_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point
   geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   labs(title = "J (Little Mud River Fire)", x = "Day of Year", y = "NDWI", color = "Point") +
+  scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
 
@@ -995,6 +1013,7 @@ beaver_NDVI_plot <- ggplot(beaver_NDVI_long, aes(x = DOY, y = NDVI, group = Poin
   geom_smooth(se = F,)+
   labs(title = "K (Beaver Ponds)", x = "Day of Year", y = "", color = "Point") + #Normalized Difference Vegetation Index
   scale_color_viridis(discrete = TRUE) +  # Use the Viridis color palette
+  scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
 beaver_NDVI_plot
@@ -1005,6 +1024,7 @@ control_NDVI_plot <- ggplot(control_NDVI_long, aes(x = DOY, y = NDVI, group = Po
   geom_smooth(se = F)+
   labs(title = "L (Control)", x = "Day of Year", y = "", color = "Point") +
   scale_color_viridis(discrete = TRUE) +  # Use the Viridis color palette
+  scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
 #control_NDVI_plot
@@ -1016,6 +1036,7 @@ beaver_NDWI_plot <- ggplot(beaver_NDWI_long, aes(x = DOY, y = NDWI, group = Poin
   geom_smooth(se = F)+
   labs(title = "K (Beaver Ponds)", x = "Day of Year", y = "", color = "Point") +
   scale_color_viridis(option="G", discrete = TRUE) +
+  scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
 #beaver_NDWI_plot
@@ -1026,6 +1047,7 @@ control_NDWI_plot <- ggplot(control_NDWI_long, aes(x = DOY, y = NDWI, group = Po
   geom_smooth(se = F)+
   labs(title = "L (Control)", x = "Day of Year", y = "", color = "Point") +
   scale_color_viridis(option="G", discrete = TRUE) +
+  scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
 control_NDWI_plot
