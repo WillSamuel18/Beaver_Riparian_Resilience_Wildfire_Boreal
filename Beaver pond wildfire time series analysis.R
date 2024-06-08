@@ -689,7 +689,7 @@ F6_NDVI_plot <- ggplot(F6_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_t
   scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  labs(title = "F (Paige Mountain Fire)", x = "", y = "", color = "Point") +
+  labs(title = "F (Page Mountain Fire)", x = "", y = "", color = "Point") +
   scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
@@ -918,7 +918,7 @@ F6_NDWI_plot <- ggplot(F6_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
   scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
   geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
   scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  labs(title = "F (Paige Mountain Fire)", x = "", y = "", color = "Point") +
+  labs(title = "F (Page Mountain Fire)", x = "", y = "", color = "Point") +
   scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
@@ -1166,7 +1166,515 @@ ggsave(plot = Time_series_panel_2,
 
 
 
-# Summarize the data for each wildfire ------------------------------------
+# Summarize the burn severity data for each wildfire and sites -----------------
+
+Beaver_BurnSeverity_data <- read.csv("Data/Burn Severity Summaries/Beaver_Pond_Polygons_With_burn_Severity_ExportTable.csv")
+Control_BurnSeverity_data <- read.csv("Data/Burn Severity Summaries/Control_Polygons_With_burn_Severity_ExportTable.csv")
+Fires_BurnSeverity_data <- read.csv("Data/Burn Severity Summaries/Fire_perims_With_burn_Severity_ExportTable.csv")
+
+
+
+#Transform the fire data
+str(Fires_BurnSeverity_data)
+
+Fires_BurnSeverity_data <- Fires_BurnSeverity_data %>% 
+  select(Incid_Name, Percent_Unburned, Percent_Mild_Burn, Percent_Moderate_Burn, Percent_Severe_Burn) 
+
+
+Fires_BurnSeverity_data_LONG <- Fires_BurnSeverity_data %>%
+  pivot_longer(cols = starts_with("Percent"),
+               names_to = "Burn_Type",
+                values_to = "Percent") %>%
+  mutate(Burn_Type = recode(Burn_Type,
+                            Percent_Unburned = "Unburned",
+                            Percent_Mild_Burn = "Mild Burn",
+                            Percent_Moderate_Burn = "Moderate Burn",
+                            Percent_Severe_Burn = "Severe Burn"),
+         Type = "Entire Fire")
+
+
+#Transform the beaver data
+str(Beaver_BurnSeverity_data)
+
+
+Beaver_BurnSeverity_data <- Beaver_BurnSeverity_data %>% 
+  select(Beaver_Ponds_2020_Fire_Name, Percent_Unburned, Percent_Mild_Burn, 
+         Percent_Moderate_Burn, Percent_Severe_Burn) %>% 
+  rename(Incid_Name = Beaver_Ponds_2020_Fire_Name)
+
+
+Beaver_BurnSeverity_data_LONG <- Beaver_BurnSeverity_data %>%
+  pivot_longer(
+    cols = starts_with("Percent"),
+    names_to = "Burn_Type",
+    values_to = "Percent"
+  ) %>%
+  mutate(Burn_Type = recode(Burn_Type,
+                            Percent_Unburned = "Unburned",
+                            Percent_Mild_Burn = "Mild Burn",
+                            Percent_Moderate_Burn = "Moderate Burn",
+                            Percent_Severe_Burn = "Severe Burn"),
+         Type = "Beaver Ponds")
+
+
+
+
+#Transform the control data
+str(Control_BurnSeverity_data)
+
+
+Control_BurnSeverity_data <- Control_BurnSeverity_data %>% 
+  select(Beaver_Ponds_2020_Fire_Name, Percent_Unburned, Percent_Mild_Burn, 
+         Percent_Moderate_Burn, Percent_Severe_Burn) %>% 
+  rename(Incid_Name = Beaver_Ponds_2020_Fire_Name)
+
+
+Control_BurnSeverity_data_LONG <- Control_BurnSeverity_data %>%
+  pivot_longer(
+    cols = starts_with("Percent"),
+    names_to = "Burn_Type",
+    values_to = "Percent"
+  ) %>%
+  mutate(Burn_Type = recode(Burn_Type,
+                            Percent_Unburned = "Unburned",
+                            Percent_Mild_Burn = "Mild Burn",
+                            Percent_Moderate_Burn = "Moderate Burn",
+                            Percent_Severe_Burn = "Severe Burn"),
+         Type = "Control Sites")
+
+
+
+BS_data <- rbind(Fires_BurnSeverity_data_LONG, Beaver_BurnSeverity_data_LONG, Control_BurnSeverity_data_LONG)
+
+
+summary(Beaver_BurnSeverity_data_LONG)
+summary(Control_BurnSeverity_data_LONG)
+summary(Fires_BurnSeverity_data_LONG)
+
+
+BS_data2 <- BS_data %>%
+  group_by(Incid_Name, Burn_Type, Type) %>% 
+  summarize(Percent = mean(Percent)) %>% 
+  mutate(Incid_Name = case_when(
+    Incid_Name == "INIAKUK LAKE" ~ "Iniakuk Lake Fire",
+    Incid_Name == "HOGATZA RIVER" ~ "Hogatza River Fire",
+    Incid_Name == "HOG" ~ "Hog Fire",
+    Incid_Name %in% c("SUNSHINE MOUNTAIN", "SUNSHINE MOUNTAINS") ~ "Sunshine Mountain Fire",
+    Incid_Name == "MUNSON CREEK" ~ "Munson Creek Fire",
+    Incid_Name %in% c("PAIGE MOUNTAN", "PAIGE MOUNTAIN", "PAGE MOUNTAIN") ~ "Page Mountain Fire",
+    Incid_Name == "HURST CREEK" ~ "Hurst Creek Fire",
+    Incid_Name == "OLD GROUCH TOP" ~ "Old Grouch Top Fire",
+    Incid_Name == "VICTORIA MOUNTAIN" ~ "Victoria Mountain Fire",
+    Incid_Name == "LITTLE MUD RIVER" ~ "Little Mud River Fire",
+    Incid_Name == "CHALKYITSIK COMPLEX" ~ "Chalkyitsik Complex Fire",
+    TRUE ~ Incid_Name
+  ))
+
+
+BS_data2 <- BS_data2 %>% 
+  filter(Incid_Name != "Chalkyitsik Complex Fire")    #Removing this fire since it only has 1 beaver pond
+
+
+
+
+
+
+
+
+#Plot it
+
+custom_colors <- c("Unburned" = "darkgreen",    # Blue
+                   "Mild Burn" = "yellow",   # Orange
+                   "Moderate Burn" = "#ff7f0e", # Green
+                   "Severe Burn" = "#d62728")  # Red
+
+# Create bar plot with faceting
+#ggplot(Fires_BurnSeverity_data_LONG, aes(x = Burn_Type, y = Percent, fill = Burn_Type)) +
+#  geom_bar(stat = "identity", position = "dodge") +
+#  labs(x = "Burn Category", y = "Percent") +
+#  facet_wrap(~ Incid_Name) +
+#  scale_fill_manual(values = custom_colors) +
+#  theme_cowplot()+
+#  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+#  theme(legend.position = "none")
+
+
+
+# Convert Incid_Name to factor with desired order
+BS_data2$Incid_Name <- factor(BS_data2$Incid_Name, levels = c("Iniakuk Lake Fire", 
+                        "Hogatza River Fire", "Hog Fire", "Sunshine Mountain Fire",
+                        "Munson Creek Fire", "Page Mountain Fire", "Hurst Creek Fire",
+                        "Old Grouch Top Fire", "Victoria Mountain Fire", "Little Mud River Fire")) #"Chalkyitsik Complex Fire"
+
+# Reorder levels of Burn_Type to change the order of colors
+#BS_data2$Burn_Type <- factor(BS_data2$Burn_Type, 
+#                             levels = c("Unburned", "Mild Burn", "Moderate Burn", "Severe Burn"))
+
+BS_data2$Burn_Type <- factor(BS_data2$Burn_Type, 
+                             levels = c("Severe Burn", "Moderate Burn", "Mild Burn","Unburned"))
+
+
+# Plot a panel
+ggplot(BS_data2, aes(x = Type, y = Percent, fill = Burn_Type)) +
+  geom_bar(stat = "identity", position = "stack", width = 0.6) +
+  labs(x = "Fire Incident", y = "Mean Percent Burned", 
+       fill = "Burn Severity") +
+  scale_fill_manual(values = custom_colors) +
+  facet_wrap(~ Incid_Name) +
+  theme_cowplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), 
+        legend.position = c(0.7, 0.1))  # Move legend to lower right corner
+
+
+
+
+
+# Re plot the panel as individual plots --
+
+A.dat.beaver <- Beaver_BurnSeverity_data %>% filter(Incid_Name == "INIAKUK LAKE")
+A.dat.control <- Control_BurnSeverity_data %>% filter(Incid_Name == "INIAKUK LAKE")
+t.test(A.dat.beaver$Percent_Unburned, A.dat.control$Percent_Unburned) #t = -0.1543, df = 10.594, p-value = 0.8803
+t.test(A.dat.beaver$Percent_Mild_Burn, A.dat.control$Percent_Mild_Burn) #t = 0.54133, df = 9.518, p-value = 0.6007
+t.test(A.dat.beaver$Percent_Moderate_Burn, A.dat.control$Percent_Moderate_Burn) #t = 1.9656, df = 6, p-value = 0.09694
+t.test(A.dat.beaver$Percent_Severe_Burn, A.dat.control$Percent_Severe_Burn) #t = NaN, df = NaN, p-value = NA
+
+    
+A <- ggplot(data = filter(BS_data2, Incid_Name != "Iniakuk Lake Fire"),
+       aes(x = Type, y = Percent, fill = Burn_Type)) +
+  stat_summary(fun.y = "mean", geom = "bar", position = "stack", width = 0.6) +
+  #geom_bar(stat = "identity", position = "stack", width = 0.6) +
+  labs(x = "", y = "Mean Percent Burned", title = "A (Iniakuk LakeFire)") +
+  scale_fill_manual(values = custom_colors) +
+  theme_cowplot() +
+  theme(#axis.text.x = element_text(angle = 45, hjust = 1), 
+        legend.position = "none",
+        axis.title.y = element_text(size = 18),
+        axis.text.y = element_text(size = 16), 
+        axis.title.x = element_blank(),   
+        axis.ticks.x = element_blank(),   
+        axis.text.x = element_blank())  
+
+
+
+A.dat.beaver <- Beaver_BurnSeverity_data %>% filter(Incid_Name == "HOGATZA RIVER")
+A.dat.control <- Control_BurnSeverity_data %>% filter(Incid_Name == "HOGATZA RIVER")
+t.test(A.dat.beaver$Percent_Unburned, A.dat.control$Percent_Unburned) #t = -2.0517, df = 44.943, p-value = 0.04606*******************
+t.test(A.dat.beaver$Percent_Mild_Burn, A.dat.control$Percent_Mild_Burn) #t = 1.2606, df = 47.95, p-value = 0.2136
+t.test(A.dat.beaver$Percent_Moderate_Burn, A.dat.control$Percent_Moderate_Burn) #t = 0.54556, df = 48.477, p-value = 0.5879
+t.test(A.dat.beaver$Percent_Severe_Burn, A.dat.control$Percent_Severe_Burn) #t = 1.8258, df = 25, p-value = 0.07984
+
+
+B <- ggplot(data = filter(BS_data2, Incid_Name != "Hogatza River Fire"),
+            aes(x = Type, y = Percent, fill = Burn_Type)) +
+  stat_summary(fun.y = "mean", geom = "bar", position = "stack", width = 0.6) +
+  #geom_bar(stat = "identity", position = "stack", width = 0.6) +
+  labs(x = "", y = "Mean Percent Burned", title = "B (Hogatza River Fire)") +
+  scale_fill_manual(values = custom_colors) +
+  theme_cowplot() +
+  theme(#axis.text.x = element_text(angle = 45, hjust = 1), 
+    legend.position = "none",
+    axis.title.x = element_blank(),   
+    axis.ticks.x = element_blank(),   
+    axis.text.x = element_blank(),
+    axis.title.y = element_blank(),   
+    axis.ticks.y = element_blank(),   
+    axis.text.y = element_blank())  
+
+
+
+
+
+A.dat.beaver <- Beaver_BurnSeverity_data %>% filter(Incid_Name == "HOG")
+A.dat.control <- Control_BurnSeverity_data %>% filter(Incid_Name == "HOG")
+t.test(A.dat.beaver$Percent_Unburned, A.dat.control$Percent_Unburned) #t = 0.39202, df = 25.506, p-value = 0.6983
+t.test(A.dat.beaver$Percent_Mild_Burn, A.dat.control$Percent_Mild_Burn) #t = -0.79997, df = 25.706, p-value = 0.4311
+t.test(A.dat.beaver$Percent_Moderate_Burn, A.dat.control$Percent_Moderate_Burn) #t = 0.85564, df = 25.89, p-value = 0.4
+t.test(A.dat.beaver$Percent_Severe_Burn, A.dat.control$Percent_Severe_Burn) #t = -0.97311, df = 14.28, p-value = 0.3467
+
+
+C <- ggplot(data = filter(BS_data2, Incid_Name != "Hog Fire"),
+            aes(x = Type, y = Percent, fill = Burn_Type)) +
+  stat_summary(fun.y = "mean", geom = "bar", position = "stack", width = 0.6) +
+  #geom_bar(stat = "identity", position = "stack", width = 0.6) +
+  labs(x = "", y = "Mean Percent Burned", title = "C (Hog Fire)") +
+  scale_fill_manual(values = custom_colors) +
+  theme_cowplot() +
+  theme(#axis.text.x = element_text(angle = 45, hjust = 1), 
+    legend.position = "none",
+    axis.title.x = element_blank(),   
+    axis.ticks.x = element_blank(),   
+    axis.text.x = element_blank(),
+    axis.title.y = element_blank(),   
+    axis.ticks.y = element_blank(),   
+    axis.text.y = element_blank())  
+
+
+
+
+A.dat.beaver <- Beaver_BurnSeverity_data %>% filter(Incid_Name == "SUNSHINE MOUNTAIN" | Incid_Name ==  "SUNSHINE MOUNTAINS")
+A.dat.control <- Control_BurnSeverity_data %>% filter(Incid_Name == "SUNSHINE MOUNTAIN" | Incid_Name ==  "SUNSHINE MOUNTAINS")
+t.test(A.dat.beaver$Percent_Unburned, A.dat.control$Percent_Unburned) #t = 0.55987, df = 13.995, p-value = 0.5844
+t.test(A.dat.beaver$Percent_Mild_Burn, A.dat.control$Percent_Mild_Burn) #t = -0.45106, df = 13.999, p-value = 0.6589
+t.test(A.dat.beaver$Percent_Moderate_Burn, A.dat.control$Percent_Moderate_Burn) #t = -0.33576, df = 8.9519, p-value = 0.7448
+t.test(A.dat.beaver$Percent_Severe_Burn, A.dat.control$Percent_Severe_Burn) #t = NaN, df = NaN, p-value = NA
+
+
+D <- ggplot(data = filter(BS_data2, Incid_Name != "Sunshine Mountain Fire"),
+            aes(x = Type, y = Percent, fill = Burn_Type)) +
+  stat_summary(fun.y = "mean", geom = "bar", position = "stack", width = 0.6) +
+  #geom_bar(stat = "identity", position = "stack", width = 0.6) +
+  labs(x = "", y = "Mean Percent Burned", title = "D (Sunshine Mountain Fire)") +
+  scale_fill_manual(values = custom_colors) +
+  theme_cowplot() +
+  theme(#axis.text.x = element_text(angle = 45, hjust = 1), 
+    legend.position = "none",
+    axis.title.x = element_blank(),   
+    axis.ticks.x = element_blank(),   
+    axis.text.x = element_blank(),    
+    axis.title.y = element_blank(),   
+    axis.ticks.y = element_blank(),   
+    axis.text.y = element_blank())  
+
+
+
+
+A.dat.beaver <- Beaver_BurnSeverity_data %>% filter(Incid_Name == "MUNSON CREEK")
+A.dat.control <- Control_BurnSeverity_data %>% filter(Incid_Name == "MUNSON CREEK")
+t.test(A.dat.beaver$Percent_Unburned, A.dat.control$Percent_Unburned) #t = 1.2936, df = 82, p-value = 0.1994
+t.test(A.dat.beaver$Percent_Mild_Burn, A.dat.control$Percent_Mild_Burn) #t = -0.042585, df = 72.439, p-value = 0.9661
+t.test(A.dat.beaver$Percent_Moderate_Burn, A.dat.control$Percent_Moderate_Burn) #t = -0.88039, df = 65.148, p-value = 0.3819
+t.test(A.dat.beaver$Percent_Severe_Burn, A.dat.control$Percent_Severe_Burn) #t = 0.24131, df = 69.962, p-value = 0.81
+
+
+E <- ggplot(data = filter(BS_data2, Incid_Name != "Munson Creek Fire"),
+            aes(x = Type, y = Percent, fill = Burn_Type)) +
+  stat_summary(fun.y = "mean", geom = "bar", position = "stack", width = 0.6) +
+  #geom_bar(stat = "identity", position = "stack", width = 0.6) +
+  labs(x = "", y = "Mean Percent Burned", title = "E (Munson Creek Fire)") +
+  scale_fill_manual(values = custom_colors) +
+  theme_cowplot() +
+  theme(#axis.text.x = element_text(angle = 45, hjust = 1), 
+    legend.position = "none",
+    axis.title.y = element_text(size = 18), 
+    axis.text.y = element_text(size = 16), 
+    axis.title.x = element_blank(),   
+    axis.ticks.x = element_blank(),   
+    axis.text.x = element_blank()) 
+
+
+
+A.dat.beaver <- Beaver_BurnSeverity_data %>% filter(Incid_Name == "PAGE MOUNTAIN" | Incid_Name == "PAIGE MOUNTAIN" | Incid_Name == "PIAGE MOUNTAN")
+A.dat.control <- Control_BurnSeverity_data %>% filter(Incid_Name == "PAGE MOUNTAIN" | Incid_Name == "PAIGE MOUNTAIN" | Incid_Name == "PIAGE MOUNTAN")
+t.test(A.dat.beaver$Percent_Unburned, A.dat.control$Percent_Unburned) #t = 0.52851, df = 122.07, p-value = 0.5981
+t.test(A.dat.beaver$Percent_Mild_Burn, A.dat.control$Percent_Mild_Burn) #t = -1.1404, df = 128.13, p-value = 0.2562
+t.test(A.dat.beaver$Percent_Moderate_Burn, A.dat.control$Percent_Moderate_Burn) #t = 0.47617, df = 134.97, p-value = 0.6347
+t.test(A.dat.beaver$Percent_Severe_Burn, A.dat.control$Percent_Severe_Burn) #t = 1.2853, df = 68, p-value = 0.203
+
+
+F <- ggplot(data = filter(BS_data2, Incid_Name != "Page Mountain Fire"),
+            aes(x = Type, y = Percent, fill = Burn_Type)) +
+  stat_summary(fun.y = "mean", geom = "bar", position = "stack", width = 0.6) +
+  #geom_bar(stat = "identity", position = "stack", width = 0.6) +
+  labs(x = "", y = "Mean Percent Burned", title = "F (Page Mountain Fire)") +
+  scale_fill_manual(values = custom_colors) +
+  theme_cowplot() +
+  theme(#axis.text.x = element_text(angle = 45, hjust = 1), 
+    legend.position = "none",
+    axis.title.x = element_blank(),   
+    axis.ticks.x = element_blank(),   
+    axis.text.x = element_blank(),
+    axis.title.y = element_blank(),   
+    axis.ticks.y = element_blank(),   
+    axis.text.y = element_blank())  
+
+
+
+
+A.dat.beaver <- Beaver_BurnSeverity_data %>% filter(Incid_Name == "HURST CREEK")
+A.dat.control <- Control_BurnSeverity_data %>% filter(Incid_Name == "HURST CREEK")
+t.test(A.dat.beaver$Percent_Unburned, A.dat.control$Percent_Unburned) #t = 1.3875, df = 69.134, p-value = 0.1697
+t.test(A.dat.beaver$Percent_Mild_Burn, A.dat.control$Percent_Mild_Burn) #t = -2.1286, df = 61.969, p-value = 0.03727 *******************************
+t.test(A.dat.beaver$Percent_Moderate_Burn, A.dat.control$Percent_Moderate_Burn) #t = 1.6527, df = 38.551, p-value = 0.1065
+t.test(A.dat.beaver$Percent_Severe_Burn, A.dat.control$Percent_Severe_Burn) #t = 1, df = 36, p-value = 0.324
+
+G <- ggplot(data = filter(BS_data2, Incid_Name != "Hurst Creek Fire"),
+            aes(x = Type, y = Percent, fill = Burn_Type)) +
+  stat_summary(fun.y = "mean", geom = "bar", position = "stack", width = 0.6) +
+  #geom_bar(stat = "identity", position = "stack", width = 0.6) +
+  labs(x = "", y = "Mean Percent Burned", title = "G (Hurst Creek Fire)") +
+  scale_fill_manual(values = custom_colors) +
+  theme_cowplot() +
+  theme(#axis.text.x = element_text(angle = 45, hjust = 1), 
+    legend.position = "none",
+    axis.title.x = element_blank(),   
+    axis.ticks.x = element_blank(),   
+    axis.text.x = element_blank(),
+    axis.title.y = element_blank(),   
+    axis.ticks.y = element_blank(),   
+    axis.text.y = element_blank())  
+
+
+
+A.dat.beaver <- Beaver_BurnSeverity_data %>% filter(Incid_Name == "OLD GROUCH TOP")
+A.dat.control <- Control_BurnSeverity_data %>% filter(Incid_Name == "OLD GROUCH TOP")
+t.test(A.dat.beaver$Percent_Unburned, A.dat.control$Percent_Unburned) #t = 1.4602, df = 43.736, p-value = 0.1514
+t.test(A.dat.beaver$Percent_Mild_Burn, A.dat.control$Percent_Mild_Burn) #t = -1.6489, df = 43.996, p-value = 0.1063
+t.test(A.dat.beaver$Percent_Moderate_Burn, A.dat.control$Percent_Moderate_Burn) #t = -0.74943, df = 43.378, p-value = 0.4576
+t.test(A.dat.beaver$Percent_Severe_Burn, A.dat.control$Percent_Severe_Burn) #t = NaN, df = NaN, p-value = NA
+
+
+H <- ggplot(data = filter(BS_data2, Incid_Name != "Old Grouch Top Fire"),
+            aes(x = Type, y = Percent, fill = Burn_Type)) +
+  stat_summary(fun.y = "mean", geom = "bar", position = "stack", width = 0.6) +
+  #geom_bar(stat = "identity", position = "stack", width = 0.6) +
+  labs(x = "", y = "Mean Percent Burned", title = "H (Old Grouch Top Fire)") +
+  scale_fill_manual(values = custom_colors) +
+  theme_cowplot() +
+  theme(#axis.text.x = element_text(angle = 45, hjust = 1), 
+    legend.position = "none",
+    axis.title.x = element_blank(),   
+    axis.ticks.x = element_blank(),   
+    axis.text.x = element_blank(),
+    axis.title.y = element_blank(),   
+    axis.ticks.y = element_blank(),   
+    axis.text.y = element_blank())  
+
+
+
+
+A.dat.beaver <- Beaver_BurnSeverity_data %>% filter(Incid_Name == "VICTORIA MOUNTAIN")
+A.dat.control <- Control_BurnSeverity_data %>% filter(Incid_Name == "VICTORIA MOUNTAIN")
+t.test(A.dat.beaver$Percent_Unburned, A.dat.control$Percent_Unburned) #t = 1.5618, df = 1.8595, p-value = 0.2678
+t.test(A.dat.beaver$Percent_Mild_Burn, A.dat.control$Percent_Mild_Burn) #t = -2.2999, df = 1.1522, p-value = 0.2339
+t.test(A.dat.beaver$Percent_Moderate_Burn, A.dat.control$Percent_Moderate_Burn) #t = 1.0177, df = 1.004, p-value = 0.4939
+t.test(A.dat.beaver$Percent_Severe_Burn, A.dat.control$Percent_Severe_Burn) #t = NaN, df = NaN, p-value = NA
+
+
+I <- ggplot(data = filter(BS_data2, Incid_Name != "Victoria Mountain Fire"),
+            aes(x = Type, y = Percent, fill = Burn_Type)) +
+  stat_summary(fun.y = "mean", geom = "bar", position = "stack", width = 0.6) +
+  #geom_bar(stat = "identity", position = "stack", width = 0.6) +
+  labs(x = "", y = "Mean Percent Burned", title = "I (Victoria Mountain Fire)") +
+  scale_fill_manual(values = custom_colors) +
+  theme_cowplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 16), 
+        axis.title.y = element_text(size = 18),
+        axis.text.y = element_text(size = 16), 
+        legend.position = "none")
+
+
+
+
+
+A.dat.beaver <- Beaver_BurnSeverity_data %>% filter(Incid_Name == "LITTLE MUD RIVER")
+A.dat.control <- Control_BurnSeverity_data %>% filter(Incid_Name == "LITTLE MUD RIVER")
+t.test(A.dat.beaver$Percent_Unburned, A.dat.control$Percent_Unburned) #t = NaN, df = NaN, p-value = NA
+t.test(A.dat.beaver$Percent_Mild_Burn, A.dat.control$Percent_Mild_Burn) #t = 0.83769, df = 5.6835, p-value = 0.436
+t.test(A.dat.beaver$Percent_Moderate_Burn, A.dat.control$Percent_Moderate_Burn) #t = 0.020891, df = 3.5156, p-value = 0.9845
+t.test(A.dat.beaver$Percent_Severe_Burn, A.dat.control$Percent_Severe_Burn) #t = -0.44025, df = 3.7027, p-value = 0.6842
+
+J <- ggplot(data = filter(BS_data2, Incid_Name != "Little Mud River Fire"),
+            aes(x = Type, y = Percent, fill = Burn_Type)) +
+  stat_summary(fun.y = "mean", geom = "bar", position = "stack", width = 0.6) +
+  #geom_bar(stat = "identity", position = "stack", width = 0.6) +
+  labs(x = "", y = "Mean Percent Burned", title = "J (Little Mud River Fire)") +
+  scale_fill_manual(values = custom_colors) +
+  theme_cowplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 16), 
+    legend.position = "none",
+    axis.title.y = element_blank(),   
+    axis.ticks.y = element_blank(),   
+    axis.text.y = element_blank())  
+
+
+
+##
+
+t.test(Beaver_BurnSeverity_data$Percent_Unburned, Control_BurnSeverity_data$Percent_Unburned) #t = 1.1566, df = 449.47, p-value = 0.248
+t.test(Beaver_BurnSeverity_data$Percent_Mild_Burn, Control_BurnSeverity_data$Percent_Mild_Burn) #t = -1.7677, df = 452.18, p-value = 0.07779
+t.test(Beaver_BurnSeverity_data$Percent_Moderate_Burn, Control_BurnSeverity_data$Percent_Moderate_Burn) #t = 0.37153, df = 459.62, p-value = 0.7104
+t.test(Beaver_BurnSeverity_data$Percent_Severe_Burn, Control_BurnSeverity_data$Percent_Severe_Burn) #t = -0.033944, df = 429.92, p-value = 0.9729
+
+
+K <- ggplot(BS_data2, 
+       aes(x = Type, y = Percent, fill = Burn_Type)) +
+  stat_summary(fun.y = "mean", geom = "bar", position = "stack", width = 0.6) +
+  labs(x = "", y = "Mean Percent Burned", 
+       fill = "Burn Severity", title = "K (all fires)") +
+  scale_fill_manual(values = custom_colors) +
+  theme_cowplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 16), 
+      legend.position = "none",
+      axis.title.y = element_blank(),   
+      axis.ticks.y = element_blank(),   
+      axis.text.y = element_blank())  
+
+###
+
+K_PLOT <- ggplot(BS_data2, 
+            aes(x = Type, y = Percent, fill = Burn_Type)) +
+  stat_summary(fun.y = "mean", geom = "bar", position = "stack", width = 0.6) +
+  labs(x = "", y = "Mean Percent Burned", 
+       fill = "Burn Severity", title = "K (all fires)") +
+  scale_fill_manual(values = custom_colors) +
+  theme_cowplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), 
+        legend.position = "right",
+        axis.title.y = element_blank(),   
+        axis.ticks.y = element_blank(),   
+        axis.text.y = element_blank(),
+        legend.text = element_text(size = 18),
+        legend.title = element_text(size = 20, face = "bold"))  
+
+
+legend_K <- get_legend(K_PLOT)
+
+H_PLOT <- ggplot(data = filter(BS_data2, Incid_Name != "Old Grouch Top Fire"),
+            aes(x = Type, y = Percent, fill = Burn_Type)) +
+  stat_summary(fun.y = "mean", geom = "bar", position = "stack", width = 0.6) +
+  #geom_bar(stat = "identity", position = "stack", width = 0.6) +
+  labs(x = "", y = "Mean Percent Burned", title = "H (Old Grouch Top Fire)") +
+  scale_fill_manual(values = custom_colors) +
+  theme_cowplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), 
+        legend.position = "none",
+        axis.title.y = element_blank(),   
+        axis.ticks.y = element_blank(),   
+        axis.text.y = element_blank())  
+
+
+H_axis <- get_x_axis(H_PLOT)
+###
+
+
+Burn_Severity_Panel <- A+B+C+D+E+F+G+H+I+J+K+legend_K#+H_axis
+Burn_Severity_Panel
+
+
+
+#Trying to plot the x-axis back on plot H, I can't get it to work
+#library(gridExtra)
+
+#Burn_Severity_Panel_with_axis <- grid.arrange(
+#  arrangeGrob(
+#    A, B, C, D, E, F, G, H, I, J, K, legend_K,
+#    ncol = 4#, heights = rep(10, 11)
+#  ),
+#  arrangeGrob(H_axis, ncol = 1),
+#  nrow = 2, heights = unit(c(100, 100), "null")
+#)
+
+#Burn_Severity_Panel
+
+
+
+
+ggsave(plot = Burn_Severity_Panel, 
+       "Figures/Burn_Severity_Panel.jpeg", 
+       width = 30, 
+       height = 30,
+       units = "cm",
+       dpi = 300)
 
 
 
