@@ -1343,7 +1343,7 @@ A <- ggplot(data = filter(BS_data2, Incid_Name != "Iniakuk Lake Fire"),
        aes(x = Type, y = Percent, fill = Burn_Type)) +
   stat_summary(fun.y = "mean", geom = "bar", position = "stack", width = 0.6) +
   #geom_bar(stat = "identity", position = "stack", width = 0.6) +
-  labs(x = "", y = "Mean Percent Burned", title = "A (Iniakuk LakeFire)") +
+  labs(x = "", y = "Mean Percent Burned", title = "A (Iniakuk Lake Fire)") +
   scale_fill_manual(values = custom_colors) +
   theme_cowplot() +
   theme(#axis.text.x = element_text(angle = 45, hjust = 1), 
@@ -1600,7 +1600,7 @@ K <- ggplot(BS_data2,
        aes(x = Type, y = Percent, fill = Burn_Type)) +
   stat_summary(fun.y = "mean", geom = "bar", position = "stack", width = 0.6) +
   labs(x = "", y = "Mean Percent Burned", 
-       fill = "Burn Severity", title = "K (all fires)") +
+       fill = "Burn Severity", title = "K (All Fires)") +
   scale_fill_manual(values = custom_colors) +
   theme_cowplot() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 16), 
@@ -1671,8 +1671,8 @@ Burn_Severity_Panel
 
 ggsave(plot = Burn_Severity_Panel, 
        "Figures/Burn_Severity_Panel.jpeg", 
-       width = 30, 
-       height = 30,
+       width = 32, 
+       height = 32,
        units = "cm",
        dpi = 300)
 
