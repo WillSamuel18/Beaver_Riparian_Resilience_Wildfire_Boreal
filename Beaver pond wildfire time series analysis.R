@@ -1320,6 +1320,7 @@ ggplot(BS_data2, aes(x = Type, y = Percent, fill = Burn_Type)) +
   labs(x = "Fire Incident", y = "Mean Percent Burned", 
        fill = "Burn Severity") +
   scale_fill_manual(values = custom_colors) +
+  scale_y_continuous(limits = c(0, 90), breaks = seq(0, 90, 10))+
   facet_wrap(~ Incid_Name) +
   theme_cowplot() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1), 
@@ -1345,6 +1346,7 @@ A <- ggplot(data = filter(BS_data2, Incid_Name != "Iniakuk Lake Fire"),
   #geom_bar(stat = "identity", position = "stack", width = 0.6) +
   labs(x = "", y = "Mean Percent Burned", title = "A (Iniakuk Lake Fire)") +
   scale_fill_manual(values = custom_colors) +
+  scale_y_continuous(limits = c(0, 90), breaks = seq(0, 90, 10))+
   theme_cowplot() +
   theme(#axis.text.x = element_text(angle = 45, hjust = 1), 
         legend.position = "none",
@@ -1353,7 +1355,7 @@ A <- ggplot(data = filter(BS_data2, Incid_Name != "Iniakuk Lake Fire"),
         axis.title.x = element_blank(),   
         axis.ticks.x = element_blank(),   
         axis.text.x = element_blank())  
-
+A
 
 
 A.dat.beaver <- Beaver_BurnSeverity_data %>% filter(Incid_Name == "HOGATZA RIVER")
@@ -1370,6 +1372,7 @@ B <- ggplot(data = filter(BS_data2, Incid_Name != "Hogatza River Fire"),
   #geom_bar(stat = "identity", position = "stack", width = 0.6) +
   labs(x = "", y = "Mean Percent Burned", title = "B (Hogatza River Fire)") +
   scale_fill_manual(values = custom_colors) +
+  scale_y_continuous(limits = c(0, 90), breaks = seq(0, 90, 10))+
   theme_cowplot() +
   theme(#axis.text.x = element_text(angle = 45, hjust = 1), 
     legend.position = "none",
@@ -1398,6 +1401,7 @@ C <- ggplot(data = filter(BS_data2, Incid_Name != "Hog Fire"),
   #geom_bar(stat = "identity", position = "stack", width = 0.6) +
   labs(x = "", y = "Mean Percent Burned", title = "C (Hog Fire)") +
   scale_fill_manual(values = custom_colors) +
+  scale_y_continuous(limits = c(0, 90), breaks = seq(0, 90, 10))+
   theme_cowplot() +
   theme(#axis.text.x = element_text(angle = 45, hjust = 1), 
     legend.position = "none",
@@ -1425,6 +1429,7 @@ D <- ggplot(data = filter(BS_data2, Incid_Name != "Sunshine Mountain Fire"),
   #geom_bar(stat = "identity", position = "stack", width = 0.6) +
   labs(x = "", y = "Mean Percent Burned", title = "D (Sunshine Mountain Fire)") +
   scale_fill_manual(values = custom_colors) +
+  scale_y_continuous(limits = c(0, 90), breaks = seq(0, 90, 10))+
   theme_cowplot() +
   theme(#axis.text.x = element_text(angle = 45, hjust = 1), 
     legend.position = "none",
@@ -1452,6 +1457,7 @@ E <- ggplot(data = filter(BS_data2, Incid_Name != "Munson Creek Fire"),
   #geom_bar(stat = "identity", position = "stack", width = 0.6) +
   labs(x = "", y = "Mean Percent Burned", title = "E (Munson Creek Fire)") +
   scale_fill_manual(values = custom_colors) +
+  scale_y_continuous(limits = c(0, 90), breaks = seq(0, 90, 10))+
   theme_cowplot() +
   theme(#axis.text.x = element_text(angle = 45, hjust = 1), 
     legend.position = "none",
@@ -1477,6 +1483,7 @@ F <- ggplot(data = filter(BS_data2, Incid_Name != "Page Mountain Fire"),
   #geom_bar(stat = "identity", position = "stack", width = 0.6) +
   labs(x = "", y = "Mean Percent Burned", title = "F (Page Mountain Fire)") +
   scale_fill_manual(values = custom_colors) +
+  scale_y_continuous(limits = c(0, 90), breaks = seq(0, 90, 10))+
   theme_cowplot() +
   theme(#axis.text.x = element_text(angle = 45, hjust = 1), 
     legend.position = "none",
@@ -1503,6 +1510,7 @@ G <- ggplot(data = filter(BS_data2, Incid_Name != "Hurst Creek Fire"),
   #geom_bar(stat = "identity", position = "stack", width = 0.6) +
   labs(x = "", y = "Mean Percent Burned", title = "G (Hurst Creek Fire)") +
   scale_fill_manual(values = custom_colors) +
+  scale_y_continuous(limits = c(0, 90), breaks = seq(0, 90, 10))+
   theme_cowplot() +
   theme(#axis.text.x = element_text(angle = 45, hjust = 1), 
     legend.position = "none",
@@ -1529,6 +1537,7 @@ H <- ggplot(data = filter(BS_data2, Incid_Name != "Old Grouch Top Fire"),
   #geom_bar(stat = "identity", position = "stack", width = 0.6) +
   labs(x = "", y = "Mean Percent Burned", title = "H (Old Grouch Top Fire)") +
   scale_fill_manual(values = custom_colors) +
+  scale_y_continuous(limits = c(0, 90), breaks = seq(0, 90, 10))+
   theme_cowplot() +
   theme(#axis.text.x = element_text(angle = 45, hjust = 1), 
     legend.position = "none",
@@ -1556,6 +1565,7 @@ I <- ggplot(data = filter(BS_data2, Incid_Name != "Victoria Mountain Fire"),
   #geom_bar(stat = "identity", position = "stack", width = 0.6) +
   labs(x = "", y = "Mean Percent Burned", title = "I (Victoria Mountain Fire)") +
   scale_fill_manual(values = custom_colors) +
+  scale_y_continuous(limits = c(0, 90), breaks = seq(0, 90, 10))+
   theme_cowplot() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 16), 
         axis.title.y = element_text(size = 18),
@@ -1579,6 +1589,7 @@ J <- ggplot(data = filter(BS_data2, Incid_Name != "Little Mud River Fire"),
   #geom_bar(stat = "identity", position = "stack", width = 0.6) +
   labs(x = "", y = "Mean Percent Burned", title = "J (Little Mud River Fire)") +
   scale_fill_manual(values = custom_colors) +
+  scale_y_continuous(limits = c(0, 90), breaks = seq(0, 90, 10))+
   theme_cowplot() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 16), 
     legend.position = "none",
@@ -1602,6 +1613,7 @@ K <- ggplot(BS_data2,
   labs(x = "", y = "Mean Percent Burned", 
        fill = "Burn Severity", title = "K (All Fires)") +
   scale_fill_manual(values = custom_colors) +
+  scale_y_continuous(limits = c(0, 90), breaks = seq(0, 90, 10))+
   theme_cowplot() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 16), 
       legend.position = "none",
@@ -1617,6 +1629,7 @@ K_PLOT <- ggplot(BS_data2,
   labs(x = "", y = "Mean Percent Burned", 
        fill = "Burn Severity", title = "K (all fires)") +
   scale_fill_manual(values = custom_colors) +
+  scale_y_continuous(limits = c(0, 90), breaks = seq(0, 90, 10))+
   theme_cowplot() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1), 
         legend.position = "right",
@@ -1635,6 +1648,7 @@ H_PLOT <- ggplot(data = filter(BS_data2, Incid_Name != "Old Grouch Top Fire"),
   #geom_bar(stat = "identity", position = "stack", width = 0.6) +
   labs(x = "", y = "Mean Percent Burned", title = "H (Old Grouch Top Fire)") +
   scale_fill_manual(values = custom_colors) +
+  scale_y_continuous(limits = c(0, 90), breaks = seq(0, 90, 10))+
   theme_cowplot() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1), 
         legend.position = "none",
