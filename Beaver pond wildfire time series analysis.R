@@ -603,15 +603,27 @@ F8_NDVI <- bind_rows(beaver_8_NDVI_long, control_8_NDVI_long, .id = "Dataset")
 F9_NDVI <- bind_rows(beaver_9_NDVI_long, control_9_NDVI_long, .id = "Dataset")
 F10_NDVI <- bind_rows(beaver_10_NDVI_long, control_10_NDVI_long, .id = "Dataset")
 
+F0_NDVI <- F0_NDVI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
+F1_NDVI <- F1_NDVI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
+F2_NDVI <- F2_NDVI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
+#F3_NDVI <- F3_NDVI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
+F4_NDVI <- F4_NDVI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
+F5_NDVI <- F5_NDVI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
+F6_NDVI <- F6_NDVI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
+F7_NDVI <- F7_NDVI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
+F8_NDVI <- F8_NDVI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
+F9_NDVI <- F9_NDVI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
+F10_NDVI <- F10_NDVI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
+
 
 
 
 F0_NDVI_plot <- ggplot(F0_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_type)
   geom_point(aes(shape = point_type, fill = point_type, group = point_type), size = 3, alpha = 0.6, col = "black")+
-  scale_shape_manual(values = c("control" = 24, "treatment" = 21)) +  # Different shapes for control and treatment
-  scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
-  scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_shape_manual(values = c("Control" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  geom_smooth(aes(col = point_type, group = point_type), method = "loess", se = FALSE, alpha = 0.8, linewidth = 2) +
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   labs(title = "A (Iniaknuk Lake Fire)", x = "", y = "NDVI", 
        color = "", shape = "") +
   scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
@@ -619,19 +631,19 @@ F0_NDVI_plot <- ggplot(F0_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_t
   theme(legend.position = c(0.75, 0.95))+
   guides(color = guide_legend(override.aes = list(shape = c(24, 21)),
                               title = NULL),
-         fill = guide_legend(override.aes = list(shape = c(21, 24), color = c("red3", "deepskyblue2")),
+         fill = guide_legend(override.aes = list(shape = c(21, 24), color = c("deepskyblue2", "#FFA366")),
                              title = NULL), 
-         shape = guide_legend(override.aes = list(fill = c("red3", "deepskyblue2")),
+         shape = guide_legend(override.aes = list(fill = c("deepskyblue2", "#FFA366")),
                               title = NULL))
 F0_NDVI_plot
 
 
 F1_NDVI_plot <- ggplot(F1_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_type)
   geom_point(aes(shape = point_type, fill = point_type, group = point_type), size = 3, alpha = 0.6, col = "black")+
-  scale_shape_manual(values = c("control" = 24, "treatment" = 21)) +  # Different shapes for control and treatment
-  scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
-  scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_shape_manual(values = c("Control" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  geom_smooth(aes(col = point_type, group = point_type), method = "loess", se = FALSE, alpha = 0.8, linewidth = 2) +
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   labs(title = "B (Hogatza River Fire)", x = "", y = "", color = "Point") +
   scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
@@ -640,10 +652,10 @@ F1_NDVI_plot <- ggplot(F1_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_t
 
 F2_NDVI_plot <- ggplot(F2_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_type)
   geom_point(aes(shape = point_type, fill = point_type, group = point_type), size = 3, alpha = 0.6, col = "black")+
-  scale_shape_manual(values = c("control" = 24, "treatment" = 21)) +  # Different shapes for control and treatment
-  scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
-  scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_shape_manual(values = c("Control" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  geom_smooth(aes(col = point_type, group = point_type), method = "loess", se = FALSE, alpha = 0.8, linewidth = 2) +
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   labs(title = "C (Hog Fire)", x = "", y = "", color = "Point") +
   scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
@@ -662,10 +674,10 @@ F2_NDVI_plot <- ggplot(F2_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_t
 
 F4_NDVI_plot <- ggplot(F4_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_type)
   geom_point(aes(shape = point_type, fill = point_type, group = point_type), size = 3, alpha = 0.6, col = "black")+
-  scale_shape_manual(values = c("control" = 24, "treatment" = 21)) +  # Different shapes for control and treatment
-  scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
-  scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_shape_manual(values = c("Control" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  geom_smooth(aes(col = point_type, group = point_type), method = "loess", se = FALSE, alpha = 0.8, linewidth = 2) +
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   labs(title = "D (Sunshine Mountain Fire)", x = "", y = "NDVI", color = "Point") +
   scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
@@ -673,10 +685,10 @@ F4_NDVI_plot <- ggplot(F4_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_t
 
 F5_NDVI_plot <- ggplot(F5_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_type)
   geom_point(aes(shape = point_type, fill = point_type, group = point_type), size = 3, alpha = 0.6, col = "black")+
-  scale_shape_manual(values = c("control" = 24, "treatment" = 21)) +  # Different shapes for control and treatment
-  scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
-  scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_shape_manual(values = c("Control" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  geom_smooth(aes(col = point_type, group = point_type), method = "loess", se = FALSE, alpha = 0.8, linewidth = 2) +
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   labs(title = "E (Munson Creek Fire)", x = "", y = "", color = "Point") +
   scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
@@ -685,10 +697,10 @@ F5_NDVI_plot <- ggplot(F5_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_t
 
 F6_NDVI_plot <- ggplot(F6_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_type)
   geom_point(aes(shape = point_type, fill = point_type, group = point_type), size = 3, alpha = 0.6, col = "black")+
-  scale_shape_manual(values = c("control" = 24, "treatment" = 21)) +  # Different shapes for control and treatment
-  scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
-  scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_shape_manual(values = c("Control" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  geom_smooth(aes(col = point_type, group = point_type), method = "loess", se = FALSE, alpha = 0.8, linewidth = 2) +
+  scale_color_manual(values = c("control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   labs(title = "F (Page Mountain Fire)", x = "", y = "", color = "Point") +
   scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
@@ -696,10 +708,10 @@ F6_NDVI_plot <- ggplot(F6_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_t
 
 F7_NDVI_plot <- ggplot(F7_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_type)
   geom_point(aes(shape = point_type, fill = point_type, group = point_type), size = 3, alpha = 0.6, col = "black")+
-  scale_shape_manual(values = c("control" = 24, "treatment" = 21)) +  # Different shapes for control and treatment
-  scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
-  scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_shape_manual(values = c("Control" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  geom_smooth(aes(col = point_type, group = point_type), method = "loess", se = FALSE, alpha = 0.8, linewidth = 2) +
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   labs(title = "G (Hurst Creek Fire)", x = "", y = "NDVI", color = "Point") +
   scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
@@ -707,10 +719,10 @@ F7_NDVI_plot <- ggplot(F7_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_t
 
 F8_NDVI_plot <- ggplot(F8_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_type)
   geom_point(aes(shape = point_type, fill = point_type, group = point_type), size = 3, alpha = 0.6, col = "black")+
-  scale_shape_manual(values = c("control" = 24, "treatment" = 21)) +  # Different shapes for control and treatment
-  scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
-  scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_shape_manual(values = c("Control" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  geom_smooth(aes(col = point_type, group = point_type), method = "loess", se = FALSE, alpha = 0.8, linewidth = 2) +
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   labs(title = "H (Old Grouch Top Fire)", x = "", y = "", color = "Point") +
   scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
@@ -718,10 +730,11 @@ F8_NDVI_plot <- ggplot(F8_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_t
 
 F9_NDVI_plot <- ggplot(F9_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_type)
   geom_point(aes(shape = point_type, fill = point_type, group = point_type), size = 3, alpha = 0.6, col = "black")+
-  scale_shape_manual(values = c("control" = 24, "treatment" = 21)) +  # Different shapes for control and treatment
-  scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  geom_smooth(aes(col = point_type, fill = point_type, group = point_type), se = T, alpha = 0.4, linewidth = 2)+
-  scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_shape_manual(values = c("Control" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  geom_smooth(aes(col = point_type, group = point_type, fill = point_type), method = "loess", se = T, alpha = 0.4, linewidth = 2) +
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   labs(title = "I (Victoria Mountain Fire)", x = "", y = "", color = "Point") +
   scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
@@ -729,15 +742,15 @@ F9_NDVI_plot <- ggplot(F9_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_t
 
 F10_NDVI_plot <- ggplot(F10_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_type)
   geom_point(aes(shape = point_type, fill = point_type, group = point_type), size = 3, alpha = 0.6, col = "black")+
-  scale_shape_manual(values = c("control" = 24, "treatment" = 21)) +  # Different shapes for control and treatment
-  scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
-  scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_shape_manual(values = c("Control" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  geom_smooth(aes(col = point_type, group = point_type), method = "loess", se = FALSE, alpha = 0.8, linewidth = 2) +
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   labs(title = "J (Little Mud River Fire)", x = "Day of Year", y = "NDVI", color = "Point") +
   scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
   theme(legend.position = "none")
-
+F10_NDVI_plot
 
 
 
@@ -833,34 +846,45 @@ F9_NDWI <- bind_rows(beaver_9_NDWI_long, control_9_NDWI_long, .id = "Dataset")
 F10_NDWI <- bind_rows(beaver_10_NDWI_long, control_10_NDWI_long, .id = "Dataset")
 
 
+F0_NDWI <- F0_NDWI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
+F1_NDWI <- F1_NDWI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
+F2_NDWI <- F2_NDWI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
+#F3_NDWI <- F3_NDWI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
+F4_NDWI <- F4_NDWI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
+F5_NDWI <- F5_NDWI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
+F6_NDWI <- F6_NDWI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
+F7_NDWI <- F7_NDWI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
+F8_NDWI <- F8_NDWI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
+F9_NDWI <- F9_NDWI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
+F10_NDWI <- F10_NDWI %>%  mutate(point_type = ifelse(point_type == "control", "Control", "Beaver"))
 
 
 F0_NDWI_plot <- ggplot(F0_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_type)
   geom_point(aes(shape = point_type, fill = point_type, group = point_type), size = 3, alpha = 0.6, col = "black")+
-  scale_shape_manual(values = c("control" = 24, "treatment" = 21)) +  # Different shapes for control and treatment
-  scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
-  scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_shape_manual(values = c("Control" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  geom_smooth(aes(col = point_type, group = point_type), method = "loess", se = FALSE, alpha = 0.8, linewidth = 2) +
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   labs(title = "A (Iniaknuk Lake Fire)", x = "", y = "NDWI", 
        color = "", shape = "") +
   scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   theme_cowplot()+
-  theme(legend.position = c(0.75, 0.15))+
+  theme(legend.position = c(0.75, 0.85))+
   guides(color = guide_legend(override.aes = list(shape = c(24, 21)),
                               title = NULL),
-         fill = guide_legend(override.aes = list(shape = c(21, 24), color = c("red3", "deepskyblue2")),
+         fill = guide_legend(override.aes = list(shape = c(21, 24), color = c("deepskyblue2", "#FFA366")),
                              title = NULL), 
-         shape = guide_legend(override.aes = list(fill = c("red3", "deepskyblue2")),
+         shape = guide_legend(override.aes = list(fill = c("deepskyblue2", "#FFA366")),
                               title = NULL))
 F0_NDWI_plot
 
 
 F1_NDWI_plot <- ggplot(F1_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_type)
   geom_point(aes(shape = point_type, fill = point_type, group = point_type), size = 3, alpha = 0.6, col = "black")+
-  scale_shape_manual(values = c("control" = 24, "treatment" = 21)) +  # Different shapes for control and treatment
-  scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
-  scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_shape_manual(values = c("Control" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  geom_smooth(aes(col = point_type, group = point_type), method = "loess", se = FALSE, alpha = 0.8, linewidth = 2) +
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   labs(title = "B (Hogatza River Fire)", x = "", y = "", color = "Point") +
   scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   theme_cowplot()+
@@ -869,10 +893,10 @@ F1_NDWI_plot <- ggplot(F1_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
 
 F2_NDWI_plot <- ggplot(F2_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_type)
   geom_point(aes(shape = point_type, fill = point_type, group = point_type), size = 3, alpha = 0.6, col = "black")+
-  scale_shape_manual(values = c("control" = 24, "treatment" = 21)) +  # Different shapes for control and treatment
-  scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
-  scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_shape_manual(values = c("Control" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  geom_smooth(aes(col = point_type, group = point_type), method = "loess", se = FALSE, alpha = 0.8, linewidth = 2) +
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   labs(title = "C (Hog Fire)", x = "", y = "", color = "Point") +
   theme_cowplot()+
@@ -891,10 +915,10 @@ F2_NDWI_plot <- ggplot(F2_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
 
 F4_NDWI_plot <- ggplot(F4_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_type)
   geom_point(aes(shape = point_type, fill = point_type, group = point_type), size = 3, alpha = 0.6, col = "black")+
-  scale_shape_manual(values = c("control" = 24, "treatment" = 21)) +  # Different shapes for control and treatment
-  scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
-  scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_shape_manual(values = c("Control" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  geom_smooth(aes(col = point_type, group = point_type), method = "loess", se = FALSE, alpha = 0.8, linewidth = 2) +
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   labs(title = "D (Sunshine Mountain Fire)", x = "", y = "NDWI", color = "Point") +
   scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   theme_cowplot()+
@@ -902,10 +926,10 @@ F4_NDWI_plot <- ggplot(F4_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
 
 F5_NDWI_plot <- ggplot(F5_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_type)
   geom_point(aes(shape = point_type, fill = point_type, group = point_type), size = 3, alpha = 0.6, col = "black")+
-  scale_shape_manual(values = c("control" = 24, "treatment" = 21)) +  # Different shapes for control and treatment
-  scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
-  scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_shape_manual(values = c("Control" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  geom_smooth(aes(col = point_type, group = point_type), method = "loess", se = FALSE, alpha = 0.8, linewidth = 2) +
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   labs(title = "E (Munson Creek Fire)", x = "", y = "", color = "Point") +
   scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   theme_cowplot()+
@@ -914,10 +938,10 @@ F5_NDWI_plot <- ggplot(F5_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
 
 F6_NDWI_plot <- ggplot(F6_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_type)
   geom_point(aes(shape = point_type, fill = point_type, group = point_type), size = 3, alpha = 0.6, col = "black")+
-  scale_shape_manual(values = c("control" = 24, "treatment" = 21)) +  # Different shapes for control and treatment
-  scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
-  scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_shape_manual(values = c("Control" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  geom_smooth(aes(col = point_type, group = point_type), method = "loess", se = FALSE, alpha = 0.8, linewidth = 2) +
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   labs(title = "F (Page Mountain Fire)", x = "", y = "", color = "Point") +
   scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   theme_cowplot()+
@@ -925,10 +949,10 @@ F6_NDWI_plot <- ggplot(F6_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
 
 F7_NDWI_plot <- ggplot(F7_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_type)
   geom_point(aes(shape = point_type, fill = point_type, group = point_type), size = 3, alpha = 0.6, col = "black")+
-  scale_shape_manual(values = c("control" = 24, "treatment" = 21)) +  # Different shapes for control and treatment
-  scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
-  scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_shape_manual(values = c("Control" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  geom_smooth(aes(col = point_type, group = point_type), method = "loess", se = FALSE, alpha = 0.8, linewidth = 2) +
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   labs(title = "G (Hurst Creek Fire)", x = "", y = "NDWI", color = "Point") +
   scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   theme_cowplot()+
@@ -936,10 +960,10 @@ F7_NDWI_plot <- ggplot(F7_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
 
 F8_NDWI_plot <- ggplot(F8_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_type)
   geom_point(aes(shape = point_type, fill = point_type, group = point_type), size = 3, alpha = 0.6, col = "black")+
-  scale_shape_manual(values = c("control" = 24, "treatment" = 21)) +  # Different shapes for control and treatment
-  scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
-  scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_shape_manual(values = c("Control" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  geom_smooth(aes(col = point_type, group = point_type), method = "loess", se = FALSE, alpha = 0.8, linewidth = 2) +
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   labs(title = "H (Old Grouch Top Fire)", x = "", y = "", color = "Point") +
   scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   theme_cowplot()+
@@ -947,10 +971,11 @@ F8_NDWI_plot <- ggplot(F8_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_t
 
 F9_NDWI_plot <- ggplot(F9_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_type)
   geom_point(aes(shape = point_type, fill = point_type, group = point_type), size = 3, alpha = 0.6, col = "black")+
-  scale_shape_manual(values = c("control" = 24, "treatment" = 21)) +  # Different shapes for control and treatment
-  #scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  geom_smooth(aes(col = point_type, fill = point_type, group = point_type),  alpha = 0.4, linewidth = 2)+
-  scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_shape_manual(values = c("Control" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  geom_smooth(aes(col = point_type, group = point_type, fill = point_type), method = "loess", se = T, alpha = 0.4, linewidth = 2) +
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   labs(title = "I (Victoria Mountain Fire)", x = "", y = "", color = "Point") +
   scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   theme_cowplot()+
@@ -959,10 +984,10 @@ F9_NDWI_plot
 
 F10_NDWI_plot <- ggplot(F10_NDWI, aes(x = DOY, y = NDWI)) +  #col = factor(point_type)
   geom_point(aes(shape = point_type, fill = point_type, group = point_type), size = 3, alpha = 0.6, col = "black")+
-  scale_shape_manual(values = c("control" = 24, "treatment" = 21)) +  # Different shapes for control and treatment
-  scale_fill_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
-  geom_smooth(aes(col = point_type, group = point_type), se = F, alpha = 0.8, linewidth = 2)+
-  scale_color_manual(values = c("control" = "deepskyblue2", "treatment" = "red3"))+
+  scale_shape_manual(values = c("Control" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  geom_smooth(aes(col = point_type, group = point_type), method = "loess", se = FALSE, alpha = 0.8, linewidth = 2) +
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   labs(title = "J (Little Mud River Fire)", x = "Day of Year", y = "NDWI", color = "Point") +
   scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
   theme_cowplot()+
@@ -1010,7 +1035,8 @@ control_NDWI_long <- read.csv("Newdata/control_NDWI_long.csv")
 
 beaver_NDVI_plot <- ggplot(beaver_NDVI_long, aes(x = DOY, y = NDVI, group = Point, color = Point)) +
   geom_point()+
-  geom_smooth(se = F,)+
+  #geom_smooth(se = F)+
+  geom_smooth(method = "loess", se = FALSE) +
   labs(title = "K (Beaver Ponds)", x = "Day of Year", y = "", color = "Point") + #Normalized Difference Vegetation Index
   scale_color_viridis(discrete = TRUE) +  # Use the Viridis color palette
   scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
@@ -1021,7 +1047,7 @@ beaver_NDVI_plot
 
 control_NDVI_plot <- ggplot(control_NDVI_long, aes(x = DOY, y = NDVI, group = Point, color = Point)) +
   geom_point()+
-  geom_smooth(se = F)+
+  geom_smooth(method = "loess", se = FALSE) +
   labs(title = "L (Control)", x = "Day of Year", y = "", color = "Point") +
   scale_color_viridis(discrete = TRUE) +  # Use the Viridis color palette
   scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
@@ -1033,7 +1059,7 @@ control_NDVI_plot <- ggplot(control_NDVI_long, aes(x = DOY, y = NDVI, group = Po
 
 beaver_NDWI_plot <- ggplot(beaver_NDWI_long, aes(x = DOY, y = NDWI, group = Point, color = Point)) +
   geom_point()+
-  geom_smooth(se = F)+
+  geom_smooth(method = "loess", se = FALSE) +
   labs(title = "K (Beaver Ponds)", x = "Day of Year", y = "", color = "Point") +
   scale_color_viridis(option="G", discrete = TRUE) +
   scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
@@ -1044,7 +1070,7 @@ beaver_NDWI_plot <- ggplot(beaver_NDWI_long, aes(x = DOY, y = NDWI, group = Poin
 
 control_NDWI_plot <- ggplot(control_NDWI_long, aes(x = DOY, y = NDWI, group = Point, color = Point)) +
   geom_point()+
-  geom_smooth(se = F)+
+  geom_smooth(method = "loess", se = FALSE) +
   labs(title = "L (Control)", x = "Day of Year", y = "", color = "Point") +
   scale_color_viridis(option="G", discrete = TRUE) +
   scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
@@ -1105,14 +1131,57 @@ ggsave(plot = individual_fires_NDWI_2,
 
 
 
+### Make the figure that Erik suggested for Figure 3
+beaver_NDVI_long <- beaver_NDVI_long %>% mutate("Type" = "Beaver",
+                                                Point = paste0("B", Point))
+
+control_NDVI_long <- control_NDVI_long %>% mutate("Type" = "Control", 
+                                                  Point = paste0("C", Point))
+
+NDVI_long <- rbind(beaver_NDVI_long, control_NDVI_long)
+NDVI_long$Type <- as.factor(NDVI_long$Type)
+NDVI_long$Point <- as.factor(NDVI_long$Point)
 
 
 
-#Plot the overall change (mean across all beaver ponds)
+levels(NDVI_long$Type) 
+levels(NDVI_long$Point) 
+
+
+beaver_control_NDVI_plot <- ggplot(NDVI_long, aes(x = DOY, y = NDVI)) + #group = Point, color = Point
+  geom_line(aes(group = Point, col = Type), stat = "smooth", se = FALSE, alpha = 0.3,  lwd = 0.75) +
+  geom_line(aes(group = Type, col = Type), stat = "smooth", lwd = 2) +
+  #geom_smooth(aes(group = Type, col = Type), method = "loess", se = F, linewidth = 2) +
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  labs(title = "***____________***", x = "Day of Year", y = "", color = "Point") + #Normalized Difference Vegetation Index
+  scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
+  theme_cowplot()+
+  theme(legend.position = "none")
+beaver_control_NDVI_plot
+
+
+
+#Time_series_panel_1 <- (beaver_NDVI_plot+control_NDVI_plot)/(beaver_NDWI_plot+control_NDWI_plot)
+#Time_series_panel_1
+
+#ggsave(plot = Time_series_panel_1, 
+       "Figures/Time_series_panel_1.jpeg", 
+       width = 30, 
+       height = 20,
+       units = "cm",
+       dpi = 300)
+
+
+
+
+
+
+
+###Plot the overall change (mean across all beaver ponds)
 
 beaver_NDVI_plot_mean <- ggplot(beaver_NDVI_long, aes(x = DOY, y = NDVI)) +
   geom_point(size = 2, shape = 21, fill = "green4", color = "black", alpha = 0.8) +
-  geom_smooth()+
+  geom_smooth(method = "loess") +
   labs(title = "Beaver Ponds", x = "", y = "Normalized Difference Vegetation Index", color = "Point") +
   #scale_color_viridis(discrete = TRUE) +  # Use the Viridis color palette
   theme_cowplot()+
@@ -1122,7 +1191,7 @@ beaver_NDVI_plot_mean <- ggplot(beaver_NDVI_long, aes(x = DOY, y = NDVI)) +
 
 control_NDVI_plot_mean <- ggplot(control_NDVI_long, aes(x = DOY, y = NDVI)) +
   geom_point(size = 2, shape = 21, fill = "green4", color = "black", alpha = 0.8) +
-  geom_smooth()+
+  geom_smooth(method = "loess") +
   labs(title = "Control", x = "", y = "", color = "Point") +
   scale_color_viridis(discrete = TRUE) +  # Use the Viridis color palette
   theme_cowplot()+
