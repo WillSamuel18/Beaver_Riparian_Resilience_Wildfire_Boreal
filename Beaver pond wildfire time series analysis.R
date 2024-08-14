@@ -292,27 +292,50 @@ summarize_ndvi <- function(i) {
 
 
 beaver_0_NDVI <- summarize_ndvi(beaver_0_INIAKNUK)
+beaver_0_NDVI <- beaver_0_NDVI %>% 
+  rename_with(~ paste0(.,"_Iniakuk"), starts_with("X"))
 beaver_0_NDVI
 
 beaver_1_NDVI <- summarize_ndvi(beaver_1_HOGATZA)
+beaver_1_NDVI <- beaver_1_NDVI %>% 
+  rename_with(~ paste0(., "_Hogatza"), starts_with("X"))
 
 beaver_2_NDVI <- summarize_ndvi(beaver_2_HOG)
+beaver_2_NDVI <- beaver_2_NDVI %>% 
+  rename_with(~ paste0(.,"_Hog"), starts_with("X"))
 
 beaver_3_NDVI <- summarize_ndvi(beaver_3_CHALKYITSIK)
+beaver_3_NDVI <- beaver_3_NDVI %>% 
+  rename_with(~ paste0(.,"_Chalkyitsik"), starts_with("X"))
 
 beaver_4_NDVI <- summarize_ndvi(beaver_4_SUNSHINE)
+beaver_4_NDVI <- beaver_4_NDVI %>% 
+  rename_with(~ paste0(.,"_Sunshine"), starts_with("X"))
 
 beaver_5_NDVI <- summarize_ndvi(beaver_5_MUNSON)
+beaver_5_NDVI <- beaver_5_NDVI %>% 
+  rename_with(~ paste0(.,"_Munson"), starts_with("X"))
 
 beaver_6_NDVI <- summarize_ndvi(beaver_6_PAIGE)
+beaver_6_NDVI <- beaver_6_NDVI %>% 
+  rename_with(~ paste0(.,"_Paige"), starts_with("X"))
 
 beaver_7_NDVI <- summarize_ndvi(beaver_7_HURST)
+beaver_7_NDVI <- beaver_7_NDVI %>% 
+  rename_with(~ paste0(.,"_Hurst"), starts_with("X"))
 
 beaver_8_NDVI <- summarize_ndvi(beaver_8_GROUCH)
+beaver_8_NDVI <- beaver_8_NDVI %>% 
+  rename_with(~ paste0(.,"_Grouch"), starts_with("X"))
 
 beaver_9_NDVI <- summarize_ndvi(beaver_9_VICTORIA)
+beaver_9_NDVI <- beaver_9_NDVI %>% 
+  rename_with(~ paste0(.,"_Victoria"), starts_with("X"))
 
 beaver_10_NDVI <- summarize_ndvi(beaver_10_MUD)
+beaver_10_NDVI <- beaver_10_NDVI %>% 
+  rename_with(~ paste0(.,"_Mud"), starts_with("X"))
+
 
 processed_list_beaver_NDVI <- list(beaver_0_NDVI, beaver_1_NDVI, beaver_2_NDVI, beaver_3_NDVI, 
                      beaver_4_NDVI, beaver_5_NDVI, beaver_6_NDVI, beaver_7_NDVI, 
@@ -331,27 +354,49 @@ write.csv(beaver_NDVI_long, "Newdata/beaver_NDVI_long.csv")
 
 
 control_0_NDVI <- summarize_ndvi(control_0_INIAKNUK)
+control_0_NDVI <- control_0_NDVI %>% 
+  rename_with(~ paste0(.,"_Iniakuk"), starts_with("X"))
 control_0_NDVI
 
 control_1_NDVI <- summarize_ndvi(control_1_HOGATZA)
+control_1_NDVI < control_1_NDVI %>% 
+  rename_with(~ paste0(., "_Hogatza"), starts_with("X"))
 
 control_2_NDVI <- summarize_ndvi(control_2_HOG)
+control_2_NDVI <- control_2_NDVI %>% 
+  rename_with(~ paste0(.,"_Hog"), starts_with("X"))
 
 control_3_NDVI <- summarize_ndvi(control_3_CHALKYITSIK)
+control_3_NDVI <- control_3_NDVI %>% 
+  rename_with(~ paste0(.,"_Chalkyitsik"), starts_with("X"))
 
 control_4_NDVI <- summarize_ndvi(control_4_SUNSHINE)
+control_4_NDVI <- control_4_NDVI %>% 
+  rename_with(~ paste0(.,"_Sunshine"), starts_with("X"))
 
 control_5_NDVI <- summarize_ndvi(control_5_MUNSON)
+control_5_NDVI <- control_5_NDVI %>% 
+  rename_with(~ paste0(.,"_Munson"), starts_with("X"))
 
 control_6_NDVI <- summarize_ndvi(control_6_PAIGE)
+control_6_NDVI <- control_6_NDVI %>% 
+  rename_with(~ paste0(.,"_Paige"), starts_with("X"))
 
 control_7_NDVI <- summarize_ndvi(control_7_HURST)
+control_7_NDVI <- control_7_NDVI %>% 
+  rename_with(~ paste0(.,"_Hurst"), starts_with("X"))
 
 control_8_NDVI <- summarize_ndvi(control_8_GROUCH)
+control_8_NDVI <- control_8_NDVI %>% 
+  rename_with(~ paste0(.,"_Grouch"), starts_with("X"))
 
 control_9_NDVI <- summarize_ndvi(control_9_VICTORIA)
+control_9_NDVI <- control_9_NDVI %>% 
+  rename_with(~ paste0(.,"_Victoria"), starts_with("X"))
 
 control_10_NDVI <- summarize_ndvi(control_10_MUD)
+control_10_NDVI <- control_10_NDVI %>% 
+  rename_with(~ paste0(.,"_Mud"), starts_with("X"))
 
 
 processed_list_control_NDVI <- list(control_0_NDVI, control_1_NDVI, control_2_NDVI, control_3_NDVI, 
@@ -363,7 +408,8 @@ control_NDVI_combined <- bind_rows(processed_list_control_NDVI, .id = "Dataset")
 str(control_NDVI_combined)
 
 
-control_NDVI_long <- tidyr::pivot_longer(control_NDVI_combined, cols = starts_with("X"),             names_to = "Point", values_to = "NDVI")
+control_NDVI_long <- tidyr::pivot_longer(control_NDVI_combined, cols = starts_with("X"),             
+                                         names_to = "Point", values_to = "NDVI")
 
 write.csv(control_NDVI_long, "Newdata/control_NDVI_long.csv")
 
@@ -389,27 +435,51 @@ summarize_ndwi <- function(i) {
 
 
 beaver_0_NDWI <- summarize_ndwi(beaver_0_INIAKNUK)
+beaver_0_NDWI <- beaver_0_NDWI %>% 
+  rename_with(~ paste0(.,"_Iniakuk"), starts_with("X"))
+  #mutate(Point = paste0("Iniakuk", Point))
 beaver_0_NDWI
 
 beaver_1_NDWI <- summarize_ndwi(beaver_1_HOGATZA)
+beaver_1_NDWI <- beaver_1_NDWI %>% 
+  rename_with(~ paste0(., "_Hogatza"), starts_with("X"))
 
 beaver_2_NDWI <- summarize_ndwi(beaver_2_HOG)
+beaver_2_NDWI <- beaver_2_NDWI %>% 
+  rename_with(~ paste0(.,"_Hog"), starts_with("X"))
 
 beaver_3_NDWI <- summarize_ndwi(beaver_3_CHALKYITSIK)
+beaver_3_NDWI <- beaver_3_NDWI %>% 
+  rename_with(~ paste0(.,"_Chalkyitsik"), starts_with("X"))
+#This doesn't work because there was only one beaver pond here, but it was excluded from the analysis anyways so it's okay. 
 
 beaver_4_NDWI <- summarize_ndwi(beaver_4_SUNSHINE)
+beaver_4_NDWI <- beaver_4_NDWI %>% 
+  rename_with(~ paste0(.,"_Sunshine"), starts_with("X"))
 
 beaver_5_NDWI <- summarize_ndwi(beaver_5_MUNSON)
+beaver_5_NDWI <- beaver_5_NDWI %>% 
+  rename_with(~ paste0(.,"_Munson"), starts_with("X"))
 
 beaver_6_NDWI <- summarize_ndwi(beaver_6_PAIGE)
+beaver_6_NDWI <- beaver_6_NDWI %>% 
+  rename_with(~ paste0(.,"_Paige"), starts_with("X"))
 
 beaver_7_NDWI <- summarize_ndwi(beaver_7_HURST)
+beaver_7_NDWI <- beaver_7_NDWI %>% 
+  rename_with(~ paste0(.,"_Hurst"), starts_with("X"))
 
 beaver_8_NDWI <- summarize_ndwi(beaver_8_GROUCH)
+beaver_8_NDWI <- beaver_8_NDWI %>% 
+  rename_with(~ paste0(.,"_Grouch"), starts_with("X"))
 
 beaver_9_NDWI <- summarize_ndwi(beaver_9_VICTORIA)
+beaver_9_NDWI <- beaver_9_NDWI %>% 
+  rename_with(~ paste0(.,"_Victoria"), starts_with("X"))
 
 beaver_10_NDWI <- summarize_ndwi(beaver_10_MUD)
+beaver_10_NDWI <- beaver_10_NDWI %>% 
+  rename_with(~ paste0(.,"_Mud"), starts_with("X"))
 
 
 processed_list_beaver_NDWI <- list(beaver_0_NDWI, beaver_1_NDWI, beaver_2_NDWI, beaver_3_NDWI, 
@@ -431,27 +501,53 @@ write.csv(beaver_NDWI_long, "Newdata/beaver_NDWI_long.csv")
 
 
 control_0_NDWI <- summarize_ndwi(control_0_INIAKNUK)
+control_0_NDWI <- control_0_NDWI %>% 
+  rename_with(~ paste0(.,"_Iniakuk"), starts_with("X"))
 control_0_NDWI
 
 control_1_NDWI <- summarize_ndwi(control_1_HOGATZA)
+control_1_NDWI <- control_1_NDWI %>% 
+  rename_with(~ paste0(., "_Hogatza"), starts_with("X"))
 
 control_2_NDWI <- summarize_ndwi(control_2_HOG)
+control_2_NDWI <- control_2_NDWI %>% 
+  rename_with(~ paste0(.,"_Hog"), starts_with("X"))
 
 control_3_NDWI <- summarize_ndwi(control_3_CHALKYITSIK)
+control_3_NDWI <- control_3_NDWI %>% 
+  rename_with(~ paste0(.,"_Chalkyitsik"), starts_with("X"))
 
 control_4_NDWI <- summarize_ndwi(control_4_SUNSHINE)
+control_4_NDWI <- control_4_NDWI %>% 
+  rename_with(~ paste0(.,"_Sunshine"), starts_with("X"))
 
 control_5_NDWI <- summarize_ndwi(control_5_MUNSON)
+control_5_NDWI <- control_5_NDWI %>% 
+  rename_with(~ paste0(.,"_Munson"), starts_with("X"))
 
 control_6_NDWI <- summarize_ndwi(control_6_PAIGE)
+control_6_NDWI <- control_6_NDWI %>% 
+  rename_with(~ paste0(.,"_Paige"), starts_with("X"))
 
 control_7_NDWI <- summarize_ndwi(control_7_HURST)
+control_7_NDWI <- control_7_NDWI %>% 
+  rename_with(~ paste0(.,"_Hurst"), starts_with("X"))
 
 control_8_NDWI <- summarize_ndwi(control_8_GROUCH)
+control_8_NDWI <- control_8_NDWI %>% 
+  rename_with(~ paste0(.,"_Grouch"), starts_with("X"))
 
 control_9_NDWI <- summarize_ndwi(control_9_VICTORIA)
+control_9_NDWI <- control_9_NDWI %>% 
+  rename_with(~ paste0(.,"_Victoria"), starts_with("X"))
+
 
 control_10_NDWI <- summarize_ndwi(control_10_MUD)
+control_10_NDWI <- control_10_NDWI %>% 
+  rename_with(~ paste0(.,"_Mud"), starts_with("X"))
+
+
+
 
 
 
@@ -700,7 +796,7 @@ F6_NDVI_plot <- ggplot(F6_NDVI, aes(x = DOY, y = NDVI)) +  #col = factor(point_t
   scale_shape_manual(values = c("Control" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
   scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   geom_smooth(aes(col = point_type, group = point_type), method = "loess", se = FALSE, alpha = 0.8, linewidth = 2) +
-  scale_color_manual(values = c("control" = "#FFA366", "Beaver" = "deepskyblue2"))+
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2"))+
   labs(title = "F (Page Mountain Fire)", x = "", y = "", color = "Point") +
   scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
   theme_cowplot()+
@@ -1133,10 +1229,10 @@ ggsave(plot = individual_fires_NDWI_2,
 
 ### Make the figure that Erik suggested for Figure 3
 beaver_NDVI_long <- beaver_NDVI_long %>% mutate("Type" = "Beaver",
-                                                Point = paste0("B", Point))
+                                                Point = paste0("B_", Point))
 
 control_NDVI_long <- control_NDVI_long %>% mutate("Type" = "Control", 
-                                                  Point = paste0("C", Point))
+                                                  Point = paste0("C_", Point))
 
 NDVI_long <- rbind(beaver_NDVI_long, control_NDVI_long)
 NDVI_long$Type <- as.factor(NDVI_long$Type)
@@ -1769,14 +1865,29 @@ ggsave(plot = Burn_Severity_Panel,
 
 
 
-# T-test and ANOVA's ------------------------------------------------------
+# Genralized linear mixed effect model -------------------------------------
+#Testing how beaver vs control sites affect dNDVI and dNDWI
+
+str(NDVI_long)
+
+NDVI_spring <- NDVI_long %>% 
+  filter(DOY < 175) %>% 
+  select(DOY, Point, NDVI, Type)
+  summarize(Point, )
+
+NDVI_fall <- NDVI_long %>% 
+  filter(DOY > 225)
 
 
 
 
 
+install.packages("lme4")
+library(lme4)
 
+?lme4
 
+glmer(dNDVI ~ Site_typebeaver/control + (1|Fire), data = .)
 
 
 
