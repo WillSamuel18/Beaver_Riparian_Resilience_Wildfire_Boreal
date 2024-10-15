@@ -1453,7 +1453,7 @@ custom_colors <- c("Unburned" = "darkgreen",    # Blue
                    "Moderate Burn" = "#ff7f0e", # Green
                    "Severe Burn" = "#d62728")  # Red
 
-# Create bar plot with faceting
+# Create bar p lot with faceting
 #ggplot(Fires_BurnSeverity_data_LONG, aes(x = Burn_Type, y = Percent, fill = Burn_Type)) +
 #  geom_bar(stat = "identity", position = "dodge") +
 #  labs(x = "Burn Category", y = "Percent") +
@@ -1858,27 +1858,41 @@ ggsave(plot = Burn_Severity_Panel,
 
 
 
-# Analyzing the time series -----------------------------------------------
 
 
 
 
 
 
-# Genralized linear mixed effect model -------------------------------------
+# Generalized linear mixed effect model -------------------------------------
 #Testing how beaver vs control sites affect dNDVI and dNDWI
+
+#beaver_NDVI_long <- read.csv("Newdata/beaver_NDVI_long.csv")
+#control_NDVI_long <- read.csv("Newdata/control_NDVI_long.csv")
+#beaver_NDWI_long <- read.csv("Newdata/beaver_NDWI_long.csv")
+#control_NDWI_long <- read.csv("Newdata/control_NDWI_long.csv")
+
+
+#write.csv(NDVI_long, "Newdata/NDVI_long.csv")
+#I don't where the code is where I made this dataset....
+NDWI_long <- read.csv("Newdata/NDWI_long.csv")
+
 
 str(NDVI_long)
 
 NDVI_spring <- NDVI_long %>% 
   filter(DOY < 175) %>% 
-  select(DOY, Point, NDVI, Type)
-  summarize(Point, )
+  select(Point, NDVI, Type) %>% #DOY,
+  group_by(Point, Type) %>% 
+  summarize(NDVI = mean(NDVI))
 
 NDVI_fall <- NDVI_long %>% 
-  filter(DOY > 225)
+  filter(DOY > 225) %>% 
+  select(Point, NDVI, Type) %>% #DOY,
+  group_by(Point, Type) %>% 
+  summarize(NDVI = mean(NDVI))
 
-
+dNDVI <- NDVI_spring-NDVI_fall
 
 
 
