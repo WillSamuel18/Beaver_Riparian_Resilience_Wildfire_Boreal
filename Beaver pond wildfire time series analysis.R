@@ -359,7 +359,9 @@ control_0_NDVI <- control_0_NDVI %>%
 control_0_NDVI
 
 control_1_NDVI <- summarize_ndvi(control_1_HOGATZA)
-control_1_NDVI < control_1_NDVI %>% 
+#control_1_NDVI < control_1_NDVI %>% 
+#  rename_with(~ paste0(., "_Hogatza"), starts_with("X"))
+control_1_NDVI <- control_1_NDVI %>% 
   rename_with(~ paste0(., "_Hogatza"), starts_with("X"))
 
 control_2_NDVI <- summarize_ndvi(control_2_HOG)
@@ -412,7 +414,6 @@ control_NDVI_long <- tidyr::pivot_longer(control_NDVI_combined, cols = starts_wi
                                          names_to = "Point", values_to = "NDVI")
 
 write.csv(control_NDVI_long, "Newdata/control_NDVI_long.csv")
-
 
 
 
@@ -1867,15 +1868,27 @@ ggsave(plot = Burn_Severity_Panel,
 # Generalized linear mixed effect model -------------------------------------
 #Testing how beaver vs control sites affect dNDVI and dNDWI
 
-#beaver_NDVI_long <- read.csv("Newdata/beaver_NDVI_long.csv")
-#control_NDVI_long <- read.csv("Newdata/control_NDVI_long.csv")
-#beaver_NDWI_long <- read.csv("Newdata/beaver_NDWI_long.csv")
-#control_NDWI_long <- read.csv("Newdata/control_NDWI_long.csv")
+beaver_NDVI_long <- read.csv("Newdata/beaver_NDVI_long.csv")
+control_NDVI_long <- read.csv("Newdata/control_NDVI_long.csv")
+beaver_NDWI_long <- read.csv("Newdata/beaver_NDWI_long.csv")
+control_NDWI_long <- read.csv("Newdata/control_NDWI_long.csv")
 
 
-#write.csv(NDVI_long, "Newdata/NDVI_long.csv")
-#I don't where the code is where I made this dataset....
-NDWI_long <- read.csv("Newdata/NDWI_long.csv")
+### Make the figure that Erik suggested for Figure 3
+beaver_NDVI_long <- beaver_NDVI_long %>% mutate("Type" = "Beaver",
+                                                Point = paste0("B_", Point))
+
+control_NDVI_long <- control_NDVI_long %>% mutate("Type" = "Control", 
+                                                  Point = paste0("C_", Point))
+
+NDVI_long <- rbind(beaver_NDVI_long, control_NDVI_long)
+NDVI_long$Type <- as.factor(NDVI_long$Type)
+NDVI_long$Point <- as.factor(NDVI_long$Point)
+
+write.csv(NDVI_long, "Newdata/NDVI_long.csv")
+
+
+NDVI_long <- read.csv("Newdata/NDVI_long.csv")
 
 
 str(NDVI_long)
@@ -1884,24 +1897,39 @@ NDVI_spring <- NDVI_long %>%
   filter(DOY < 175) %>% 
   select(Point, NDVI, Type) %>% #DOY,
   group_by(Point, Type) %>% 
-  summarize(NDVI = mean(NDVI))
+  summarize(NDVI = mean(NDVI, na.rm = T))
 
 NDVI_fall <- NDVI_long %>% 
   filter(DOY > 225) %>% 
   select(Point, NDVI, Type) %>% #DOY,
   group_by(Point, Type) %>% 
-  summarize(NDVI = mean(NDVI))
-
-dNDVI <- NDVI_spring-NDVI_fall
+  summarize(NDVI = mean(NDVI, na.rm = T))
 
 
 
-install.packages("lme4")
+NDVI_combined <- merge(NDVI_spring, NDVI_fall, by = "Point", suffixes = c("_spring", "_fall"))
+
+NDVI_combined$dNDVI <- NDVI_combined$NDVI_spring - NDVI_combined$NDVI_fall
+
+NDVI_combined <- NDVI_combined %>%
+  mutate(Fire = str_extract(Point, "[^_]+$")) #%>% 
+###  mutate(Fire = ifelse(grepl("X", Fire), "", Fire))
+#mutate(Fire = ifelse(Fire contains "X", ))
+
+str(NDVI_combined)
+
+unique(NDVI_combined$Fire)
+
+
+
+
+
+#install.packages("lme4")
 library(lme4)
 
 ?lme4
 
-glmer(dNDVI ~ Site_typebeaver/control + (1|Fire), data = .)
+summary(glmer(dNDVI ~ Type_spring + (1|Fire), data = NDVI_combined))
 
 
 
