@@ -8,7 +8,11 @@ library(lubridate) #for data manipulation
 library(ggplot2)  #for plotting
 library(patchwork) #for making panels
 library(cowplot)  #for plotting
-library(viridis)  #For plotting color palettes
+library(viridis)  #for plotting color palettes
+library(lme4)     #for mixed effect model
+library(lmerTest) #for mixed effect model p-values
+library(MASS)     #for ordinal logistic regression
+
 #library(AICcmodavg) #for model statistics
 #library(rcompanion) #for pseudo R-squared
 #library(boot) #For cross validation
@@ -1441,6 +1445,7 @@ BS_data2 <- BS_data2 %>%
   filter(Incid_Name != "Chalkyitsik Complex Fire")    #Removing this fire since it only has 1 beaver pond
 
 
+write.csv(BS_data2, "Newdata/BS_data2.csv")
 
 
 
@@ -1478,6 +1483,11 @@ BS_data2$Incid_Name <- factor(BS_data2$Incid_Name, levels = c("Iniakuk Lake Fire
 
 BS_data2$Burn_Type <- factor(BS_data2$Burn_Type, 
                              levels = c("Severe Burn", "Moderate Burn", "Mild Burn","Unburned"))
+
+
+BS_data2
+
+
 
 
 # Plot a panel
@@ -1867,14 +1877,12 @@ ggsave(plot = Burn_Severity_Panel,
 
 # Generalized linear mixed effect model -------------------------------------
 #Testing how beaver vs control sites affect dNDVI and dNDWI
+#### DO NDVI FIRST _____________________________________________________________
 
 beaver_NDVI_long <- read.csv("Newdata/beaver_NDVI_long.csv")
 control_NDVI_long <- read.csv("Newdata/control_NDVI_long.csv")
-beaver_NDWI_long <- read.csv("Newdata/beaver_NDWI_long.csv")
-control_NDWI_long <- read.csv("Newdata/control_NDWI_long.csv")
 
 
-### Make the figure that Erik suggested for Figure 3
 beaver_NDVI_long <- beaver_NDVI_long %>% mutate("Type" = "Beaver",
                                                 Point = paste0("B_", Point))
 
@@ -1911,25 +1919,324 @@ NDVI_combined <- merge(NDVI_spring, NDVI_fall, by = "Point", suffixes = c("_spri
 
 NDVI_combined$dNDVI <- NDVI_combined$NDVI_spring - NDVI_combined$NDVI_fall
 
+
 NDVI_combined <- NDVI_combined %>%
   mutate(Fire = str_extract(Point, "[^_]+$")) #%>% 
 ###  mutate(Fire = ifelse(grepl("X", Fire), "", Fire))
 #mutate(Fire = ifelse(Fire contains "X", ))
 
 str(NDVI_combined)
-
 unique(NDVI_combined$Fire)
+dim(NDVI_combined)
+which(is.nan(NDVI_combined$NDVI_fall)) # 2 Nan values
+which(is.nan(NDVI_combined$NDVI_spring)) # 9 Nan values
+which(is.nan(NDVI_combined$dNDVI)) #combined there are 11 Nan values
 
 
 
 
-
-#install.packages("lme4")
-library(lme4)
 
 ?lme4
 
-summary(glmer(dNDVI ~ Type_spring + (1|Fire), data = NDVI_combined))
+model <- lmer(dNDVI ~ Type_spring + (1|Fire), data = NDVI_combined)
+summary(model)
+#This means that, on average, the NDVI change (dNDVI) in the "Control" 
+#sites is 0.03 units higher than in the "Beaver" sites (since "Beaver" 
+#is the reference level for Type_spring).
+#A positive estimate (0.03) indicates that Control sites experienced a
+#greater increase (or smaller decrease) in NDVI compared to Beaver sites.
+#This relationship was statistically significant t = 2.322, p = 0.021
+
+ggplot(NDVI_combined, aes(x = Type_spring, y = dNDVI, fill = Type_spring)) +
+  geom_boxplot() +
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2")) +
+  labs(x = "Site Type", y = "NDVI Change (dNDVI)") +
+  theme_minimal()+  
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(color = "black", size = 14),
+    axis.text.y = element_text(color = "grey20", size = 12),
+    axis.title.y = element_text(size = 14))
+
+
+
+
+
+
+
+beaver_density_plot <- ggplot(NDVI_combined, aes(x = dNDVI, fill = Type_spring)) +
+  geom_density(alpha = 0.6) +
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2")) +
+  labs(fill = "Site Type", title = "A",
+       x = "NDVI Change (dNDVI)", y = "Density") +
+  theme_minimal()+
+  theme(
+    title = element_text(face = "bold", size = 14),
+    legend.position = c(0.85, 0.85),  
+    legend.title = element_text(size = 14), 
+    legend.text = element_text(size = 12),  
+    legend.background = element_rect(fill = "white", color = "black"),  
+    axis.text.x = element_text(color = "grey20", size = 12),
+    axis.text.y = element_text(color = "grey20", size = 12),
+    axis.title.x = element_text(color = "black", size = 14),
+    axis.title.y = element_text(color = "black", size = 14)
+  )
+beaver_density_plot
+
+ggsave(plot = beaver_density_plot, 
+       "Figures/beaver_density_plot.jpeg", 
+       width = 12, 
+       height = 12,
+       units = "cm",
+       dpi = 300)
+
+
+
+
+
+beaver_violin <- ggplot(NDVI_combined, aes(x = Type_spring, y = dNDVI, fill = Type_spring)) +
+  geom_violin(trim = FALSE, alpha = 0.6) +  
+  geom_boxplot(width = 0.1, position = position_dodge(width = 0.9), color = "black", alpha = 0.7) +  # Boxplot on top
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2")) +
+  labs(title = "B",
+    x = "", y = "NDVI Change (dNDVI)") +
+  theme_minimal() +  
+  theme(
+    title = element_text(face = "bold", size = 14),
+    legend.position = "none",
+    axis.text.x = element_text(color = "black", size = 14),
+    axis.text.y = element_text(color = "grey20", size = 12),
+    axis.title.y = element_text(size = 14))
+beaver_violin
+
+ggsave(plot = beaver_violin, 
+       "Figures/beaver_violin.jpeg", 
+       width = 12, 
+       height = 12,
+       units = "cm",
+       dpi = 300)
+
+
+
+
+ggplot(NDVI_combined, aes(x = Type_spring, y = dNDVI, color = Fire, group = Fire)) +
+  geom_line(stat = "summary", fun = mean) +
+  labs(title = "Interaction Between Fire and Site Type on NDVI Change",
+       x = "Site Type", y = "Mean NDVI Change (dNDVI)") +
+  theme_minimal()
+
+
+
+
+NDVI_change_panel <- beaver_density_plot + beaver_violin
+NDVI_change_panel
+
+ggsave(plot = NDVI_change_panel, 
+       "Figures/NDVI_change_panel.jpeg", 
+       width = 24, 
+       height = 12,
+       units = "cm",
+       dpi = 300)
+
+
+### NOW DO NDWI ________________________________________________________________
+
+
+# Load the data
+beaver_NDWI_long <- read.csv("Newdata/beaver_NDWI_long.csv")
+control_NDWI_long <- read.csv("Newdata/control_NDWI_long.csv")
+
+# Check the structure of the NDWI datasets
+str(beaver_NDWI_long)
+str(control_NDWI_long)
+
+# Add Type and modify Point
+beaver_NDWI_long <- beaver_NDWI_long %>% 
+  mutate(Type = "Beaver", Point = paste0("B_", Point))
+
+control_NDWI_long <- control_NDWI_long %>% 
+  mutate(Type = "Control", Point = paste0("C_", Point))
+
+# Combine data
+NDWI_long <- rbind(beaver_NDWI_long, control_NDWI_long)
+NDWI_long$Type <- as.factor(NDWI_long$Type)
+NDWI_long$Point <- as.factor(NDWI_long$Point)
+
+# Write to CSV
+write.csv(NDWI_long, "Newdata/NDWI_long.csv")
+
+# Read the combined data
+NDWI_long <- read.csv("Newdata/NDWI_long.csv")
+
+# Structure of NDWI_long
+str(NDWI_long)
+
+# Check for NA values
+summary(NDWI_long)
+
+# Calculate NDWI_spring and NDWI_fall
+NDWI_spring <- NDWI_long %>% 
+  filter(DOY < 175) %>% 
+  select(Point, NDWI, Type) %>%  # Make sure 'NDWI' is the correct column name
+  group_by(Point, Type) %>% 
+  summarize(NDWI = mean(NDWI, na.rm = TRUE))
+
+NDWI_fall <- NDWI_long %>% 
+  filter(DOY > 225) %>% 
+  select(Point, NDWI, Type) %>%  # Ensure 'NDWI' is the correct column name
+  group_by(Point, Type) %>% 
+  summarize(NDWI = mean(NDWI, na.rm = TRUE))
+
+# Merge data
+NDWI_combined <- merge(NDWI_spring, NDWI_fall, by = "Point", suffixes = c("_spring", "_fall"))
+
+# Calculate dNDWI
+NDWI_combined$dNDWI <- NDWI_combined$NDWI_spring - NDWI_combined$NDWI_fall
+
+
+NDWI_combined <- NDWI_combined %>%
+  mutate(Fire = str_extract(Point, "[^_]+$")) #%>% 
+###  mutate(Fire = ifelse(grepl("X", Fire), "", Fire))
+#mutate(Fire = ifelse(Fire contains "X", ))
+
+str(NDWI_combined)
+unique(NDWI_combined$Fire)
+dim(NDWI_combined)
+which(is.nan(NDWI_combined$NDWI_fall)) # 2 Nan values
+which(is.nan(NDWI_combined$NDWI_spring)) # 9 Nan values
+which(is.nan(NDWI_combined$dNDWI)) #combined there are 11 Nan values
+
+
+
+
+
+?lme4
+
+model <- lmer(dNDWI ~ Type_spring + (1|Fire), data = NDWI_combined)
+summary(model)
+#This means that, on average, the NDWI change (dNDWI) in the "Control" 
+#sites is 0.0179 units lower than in the "Beaver" sites (since "Beaver" 
+#is the reference level for Type_spring).
+#A negative estimate (-0.0179) indicates that Control sites experienced a
+#smaller increase (or larger decrease) in NDWI compared to Beaver sites.
+#This relationship was not statistically significant t = -1.613, p = 0.107
+
+ggplot(NDWI_combined, aes(x = Type_spring, y = dNDWI, fill = Type_spring)) +
+  geom_boxplot() +
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2")) +
+  labs(x = "Site Type", y = "NDWI Change (dNDWI)") +
+  theme_minimal()+  
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(color = "black", size = 14),
+    axis.text.y = element_text(color = "grey20", size = 12),
+    axis.title.y = element_text(size = 14))
+
+
+
+
+beaver_density_plot_NDWI <- ggplot(NDWI_combined, aes(x = dNDWI, fill = Type_spring)) +
+  geom_density(alpha = 0.6) +
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2")) +
+  labs(fill = "Site Type", title = "C",
+       x = "NDWI Change (dNDWI)", y = "Density") +
+  theme_minimal()+
+  theme(
+    legend.position = "none",
+    #legend.position = c(0.2, 0.85),  
+    title = element_text(face = "bold", size = 14),
+    legend.title = element_text(size = 14), 
+    legend.text = element_text(size = 12),  
+    legend.background = element_rect(fill = "white", color = "black"),  
+    axis.text.x = element_text(color = "grey20", size = 12),
+    axis.text.y = element_text(color = "grey20", size = 12),
+    axis.title.x = element_text(color = "black", size = 14),
+    axis.title.y = element_text(color = "black", size = 14)
+  )
+beaver_density_plot_NDWI
+
+ggsave(plot = beaver_density_plot_NDWI, 
+       "Figures/beaver_density_plot.jpeg", 
+       width = 12, 
+       height = 12,
+       units = "cm",
+       dpi = 300)
+
+
+
+
+
+beaver_violin_NDWI <- ggplot(NDWI_combined, aes(x = Type_spring, y = dNDWI, fill = Type_spring)) +
+  geom_violin(trim = FALSE, alpha = 0.6) +  
+  geom_boxplot(width = 0.1, position = position_dodge(width = 0.9), color = "black", alpha = 0.7) +  # Boxplot on top
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2")) +
+  labs(title = "D",
+       x = "", y = "NDWI Change (dNDWI)") +
+  theme_minimal() +  
+  theme(
+    title = element_text(face = "bold", size = 14),
+    legend.position = "none",
+    axis.text.x = element_text(color = "black", size = 14),
+    axis.text.y = element_text(color = "grey20", size = 12),
+    axis.title.y = element_text(size = 14))
+beaver_violin_NDWI
+
+ggsave(plot = beaver_violin_NDWI, 
+       "Figures/beaver_violin.jpeg", 
+       width = 12, 
+       height = 12,
+       units = "cm",
+       dpi = 300)
+
+
+
+
+ggplot(NDWI_combined, aes(x = Type_spring, y = dNDWI, color = Fire, group = Fire)) +
+  geom_line(stat = "summary", fun = mean) +
+  labs(title = "Interaction Between Fire and Site Type on NDVI Change",
+       x = "Site Type", y = "Mean NDVI Change (dNDWI)") +
+  theme_minimal()
+
+
+
+
+NDWI_change_panel <- beaver_density_plot_NDWI + beaver_violin_NDWI
+NDWI_change_panel
+
+ggsave(plot = NDWI_change_panel, 
+       "Figures/NDWI_change_panel.jpeg", 
+       width = 24, 
+       height = 12,
+       units = "cm",
+       dpi = 300)
+
+
+
+#Now combine the two panels
+overall_change_panel <- NDVI_change_panel/NDWI_change_panel
+overall_change_panel
+
+
+ggsave(plot = overall_change_panel, 
+       "Figures/overall_change_panel.jpeg", 
+       width = 24, 
+       height = 24,
+       units = "cm",
+       dpi = 300)
+
+
+
+# Testing for effects of beavers on burn severity -------------------------
+
+NDVI_long <- read.csv("Newdata/NDVI_long.csv")
+NDWI_long <- read.csv("Newdata/NDWI_long.csv")
+
+
+
+
+
+
+
 
 
 
