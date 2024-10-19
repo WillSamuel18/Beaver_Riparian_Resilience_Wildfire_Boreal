@@ -2397,25 +2397,6 @@ summary(BS_model)
 
 
 
-# Fit the multinomial logistic regression model
-#install.packages("nnet")
-library(nnet)
-BS_data3 <- BS_data3 %>%
-  mutate(Burn_Type = factor(Burn_Type, 
-                            levels = c("Unburned", "Mild Burn", "Moderate Burn", "Severe Burn")))
-
-model_multinom <- nnet::multinom(Burn_Type ~ Percent + Type, data = BS_data3)
-summary(model_multinom)
-#Type (Control Sites): This compares the effect of being in a Control Site vs.
-#Beaver Pond on the log-odds of being in the burn categories relative to "Unburned."
-
-#For Mild Burn, the coefficient is -0.04050770. Being in Control Sites slightly 
-#decreases the odds of Mild Burn compared to Beaver Ponds.
-#For Moderate Burn and Severe Burn, the coefficients are also negative but small, 
-#indicating a slight decrease in the odds of being in these categories when in Control Sites.
-
-
-
 library(mgcv)
 
 # Fit a generalized additive model
@@ -2426,7 +2407,6 @@ summary(gam_model)
 #versus a Beaver Pond on Percent. The small estimate (0.06427) and very high p-value 
 #(0.987) indicate that there is no significant difference in Percent between Control 
 #Sites and Beaver Ponds.
-##################
 
 
 
@@ -2466,10 +2446,10 @@ p_values
 #Moderate Burn           0      0.0005520323
 #Severe Burn             0      0.0240593607
 
-#Exponentiated coefficients to interpret as odd ratios
+#Exponentiation of the coefficients to interpret as odd ratios
 exp(summary(multinom_model)$coefficients)
 #(Intercept) TypeControl Sites
-#Mild Burn      1.39819723          1.356432 time more likely than beaver ponds
+#Mild Burn      1.39819723          1.356432 times more likely in control sites than beaver ponds
 #Moderate Burn  0.34929400          1.116694
 #Severe Burn    0.02645149          1.247027
 
@@ -2477,6 +2457,8 @@ exp(summary(multinom_model)$coefficients)
 
 
 
+
+###STILL CAN'T GET THESE LIBRARIES TO LOAD/RUN PROPERLY
 
 ###Trying to include a random effect of fire
 install.packages("rstan")
@@ -2488,7 +2470,6 @@ install.packages("rstan", dependencies = TRUE)
 install.packages("devtools")
 devtools::install_github("paul-buerkner/brms")
 ##
-install.packages("brms", dependencies = TRUE)  ###############Need to run this again! 14:55, 10/18/2024
 library(brms)
 
 
