@@ -1,0 +1,129 @@
+"","Incid_Name","Burn_Type","Type","Percent"
+"1","Hog Fire","Mild Burn","Beaver Ponds",56.047635296531
+"2","Hog Fire","Mild Burn","Control Sites",65.6560737657409
+"3","Hog Fire","Mild Burn","Entire Fire",4.98638378909836
+"4","Hog Fire","Moderate Burn","Beaver Ponds",40.7373967369058
+"5","Hog Fire","Moderate Burn","Control Sites",30.8723316443645
+"6","Hog Fire","Moderate Burn","Entire Fire",35.7156934626805
+"7","Hog Fire","Severe Burn","Beaver Ponds",0.330756582338883
+"8","Hog Fire","Severe Burn","Control Sites",1.66177015189689
+"9","Hog Fire","Severe Burn","Entire Fire",27.7151115496532
+"10","Hog Fire","Unburned","Beaver Ponds",2.88421150604394
+"11","Hog Fire","Unburned","Control Sites",1.80540670313971
+"12","Hog Fire","Unburned","Entire Fire",2.46383080444345
+"13","Hogatza River Fire","Mild Burn","Beaver Ponds",64.9539797788685
+"14","Hogatza River Fire","Mild Burn","Control Sites",55.5745086016316
+"15","Hogatza River Fire","Mild Burn","Entire Fire",7.94347057606467
+"16","Hogatza River Fire","Moderate Burn","Beaver Ponds",18.3576210906035
+"17","Hogatza River Fire","Moderate Burn","Control Sites",14.6310625761033
+"18","Hogatza River Fire","Moderate Burn","Entire Fire",32.8001363886448
+"19","Hogatza River Fire","Severe Burn","Beaver Ponds",0.837781216455001
+"20","Hogatza River Fire","Severe Burn","Control Sites",0
+"21","Hogatza River Fire","Severe Burn","Entire Fire",33.1237274511089
+"22","Hogatza River Fire","Unburned","Beaver Ponds",15.4079340399963
+"23","Hogatza River Fire","Unburned","Control Sites",29.7900110313648
+"24","Hogatza River Fire","Unburned","Entire Fire",3.89612665147622
+"25","Hurst Creek Fire","Mild Burn","Beaver Ponds",29.8850827829585
+"26","Hurst Creek Fire","Mild Burn","Control Sites",46.8555152653665
+"27","Hurst Creek Fire","Mild Burn","Entire Fire",7.02547671871413
+"28","Hurst Creek Fire","Moderate Burn","Beaver Ponds",2.28078916243605
+"29","Hurst Creek Fire","Moderate Burn","Control Sites",0.303212596130251
+"30","Hurst Creek Fire","Moderate Burn","Entire Fire",32.4166238232884
+"31","Hurst Creek Fire","Severe Burn","Beaver Ponds",0.0767848110886695
+"32","Hurst Creek Fire","Severe Burn","Control Sites",0
+"33","Hurst Creek Fire","Severe Burn","Entire Fire",11.6478520512296
+"34","Hurst Creek Fire","Unburned","Beaver Ponds",31.5748357681291
+"35","Hurst Creek Fire","Unburned","Control Sites",23.0728244137024
+"36","Hurst Creek Fire","Unburned","Entire Fire",3.97360562227678
+"37","Iniakuk Lake Fire","Mild Burn","Beaver Ponds",53.2858669207041
+"38","Iniakuk Lake Fire","Mild Burn","Control Sites",42.5611637560809
+"39","Iniakuk Lake Fire","Mild Burn","Entire Fire",6.3293721973784
+"40","Iniakuk Lake Fire","Moderate Burn","Beaver Ponds",6.9629401839094
+"41","Iniakuk Lake Fire","Moderate Burn","Control Sites",0
+"42","Iniakuk Lake Fire","Moderate Burn","Entire Fire",44.4281100369774
+"43","Iniakuk Lake Fire","Severe Burn","Beaver Ponds",0
+"44","Iniakuk Lake Fire","Severe Burn","Control Sites",0
+"45","Iniakuk Lake Fire","Severe Burn","Entire Fire",10.5663598968341
+"46","Iniakuk Lake Fire","Unburned","Beaver Ponds",36.5460381238721
+"47","Iniakuk Lake Fire","Unburned","Control Sites",39.9413395112295
+"48","Iniakuk Lake Fire","Unburned","Entire Fire",3.06094071190365
+"49","Little Mud River Fire","Mild Burn","Beaver Ponds",16.2174252197696
+"50","Little Mud River Fire","Mild Burn","Control Sites",9.58681399084473
+"51","Little Mud River Fire","Mild Burn","Entire Fire",5.56825467814946
+"52","Little Mud River Fire","Moderate Burn","Beaver Ponds",47.4913328349395
+"53","Little Mud River Fire","Moderate Burn","Control Sites",47.1050577379169
+"54","Little Mud River Fire","Moderate Burn","Entire Fire",62.942908095417
+"55","Little Mud River Fire","Severe Burn","Beaver Ponds",36.2912421965631
+"56","Little Mud River Fire","Severe Burn","Control Sites",43.3037109960108
+"57","Little Mud River Fire","Severe Burn","Entire Fire",6.86162536865107
+"58","Little Mud River Fire","Unburned","Beaver Ponds",0
+"59","Little Mud River Fire","Unburned","Control Sites",0
+"60","Little Mud River Fire","Unburned","Entire Fire",2.94369034451126
+"61","Munson Creek Fire","Mild Burn","Beaver Ponds",53.9220278018317
+"62","Munson Creek Fire","Mild Burn","Control Sites",54.21988694263
+"63","Munson Creek Fire","Mild Burn","Entire Fire",10.7787673277746
+"64","Munson Creek Fire","Moderate Burn","Beaver Ponds",14.9561487020402
+"65","Munson Creek Fire","Moderate Burn","Control Sites",19.7210174804329
+"66","Munson Creek Fire","Moderate Burn","Entire Fire",43.1820047539401
+"67","Munson Creek Fire","Severe Burn","Beaver Ponds",0.63637472574015
+"68","Munson Creek Fire","Severe Burn","Control Sites",0.494500280909884
+"69","Munson Creek Fire","Severe Burn","Entire Fire",24.8491230275889
+"70","Munson Creek Fire","Unburned","Beaver Ponds",20.7881862526328
+"71","Munson Creek Fire","Unburned","Control Sites",14.1332171477461
+"72","Munson Creek Fire","Unburned","Entire Fire",5.66858100440957
+"73","Old Grouch Top Fire","Mild Burn","Beaver Ponds",58.7221597267174
+"74","Old Grouch Top Fire","Mild Burn","Control Sites",72.0766150447306
+"75","Old Grouch Top Fire","Mild Burn","Entire Fire",7.42073949159666
+"76","Old Grouch Top Fire","Moderate Burn","Beaver Ponds",9.55933622101718
+"77","Old Grouch Top Fire","Moderate Burn","Control Sites",12.3532390814896
+"78","Old Grouch Top Fire","Moderate Burn","Entire Fire",32.6372333687303
+"79","Old Grouch Top Fire","Severe Burn","Beaver Ponds",0
+"80","Old Grouch Top Fire","Severe Burn","Control Sites",0
+"81","Old Grouch Top Fire","Severe Burn","Entire Fire",4.7375423615302
+"82","Old Grouch Top Fire","Unburned","Beaver Ponds",23.5120729491105
+"83","Old Grouch Top Fire","Unburned","Control Sites",13.6528080301471
+"84","Old Grouch Top Fire","Unburned","Entire Fire",4.15730623796719
+"85","Page Mountain Fire","Mild Burn","Entire Fire",13.4123713453127
+"86","Page Mountain Fire","Moderate Burn","Entire Fire",33.7866108660679
+"87","Page Mountain Fire","Severe Burn","Entire Fire",1.66450932534741
+"88","Page Mountain Fire","Unburned","Entire Fire",7.50890153962481
+"89","Page Mountain Fire","Mild Burn","Beaver Ponds",31.0679456757391
+"90","Page Mountain Fire","Mild Burn","Control Sites",37.6633327090558
+"91","Page Mountain Fire","Moderate Burn","Beaver Ponds",6.12679201282086
+"92","Page Mountain Fire","Moderate Burn","Control Sites",5.14027205531171
+"93","Page Mountain Fire","Severe Burn","Beaver Ponds",0.169710135214196
+"94","Page Mountain Fire","Severe Burn","Control Sites",0
+"95","Page Mountain Fire","Unburned","Beaver Ponds",44.6220808384113
+"96","Page Mountain Fire","Unburned","Control Sites",41.526943397087
+"97","Page Mountain Fire","Mild Burn","Beaver Ponds",0
+"98","Page Mountain Fire","Mild Burn","Control Sites",0
+"99","Page Mountain Fire","Moderate Burn","Beaver Ponds",0
+"100","Page Mountain Fire","Moderate Burn","Control Sites",0
+"101","Page Mountain Fire","Severe Burn","Beaver Ponds",0
+"102","Page Mountain Fire","Severe Burn","Control Sites",0
+"103","Page Mountain Fire","Unburned","Beaver Ponds",0
+"104","Page Mountain Fire","Unburned","Control Sites",0
+"105","Sunshine Mountain Fire","Mild Burn","Beaver Ponds",86.5831102436877
+"106","Sunshine Mountain Fire","Mild Burn","Control Sites",90.3097647121038
+"107","Sunshine Mountain Fire","Moderate Burn","Beaver Ponds",4.73160559226872
+"108","Sunshine Mountain Fire","Moderate Burn","Control Sites",6.74131580132026
+"109","Sunshine Mountain Fire","Severe Burn","Beaver Ponds",0
+"110","Sunshine Mountain Fire","Severe Burn","Control Sites",0
+"111","Sunshine Mountain Fire","Unburned","Beaver Ponds",5.2986184351931
+"112","Sunshine Mountain Fire","Unburned","Control Sites",2.94450193007598
+"113","Sunshine Mountain Fire","Mild Burn","Entire Fire",5.0645266874374
+"114","Sunshine Mountain Fire","Moderate Burn","Entire Fire",29.1565562409622
+"115","Sunshine Mountain Fire","Severe Burn","Entire Fire",1.96438615976105
+"116","Sunshine Mountain Fire","Unburned","Entire Fire",2.82630384111924
+"117","Victoria Mountain Fire","Mild Burn","Beaver Ponds",33.5012087297827
+"118","Victoria Mountain Fire","Mild Burn","Control Sites",80.3592098078347
+"119","Victoria Mountain Fire","Mild Burn","Entire Fire",8.70773701641914
+"120","Victoria Mountain Fire","Moderate Burn","Beaver Ponds",9.64437584161879
+"121","Victoria Mountain Fire","Moderate Burn","Control Sites",0.403938486520139
+"122","Victoria Mountain Fire","Moderate Burn","Entire Fire",31.8184668988972
+"123","Victoria Mountain Fire","Severe Burn","Beaver Ponds",0
+"124","Victoria Mountain Fire","Severe Burn","Control Sites",0
+"125","Victoria Mountain Fire","Severe Burn","Entire Fire",7.69286784759751
+"126","Victoria Mountain Fire","Unburned","Beaver Ponds",56.8544167333572
+"127","Victoria Mountain Fire","Unburned","Control Sites",19.2324340311169
+"128","Victoria Mountain Fire","Unburned","Entire Fire",4.442542067864

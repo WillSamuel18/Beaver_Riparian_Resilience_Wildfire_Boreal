@@ -20,7 +20,7 @@ library(MASS)     #for ordinal logistic regression
 set.seed(1)  
 
 
-rm(list=ls(all=TRUE)) # clear the working environment
+#rm(list=ls(all=TRUE)) # clear the working environment
 
 
 
@@ -1348,7 +1348,7 @@ Fires_BurnSeverity_data <- read.csv("Data/Burn Severity Summaries/Fire_perims_Wi
 str(Fires_BurnSeverity_data)
 
 Fires_BurnSeverity_data <- Fires_BurnSeverity_data %>% 
-  select(Incid_Name, Percent_Unburned, Percent_Mild_Burn, Percent_Moderate_Burn, Percent_Severe_Burn) 
+  dplyr::select(Incid_Name, Percent_Unburned, Percent_Mild_Burn, Percent_Moderate_Burn, Percent_Severe_Burn) 
 
 
 Fires_BurnSeverity_data_LONG <- Fires_BurnSeverity_data %>%
@@ -1360,7 +1360,8 @@ Fires_BurnSeverity_data_LONG <- Fires_BurnSeverity_data %>%
                             Percent_Mild_Burn = "Mild Burn",
                             Percent_Moderate_Burn = "Moderate Burn",
                             Percent_Severe_Burn = "Severe Burn"),
-         Type = "Entire Fire")
+         Type = "Entire Fire") 
+
 
 
 #Transform the beaver data
@@ -1368,9 +1369,10 @@ str(Beaver_BurnSeverity_data)
 
 
 Beaver_BurnSeverity_data <- Beaver_BurnSeverity_data %>% 
-  select(Beaver_Ponds_2020_Fire_Name, Percent_Unburned, Percent_Mild_Burn, 
+  dplyr::select(Beaver_Ponds_2020_Fire_Name, Percent_Unburned, Percent_Mild_Burn, 
          Percent_Moderate_Burn, Percent_Severe_Burn) %>% 
   rename(Incid_Name = Beaver_Ponds_2020_Fire_Name)
+
 
 
 Beaver_BurnSeverity_data_LONG <- Beaver_BurnSeverity_data %>%
@@ -1394,9 +1396,10 @@ str(Control_BurnSeverity_data)
 
 
 Control_BurnSeverity_data <- Control_BurnSeverity_data %>% 
-  select(Beaver_Ponds_2020_Fire_Name, Percent_Unburned, Percent_Mild_Burn, 
+  dplyr::select(Beaver_Ponds_2020_Fire_Name, Percent_Unburned, Percent_Mild_Burn, 
          Percent_Moderate_Burn, Percent_Severe_Burn) %>% 
   rename(Incid_Name = Beaver_Ponds_2020_Fire_Name)
+
 
 
 Control_BurnSeverity_data_LONG <- Control_BurnSeverity_data %>%
@@ -1424,7 +1427,7 @@ summary(Fires_BurnSeverity_data_LONG)
 
 BS_data2 <- BS_data %>%
   group_by(Incid_Name, Burn_Type, Type) %>% 
-  summarize(Percent = mean(Percent)) %>% 
+  summarize(Percent = mean(Percent, na.rm = T)) %>% 
   mutate(Incid_Name = case_when(
     Incid_Name == "INIAKUK LAKE" ~ "Iniakuk Lake Fire",
     Incid_Name == "HOGATZA RIVER" ~ "Hogatza River Fire",
@@ -1493,7 +1496,7 @@ BS_data2
 # Plot a panel
 ggplot(BS_data2, aes(x = Type, y = Percent, fill = Burn_Type)) +
   geom_bar(stat = "identity", position = "stack", width = 0.6) +
-  labs(x = "Fire Incident", y = "Mean Percent Burned", 
+  labs(x = "Fire Incident", y = "Mean Percent Burned (Per Category)", 
        fill = "Burn Severity") +
   scale_fill_manual(values = custom_colors) +
   scale_y_continuous(limits = c(0, 90), breaks = seq(0, 90, 10))+
@@ -1875,7 +1878,7 @@ ggsave(plot = Burn_Severity_Panel,
 
 
 
-# Generalized linear mixed effect model -------------------------------------
+# Generalized linear mixed effect models -------------------------------------
 #Testing how beaver vs control sites affect dNDVI and dNDWI
 #### DO NDVI FIRST _____________________________________________________________
 
@@ -1893,7 +1896,7 @@ NDVI_long <- rbind(beaver_NDVI_long, control_NDVI_long)
 NDVI_long$Type <- as.factor(NDVI_long$Type)
 NDVI_long$Point <- as.factor(NDVI_long$Point)
 
-write.csv(NDVI_long, "Newdata/NDVI_long.csv")
+#write.csv(NDVI_long, "Newdata/NDVI_long.csv")
 
 
 NDVI_long <- read.csv("Newdata/NDVI_long.csv")
@@ -1903,13 +1906,13 @@ str(NDVI_long)
 
 NDVI_spring <- NDVI_long %>% 
   filter(DOY < 175) %>% 
-  select(Point, NDVI, Type) %>% #DOY,
+  dplyr::select(Point, NDVI, Type) %>% #DOY,
   group_by(Point, Type) %>% 
   summarize(NDVI = mean(NDVI, na.rm = T))
 
 NDVI_fall <- NDVI_long %>% 
   filter(DOY > 225) %>% 
-  select(Point, NDVI, Type) %>% #DOY,
+  dplyr::select(Point, NDVI, Type) %>% #DOY,
   group_by(Point, Type) %>% 
   summarize(NDVI = mean(NDVI, na.rm = T))
 
@@ -1946,6 +1949,21 @@ summary(model)
 #A positive estimate (0.03) indicates that Control sites experienced a
 #greater increase (or smaller decrease) in NDVI compared to Beaver sites.
 #This relationship was statistically significant t = 2.322, p = 0.021
+
+
+# Plot the real data
+ggplot(NDVI_combined, aes(x = Type_spring, y = dNDVI, color = Type_spring)) +
+  geom_jitter(alpha = 0.5, width = 0.2) +  # Adds jitter to the points
+  scale_color_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2")) +
+  labs(title = "Real dNDVI by Type in Spring",
+       x = "Type in Spring",
+       y = "dNDVI") +
+  theme_minimal() +
+  theme(legend.position = "bottom")+
+  facet_wrap(~Fire)
+
+
+
 
 ggplot(NDVI_combined, aes(x = Type_spring, y = dNDVI, fill = Type_spring)) +
   geom_boxplot() +
@@ -1997,6 +2015,8 @@ ggsave(plot = beaver_density_plot,
 beaver_violin <- ggplot(NDVI_combined, aes(x = Type_spring, y = dNDVI, fill = Type_spring)) +
   geom_violin(trim = FALSE, alpha = 0.6) +  
   geom_boxplot(width = 0.1, position = position_dodge(width = 0.9), color = "black", alpha = 0.7) +  # Boxplot on top
+  geom_point(aes(x = Type_spring, y = mean(dNDVI, na.rm = TRUE), fill = Type_spring), 
+             shape = 8, size = 3, color = "black") +  
   scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2")) +
   labs(title = "B",
     x = "", y = "NDVI Change (dNDVI)") +
@@ -2063,7 +2083,7 @@ NDWI_long$Type <- as.factor(NDWI_long$Type)
 NDWI_long$Point <- as.factor(NDWI_long$Point)
 
 # Write to CSV
-write.csv(NDWI_long, "Newdata/NDWI_long.csv")
+#write.csv(NDWI_long, "Newdata/NDWI_long.csv")
 
 # Read the combined data
 NDWI_long <- read.csv("Newdata/NDWI_long.csv")
@@ -2077,13 +2097,13 @@ summary(NDWI_long)
 # Calculate NDWI_spring and NDWI_fall
 NDWI_spring <- NDWI_long %>% 
   filter(DOY < 175) %>% 
-  select(Point, NDWI, Type) %>%  # Make sure 'NDWI' is the correct column name
+  dplyr::select(Point, NDWI, Type) %>%  # Make sure 'NDWI' is the correct column name
   group_by(Point, Type) %>% 
   summarize(NDWI = mean(NDWI, na.rm = TRUE))
 
 NDWI_fall <- NDWI_long %>% 
   filter(DOY > 225) %>% 
-  select(Point, NDWI, Type) %>%  # Ensure 'NDWI' is the correct column name
+  dplyr::select(Point, NDWI, Type) %>%  # Ensure 'NDWI' is the correct column name
   group_by(Point, Type) %>% 
   summarize(NDWI = mean(NDWI, na.rm = TRUE))
 
@@ -2169,7 +2189,8 @@ ggsave(plot = beaver_density_plot_NDWI,
 beaver_violin_NDWI <- ggplot(NDWI_combined, aes(x = Type_spring, y = dNDWI, fill = Type_spring)) +
   geom_violin(trim = FALSE, alpha = 0.6) +  
   geom_boxplot(width = 0.1, position = position_dodge(width = 0.9), color = "black", alpha = 0.7) +  # Boxplot on top
-  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2")) +
+  geom_point(aes(x = Type_spring, y = mean(dNDWI, na.rm = TRUE), fill = Type_spring), 
+             shape = 8, size = 3, color = "black") +  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2")) +
   labs(title = "D",
        x = "", y = "NDWI Change (dNDWI)") +
   theme_minimal() +  
@@ -2226,12 +2247,285 @@ ggsave(plot = overall_change_panel,
 
 
 
-# Testing for effects of beavers on burn severity -------------------------
 
-NDVI_long <- read.csv("Newdata/NDVI_long.csv")
-NDWI_long <- read.csv("Newdata/NDWI_long.csv")
+# Testing for effects of beavers on burn severity ----------------------------
 
 
+#NDVI_long <- read.csv("Newdata/NDVI_long.csv")
+#NDWI_long <- read.csv("Newdata/NDWI_long.csv")
+#BS_data2 <- read.csv("Newdata/BS_data2.csv")
+Beaver_BurnSeverity_data <- read.csv("Data/Burn Severity Summaries/Beaver_Pond_Polygons_With_burn_Severity_ExportTable.csv")
+Control_BurnSeverity_data <- read.csv("Data/Burn Severity Summaries/Control_Polygons_With_burn_Severity_ExportTable.csv")
+
+
+str(Beaver_BurnSeverity_data)
+
+
+#Transform the beaver data
+
+Beaver_BurnSeverity_data <- Beaver_BurnSeverity_data %>% 
+  dplyr::select(Beaver_Ponds_2020_Fire_Name, Percent_Unburned, Percent_Mild_Burn, 
+                Percent_Moderate_Burn, Percent_Severe_Burn) %>% 
+  rename(Incid_Name = Beaver_Ponds_2020_Fire_Name) %>% 
+  mutate(#Normalize the burn percentages to 100%. I think this is necessary for modeling. If there were no 
+    #values in any of these categories, it was due to those data being masked by MTBS for poor imagery. 
+    #There are two options, either to leave them in as NA values, or imagine they are all unburned. 
+    #I think I'll do the former, exclude them from the analysis
+    Total_Percent = Percent_Unburned + Percent_Mild_Burn + Percent_Moderate_Burn + Percent_Severe_Burn,
+    Percent_Unburned = (Percent_Unburned / Total_Percent)*100,
+    Percent_Mild_Burn = (Percent_Mild_Burn / Total_Percent)*100,
+    Percent_Moderate_Burn = (Percent_Moderate_Burn / Total_Percent)*100,
+    Percent_Severe_Burn = (Percent_Severe_Burn / Total_Percent)*100,
+    New_Total_Percent = Percent_Unburned + Percent_Mild_Burn + Percent_Moderate_Burn + Percent_Severe_Burn
+    
+    #Here is the other option, assuming its unburned. 
+    #Total_Percent = Percent_Unburned + Percent_Mild_Burn + Percent_Moderate_Burn + Percent_Severe_Burn,
+    #Percent_Mild_Burn = ifelse(Total_Percent == 0, 0, (Percent_Mild_Burn / Total_Percent)*100),
+    #Percent_Moderate_Burn = ifelse(Total_Percent == 0, 0, (Percent_Moderate_Burn / Total_Percent)*100),
+    #Percent_Severe_Burn = ifelse(Total_Percent == 0, 0, (Percent_Severe_Burn / Total_Percent)*100),
+    #Percent_Unburned = ifelse(Total_Percent == 0, 100, (Percent_Unburned / Total_Percent)*100),
+    #New_Total_Percent = Percent_Unburned + Percent_Mild_Burn + Percent_Moderate_Burn + Percent_Severe_Burn
+  )
+  
+  
+  
+
+
+sum(Beaver_BurnSeverity_data$Percent_Unburned, Beaver_BurnSeverity_data$Percent_Mild_Burn,
+    Beaver_BurnSeverity_data$Percent_Moderate_Burn, Beaver_BurnSeverity_data$Percent_Severe_Burn)
+
+Beaver_BurnSeverity_data_LONG <- Beaver_BurnSeverity_data %>%
+  pivot_longer(
+    cols = starts_with("Percent"),
+    names_to = "Burn_Type",
+    values_to = "Percent"
+  ) %>%
+  mutate(Burn_Type = recode(Burn_Type,
+                            Percent_Unburned = "Unburned",
+                            Percent_Mild_Burn = "Mild Burn",
+                            Percent_Moderate_Burn = "Moderate Burn",
+                            Percent_Severe_Burn = "Severe Burn"),
+         Type = "Beaver Ponds")
+
+
+
+#Transform the control data
+str(Control_BurnSeverity_data)
+
+
+Control_BurnSeverity_data <- Control_BurnSeverity_data %>% 
+  dplyr::select(Beaver_Ponds_2020_Fire_Name, Percent_Unburned, Percent_Mild_Burn, 
+                Percent_Moderate_Burn, Percent_Severe_Burn) %>% 
+  rename(Incid_Name = Beaver_Ponds_2020_Fire_Name) %>% 
+  mutate(#Normalize the burn percentages to 100%. I think this is necessary for modeling. If there were no 
+    #values in any of these categories, it was due to those data being masked by MTBS for poor imagery. 
+    #There are two options, either to leave them in as NA values, or imagine they are all unburned. 
+    #I think I'll do the former, exclude them from the analysis
+    Total_Percent = Percent_Unburned + Percent_Mild_Burn + Percent_Moderate_Burn + Percent_Severe_Burn,
+    Percent_Unburned = (Percent_Unburned / Total_Percent)*100,
+    Percent_Mild_Burn = (Percent_Mild_Burn / Total_Percent)*100,
+    Percent_Moderate_Burn = (Percent_Moderate_Burn / Total_Percent)*100,
+    Percent_Severe_Burn = (Percent_Severe_Burn / Total_Percent)*100,
+    New_Total_Percent = Percent_Unburned + Percent_Mild_Burn + Percent_Moderate_Burn + Percent_Severe_Burn
+    
+    #Here is the other option, assuming its unburned. 
+    #Total_Percent = Percent_Unburned + Percent_Mild_Burn + Percent_Moderate_Burn + Percent_Severe_Burn,
+    #Percent_Mild_Burn = ifelse(Total_Percent == 0, 0, (Percent_Mild_Burn / Total_Percent)*100),
+    #Percent_Moderate_Burn = ifelse(Total_Percent == 0, 0, (Percent_Moderate_Burn / Total_Percent)*100),
+    #Percent_Severe_Burn = ifelse(Total_Percent == 0, 0, (Percent_Severe_Burn / Total_Percent)*100),
+    #Percent_Unburned = ifelse(Total_Percent == 0, 100, (Percent_Unburned / Total_Percent)*100),
+    #New_Total_Percent = Percent_Unburned + Percent_Mild_Burn + Percent_Moderate_Burn + Percent_Severe_Burn
+  )
+
+
+Control_BurnSeverity_data_LONG <- Control_BurnSeverity_data %>%
+  pivot_longer(
+    cols = starts_with("Percent"),
+    names_to = "Burn_Type",
+    values_to = "Percent"
+  ) %>%
+  mutate(Burn_Type = recode(Burn_Type,
+                            Percent_Unburned = "Unburned",
+                            Percent_Mild_Burn = "Mild Burn",
+                            Percent_Moderate_Burn = "Moderate Burn",
+                            Percent_Severe_Burn = "Severe Burn"),
+         Type = "Control Sites")
+
+
+str(Beaver_BurnSeverity_data_LONG)
+str(Control_BurnSeverity_data_LONG)
+
+
+BS_data3 <- rbind(Beaver_BurnSeverity_data_LONG, Control_BurnSeverity_data_LONG)
+
+BS_data3 <- BS_data3 %>%
+  #group_by(Incid_Name, Burn_Type, Type) %>% 
+  #summarize(Percent = mean(Percent)) %>% 
+  mutate(Incid_Name = case_when(
+    Incid_Name == "INIAKUK LAKE" ~ "Iniakuk Lake Fire",
+    Incid_Name == "HOGATZA RIVER" ~ "Hogatza River Fire",
+    Incid_Name == "HOG" ~ "Hog Fire",
+    Incid_Name %in% c("SUNSHINE MOUNTAIN", "SUNSHINE MOUNTAINS") ~ "Sunshine Mountain Fire",
+    Incid_Name == "MUNSON CREEK" ~ "Munson Creek Fire",
+    Incid_Name %in% c("PAIGE MOUNTAN", "PAIGE MOUNTAIN", "PAGE MOUNTAIN") ~ "Page Mountain Fire",
+    Incid_Name == "HURST CREEK" ~ "Hurst Creek Fire",
+    Incid_Name == "OLD GROUCH TOP" ~ "Old Grouch Top Fire",
+    Incid_Name == "VICTORIA MOUNTAIN" ~ "Victoria Mountain Fire",
+    Incid_Name == "LITTLE MUD RIVER" ~ "Little Mud River Fire",
+    Incid_Name == "CHALKYITSIK COMPLEX" ~ "Chalkyitsik Complex Fire",
+    TRUE ~ Incid_Name
+  ))
+
+
+BS_data3 <- BS_data3 %>% 
+  filter(Incid_Name != "Chalkyitsik Complex Fire")    #Removing this fire since it only has 1 beaver pond
+
+
+
+
+
+
+
+################## trying to model the 
+#Ordinal Logistic Regression
+str(BS_data3)
+BS_data3$Burn_Type <- factor(BS_data3$Burn_Type, 
+                             levels = c("Unburned", "Mild Burn", "Moderate Burn", "Severe Burn"),
+                             ordered = TRUE)
+BS_model <- polr(Burn_Type ~ Type + Percent, data = BS_data3, Hess = TRUE)
+summary(BS_model)
+
+
+
+# Fit the multinomial logistic regression model
+#install.packages("nnet")
+library(nnet)
+BS_data3 <- BS_data3 %>%
+  mutate(Burn_Type = factor(Burn_Type, 
+                            levels = c("Unburned", "Mild Burn", "Moderate Burn", "Severe Burn")))
+
+model_multinom <- nnet::multinom(Burn_Type ~ Percent + Type, data = BS_data3)
+summary(model_multinom)
+#Type (Control Sites): This compares the effect of being in a Control Site vs.
+#Beaver Pond on the log-odds of being in the burn categories relative to "Unburned."
+
+#For Mild Burn, the coefficient is -0.04050770. Being in Control Sites slightly 
+#decreases the odds of Mild Burn compared to Beaver Ponds.
+#For Moderate Burn and Severe Burn, the coefficients are also negative but small, 
+#indicating a slight decrease in the odds of being in these categories when in Control Sites.
+
+
+
+library(mgcv)
+
+# Fit a generalized additive model
+gam_model <- gam(Percent ~ Burn_Type + Type, data = BS_data3)
+summary(gam_model)
+
+#TypeControl Sites (0.06427): This shows the effect of being in a Control Site 
+#versus a Beaver Pond on Percent. The small estimate (0.06427) and very high p-value 
+#(0.987) indicate that there is no significant difference in Percent between Control 
+#Sites and Beaver Ponds.
+##################
+
+
+
+
+
+
+###
+library(nnet)
+
+# Reshape data for multinomial logistic regression
+BS_data3_wide <- BS_data3 %>%
+  pivot_wider(
+    names_from = Burn_Type, 
+    values_from = Percent,
+    values_fn = list(Percent = mean)
+  )
+
+# Fit multinomial logistic regression model
+multinom_model <- nnet::multinom(cbind(Unburned, `Mild Burn`, `Moderate Burn`, `Severe Burn`) 
+                           ~ Type, data = BS_data3_wide)
+summary(multinom_model)
+#Mild Burn: The positive coefficient (0.305) for control sites indicates that 
+  #control sites are more likely to experience a mild burn relative to unburned 
+  #areas compared to beaver ponds.
+#Moderate Burn: The small positive coefficient (0.110) for control sites 
+  #suggests a slightly higher likelihood of moderate burns compared to unburned areas 
+  #in control sites than in beaver ponds.
+#Severe Burn: The positive coefficient (0.221) indicates that control sites are 
+  #more likely to experience severe burns than beaver ponds relative to unburned areas, 
+  #although the effect size is modest.
+
+z_values <- summary(multinom_model)$coefficients / summary(multinom_model)$standard.errors
+p_values <- (1 - pnorm(abs(z_values), 0, 1)) * 2
+p_values
+#              (Intercept) TypeControl Sites
+#Mild Burn               0      0.0000000000
+#Moderate Burn           0      0.0005520323
+#Severe Burn             0      0.0240593607
+
+#Exponentiated coefficients to interpret as odd ratios
+exp(summary(multinom_model)$coefficients)
+#(Intercept) TypeControl Sites
+#Mild Burn      1.39819723          1.356432 time more likely than beaver ponds
+#Moderate Burn  0.34929400          1.116694
+#Severe Burn    0.02645149          1.247027
+
+
+
+
+
+
+###Trying to include a random effect of fire
+install.packages("rstan")
+install.packages("QuickJSR")
+install.packages("brms")
+
+install.packages("rstan", dependencies = TRUE)
+##
+install.packages("devtools")
+devtools::install_github("paul-buerkner/brms")
+##
+install.packages("brms", dependencies = TRUE)  ###############Need to run this again! 14:55, 10/18/2024
+library(brms)
+
+
+# Fit the model with random effect for Fire (Incid_Name)
+brm_model <- brm(
+  formula = cbind(Unburned, `Mild Burn`, `Moderate Burn`, `Severe Burn`) ~ Type + (1 | Incid_Name),
+  data = BS_data3_wide,
+  family = categorical(),
+  chains = 4,       # Number of Markov chains
+  iter = 2000,      # Number of iterations per chain
+  warmup = 1000,    # Number of warmup iterations
+  control = list(adapt_delta = 0.95)  # Adjust for convergence issues
+)
+
+# Summarize the model
+summary(brm_model)
+
+
+
+
+
+# Install and load the package if you haven't already
+install.packages("glmmulti")
+install.packages("remotes")  # if not already installed
+remotes::install_github("willsamuel18/glmmulti") 
+install.packages("path/to/glmmulti_version.tar.gz", repos = NULL, type = "source")
+library(glmmulti)
+
+# Fit the model with random effects
+glmmulti_model <- glmmulti::glmmulti(
+  cbind(Unburned, `Mild Burn`, `Moderate Burn`, `Severe Burn`) ~ Type + (1 | Incid_Name),
+  data = BS_data3_wide,
+  family = "multinomial"
+)
+
+# Summarize the model
+summary(glmmulti_model)
 
 
 
