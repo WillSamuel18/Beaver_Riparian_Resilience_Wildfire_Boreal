@@ -1448,7 +1448,7 @@ BS_data2 <- BS_data2 %>%
   filter(Incid_Name != "Chalkyitsik Complex Fire")    #Removing this fire since it only has 1 beaver pond
 
 
-write.csv(BS_data2, "Newdata/BS_data2.csv")
+#write.csv(BS_data2, "Newdata/BS_data2.csv")
 
 
 
@@ -1863,9 +1863,9 @@ Burn_Severity_Panel
 
 
 ggsave(plot = Burn_Severity_Panel, 
-       "Figures/Burn_Severity_Panel.jpeg", 
+       "Figures/Burn_Severity_Panel2.jpeg", 
        width = 32, 
-       height = 32,
+       height = 36,
        units = "cm",
        dpi = 300)
 
@@ -2026,7 +2026,9 @@ beaver_violin <- ggplot(NDVI_combined, aes(x = Type_spring, y = dNDVI, fill = Ty
     legend.position = "none",
     axis.text.x = element_text(color = "black", size = 14),
     axis.text.y = element_text(color = "grey20", size = 12),
-    axis.title.y = element_text(size = 14))
+    axis.title.y = element_text(size = 14))+
+  coord_flip()  # Flip the axes
+
 beaver_violin
 
 ggsave(plot = beaver_violin, 
@@ -2035,6 +2037,17 @@ ggsave(plot = beaver_violin,
        height = 12,
        units = "cm",
        dpi = 300)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2199,7 +2212,9 @@ beaver_violin_NDWI <- ggplot(NDWI_combined, aes(x = Type_spring, y = dNDWI, fill
     legend.position = "none",
     axis.text.x = element_text(color = "black", size = 14),
     axis.text.y = element_text(color = "grey20", size = 12),
-    axis.title.y = element_text(size = 14))
+    axis.title.y = element_text(size = 14))+
+  coord_flip()  # Flip the axes
+
 beaver_violin_NDWI
 
 ggsave(plot = beaver_violin_NDWI, 
@@ -2239,9 +2254,9 @@ overall_change_panel
 
 
 ggsave(plot = overall_change_panel, 
-       "Figures/overall_change_panel.jpeg", 
+       "Figures/overall_change_panel_smooshed.jpeg", 
        width = 24, 
-       height = 24,
+       height = 18,
        units = "cm",
        dpi = 300)
 
