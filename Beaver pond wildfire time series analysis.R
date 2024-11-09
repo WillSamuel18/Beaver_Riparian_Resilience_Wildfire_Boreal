@@ -2533,6 +2533,20 @@ summary(glmmulti_model)
 
 
 
+#########
+
+library(ordinal)
+
+str(BS_data3)
+# Fit the model
+model <- clmm(as.ordered(Burn_Type) ~ Type + (1 | Incid_Name),
+              data = BS_data3,
+              weights = Percent)
+
+# Summarize the model
+summary(model)
+
+
 
 
 
