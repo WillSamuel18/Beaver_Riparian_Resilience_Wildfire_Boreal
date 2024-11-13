@@ -11,7 +11,9 @@ library(cowplot)  #for plotting
 library(viridis)  #for plotting color palettes
 library(lme4)     #for mixed effect model
 library(lmerTest) #for mixed effect model p-values
-library(MASS)     #for ordinal logistic regression
+library(ordinal) #for ordinal logistic regression with random effect
+
+
 
 #library(AICcmodavg) #for model statistics
 #library(rcompanion) #for pseudo R-squared
@@ -2286,6 +2288,7 @@ Beaver_BurnSeverity_data <- Beaver_BurnSeverity_data %>%
     #values in any of these categories, it was due to those data being masked by MTBS for poor imagery. 
     #There are two options, either to leave them in as NA values, or imagine they are all unburned. 
     #I think I'll do the former, exclude them from the analysis
+    Site_Num = seq(1,nrow(Beaver_BurnSeverity_data)),
     Total_Percent = Percent_Unburned + Percent_Mild_Burn + Percent_Moderate_Burn + Percent_Severe_Burn,
     Percent_Unburned = (Percent_Unburned / Total_Percent)*100,
     Percent_Mild_Burn = (Percent_Mild_Burn / Total_Percent)*100,
@@ -2336,6 +2339,7 @@ Control_BurnSeverity_data <- Control_BurnSeverity_data %>%
     #values in any of these categories, it was due to those data being masked by MTBS for poor imagery. 
     #There are two options, either to leave them in as NA values, or imagine they are all unburned. 
     #I think I'll do the former, exclude them from the analysis
+    Site_Num = seq(1,nrow(Control_BurnSeverity_data)),
     Total_Percent = Percent_Unburned + Percent_Mild_Burn + Percent_Moderate_Burn + Percent_Severe_Burn,
     Percent_Unburned = (Percent_Unburned / Total_Percent)*100,
     Percent_Mild_Burn = (Percent_Mild_Burn / Total_Percent)*100,
@@ -2395,8 +2399,73 @@ BS_data3 <- BS_data3 %>%
 BS_data3 <- BS_data3 %>% 
   filter(Incid_Name != "Chalkyitsik Complex Fire")    #Removing this fire since it only has 1 beaver pond
 
+BS_data3$Incid_Name <- as.factor(BS_data3$Incid_Name)
+BS_data3$Site_Num <- as.factor(BS_data3$Site_Num)
 
 
+
+str(BS_data3)
+BS_data3$Burn_Type <- factor(BS_data3$Burn_Type, 
+                             levels = c("Unburned", "Mild Burn", "Moderate Burn", "Severe Burn"),
+                             ordered = TRUE)
+# Fit the model
+model <- clmm(as.ordered(Burn_Type) ~ Type + (1 | Incid_Name),
+              data = BS_data3,
+              weights = Percent)
+
+#This accounts for individual sites, and pairs control and treatment sites. I don't think this is neccessary for the analyses, especially since we didn't do it with NDVI or NDWI. 
+#model <- clmm(as.ordered(Burn_Type) ~ Type + (1 | Incid_Name / Site_Num),
+#              data = BS_data3,
+#              weights = Percent)
+
+# Summarize the model
+summary(model)
+
+mean_points <- BS_data3 %>%
+  group_by(Burn_Type, Type) %>%
+  summarise(mean_percent = mean(Percent, na.rm = TRUE), .groups = "drop")
+
+# Plot with the calculated means
+ggplot(BS_data3, aes(x = Burn_Type, y = Percent, fill = Type)) +
+  geom_violin(trim = FALSE, scale = "width", position = position_dodge(0.9), alpha = 0.6) +
+  geom_boxplot(width = 0.2, position = position_dodge(0.9), alpha = 0.6) +
+  geom_point(data = mean_points, aes(x = Burn_Type, y = mean_percent, fill = Type), 
+             shape = 8, size = 3, color = "black", position = position_dodge(0.9)) +  
+  labs(
+    #title = "Distribution of Burn Percentage by Burn Severity and Site Type",
+    x = "Burn Severity Category",
+    y = "Percent of Burn Category"
+  ) +
+  scale_fill_manual(values = c("Control Sites" = "#FFA366", "Beaver Ponds" = "deepskyblue2")) +
+  theme_minimal() +  
+  theme(
+    title = element_text(face = "bold", size = 14),
+    legend.position = c(0.85, 0.85),  
+    legend.title = element_text(size = 14), 
+    legend.text = element_text(size = 12),  
+    legend.background = element_rect(fill = "white", color = "black"),  
+    axis.text.x = element_text(color = "grey20", size = 12),
+    axis.text.y = element_text(color = "grey20", size = 12),
+    axis.title.x = element_text(color = "black", size = 14),
+    axis.title.y = element_text(color = "black", size = 14)
+  )
+  #coord_flip()  # Flip the axes
+
+ggsave(plot = beaver_density_plot_NDWI, 
+       "Figures/beaver_density_plot.jpeg", 
+       width = 12, 
+       height = 12,
+       units = "cm",
+       dpi = 300)
+
+
+
+
+
+
+
+
+# All old burn severity trials that did not work --------------------------
 
 
 
@@ -2441,17 +2510,17 @@ BS_data3_wide <- BS_data3 %>%
 
 # Fit multinomial logistic regression model
 multinom_model <- nnet::multinom(cbind(Unburned, `Mild Burn`, `Moderate Burn`, `Severe Burn`) 
-                           ~ Type, data = BS_data3_wide)
+                                 ~ Type, data = BS_data3_wide)
 summary(multinom_model)
 #Mild Burn: The positive coefficient (0.305) for control sites indicates that 
-  #control sites are more likely to experience a mild burn relative to unburned 
-  #areas compared to beaver ponds.
+#control sites are more likely to experience a mild burn relative to unburned 
+#areas compared to beaver ponds.
 #Moderate Burn: The small positive coefficient (0.110) for control sites 
-  #suggests a slightly higher likelihood of moderate burns compared to unburned areas 
-  #in control sites than in beaver ponds.
+#suggests a slightly higher likelihood of moderate burns compared to unburned areas 
+#in control sites than in beaver ponds.
 #Severe Burn: The positive coefficient (0.221) indicates that control sites are 
-  #more likely to experience severe burns than beaver ponds relative to unburned areas, 
-  #although the effect size is modest.
+#more likely to experience severe burns than beaver ponds relative to unburned areas, 
+#although the effect size is modest.
 
 z_values <- summary(multinom_model)$coefficients / summary(multinom_model)$standard.errors
 p_values <- (1 - pnorm(abs(z_values), 0, 1)) * 2
@@ -2522,34 +2591,6 @@ glmmulti_model <- glmmulti::glmmulti(
 
 # Summarize the model
 summary(glmmulti_model)
-
-
-
-
-
-
-
-
-
-
-
-#########
-
-library(ordinal)
-
-str(BS_data3)
-# Fit the model
-model <- clmm(as.ordered(Burn_Type) ~ Type + (1 | Incid_Name),
-              data = BS_data3,
-              weights = Percent)
-
-# Summarize the model
-summary(model)
-
-
-
-
-
 
 
 
