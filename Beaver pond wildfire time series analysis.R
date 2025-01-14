@@ -1880,7 +1880,7 @@ ggsave(plot = Burn_Severity_Panel,
 
 
 
-# Generalized linear mixed effect models -------------------------------------
+# Generalized linear mixed effect models for NDVI and NDWI -------------------
 #Testing how beaver vs control sites affect dNDVI and dNDWI
 #### DO NDVI FIRST _____________________________________________________________
 
@@ -2014,24 +2014,28 @@ ggsave(plot = beaver_density_plot,
 
 
 
-beaver_violin <- ggplot(NDVI_combined, aes(x = Type_spring, y = dNDVI, fill = Type_spring)) +
+beaver_violin_NDVI <- ggplot(NDVI_combined, aes(x = Type_spring, y = dNDVI, fill = Type_spring)) +
   geom_violin(trim = FALSE, alpha = 0.6) +  
   geom_boxplot(width = 0.1, position = position_dodge(width = 0.9), color = "black", alpha = 0.7) +  # Boxplot on top
   geom_point(aes(x = Type_spring, y = mean(dNDVI, na.rm = TRUE), fill = Type_spring), 
              shape = 8, size = 3, color = "black") +  
   scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2")) +
-  labs(title = "B",
+  labs(title = "A",
     x = "", y = "NDVI Change (dNDVI)") +
   theme_minimal() +  
   theme(
     title = element_text(face = "bold", size = 14),
     legend.position = "none",
+    #legend.position = c(0.9, 0.9),  
+    #legend.title = element_text(size = 14), 
+    #legend.text = element_text(size = 12),  
+    #legend.background = element_rect(fill = "white", color = "black"),  
     axis.text.x = element_text(color = "black", size = 14),
     axis.text.y = element_text(color = "grey20", size = 12),
     axis.title.y = element_text(size = 14))+
   coord_flip()  # Flip the axes
 
-beaver_violin
+beaver_violin_NDVI
 
 ggsave(plot = beaver_violin, 
        "Figures/beaver_violin.jpeg", 
@@ -2206,7 +2210,7 @@ beaver_violin_NDWI <- ggplot(NDWI_combined, aes(x = Type_spring, y = dNDWI, fill
   geom_boxplot(width = 0.1, position = position_dodge(width = 0.9), color = "black", alpha = 0.7) +  # Boxplot on top
   geom_point(aes(x = Type_spring, y = mean(dNDWI, na.rm = TRUE), fill = Type_spring), 
              shape = 8, size = 3, color = "black") +  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2")) +
-  labs(title = "D",
+  labs(title = "B",
        x = "", y = "NDWI Change (dNDWI)") +
   theme_minimal() +  
   theme(
@@ -2262,6 +2266,19 @@ ggsave(plot = overall_change_panel,
        units = "cm",
        dpi = 300)
 
+
+#One more final version
+
+Beaver_Violin <- beaver_violin_NDVI/beaver_violin_NDWI
+Beaver_Violin
+
+
+ggsave(plot = Beaver_Violin, 
+       "Figures/Beaver_Violin.jpeg", 
+       width = 20, 
+       height = 20,
+       units = "cm",
+       dpi = 300)
 
 
 
@@ -2426,7 +2443,7 @@ mean_points <- BS_data3 %>%
   summarise(mean_percent = mean(Percent, na.rm = TRUE), .groups = "drop")
 
 # Plot with the calculated means
-ggplot(BS_data3, aes(x = Burn_Type, y = Percent, fill = Type)) +
+Burn_severity_plot <- ggplot(BS_data3, aes(x = Burn_Type, y = Percent, fill = Type)) +
   geom_violin(trim = FALSE, scale = "width", position = position_dodge(0.9), alpha = 0.6) +
   geom_boxplot(width = 0.2, position = position_dodge(0.9), alpha = 0.6) +
   geom_point(data = mean_points, aes(x = Burn_Type, y = mean_percent, fill = Type), 
@@ -2434,7 +2451,7 @@ ggplot(BS_data3, aes(x = Burn_Type, y = Percent, fill = Type)) +
   labs(
     #title = "Distribution of Burn Percentage by Burn Severity and Site Type",
     x = "Burn Severity Category",
-    y = "Percent of Burn Category"
+    y = "Percent of Burn Severity Category"
   ) +
   scale_fill_manual(values = c("Control Sites" = "#FFA366", "Beaver Ponds" = "deepskyblue2")) +
   theme_minimal() +  
@@ -2450,10 +2467,11 @@ ggplot(BS_data3, aes(x = Burn_Type, y = Percent, fill = Type)) +
     axis.title.y = element_text(color = "black", size = 14)
   )
   #coord_flip()  # Flip the axes
+Burn_severity_plot
 
-ggsave(plot = beaver_density_plot_NDWI, 
+ggsave(plot = Burn_severity_plot, 
        "Figures/beaver_density_plot.jpeg", 
-       width = 12, 
+       width = 20, 
        height = 12,
        units = "cm",
        dpi = 300)
