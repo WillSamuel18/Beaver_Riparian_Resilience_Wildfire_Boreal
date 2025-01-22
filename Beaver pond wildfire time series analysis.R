@@ -2018,7 +2018,7 @@ beaver_violin_NDVI <- ggplot(NDVI_combined, aes(x = Type_spring, y = dNDVI, fill
   geom_violin(trim = FALSE, alpha = 0.6) +  
   geom_boxplot(width = 0.1, position = position_dodge(width = 0.9), color = "black", alpha = 0.7) +  # Boxplot on top
   geom_point(aes(x = Type_spring, y = mean(dNDVI, na.rm = TRUE), fill = Type_spring), 
-             shape = 8, size = 3, color = "black") +  
+             shape = 16, size = 3, color = "black") +  
   scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2")) +
   labs(title = "A",
     x = "", y = "NDVI Change (dNDVI)") +
@@ -2209,7 +2209,7 @@ beaver_violin_NDWI <- ggplot(NDWI_combined, aes(x = Type_spring, y = dNDWI, fill
   geom_violin(trim = FALSE, alpha = 0.6) +  
   geom_boxplot(width = 0.1, position = position_dodge(width = 0.9), color = "black", alpha = 0.7) +  # Boxplot on top
   geom_point(aes(x = Type_spring, y = mean(dNDWI, na.rm = TRUE), fill = Type_spring), 
-             shape = 8, size = 3, color = "black") +  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2")) +
+             shape = 16, size = 3, color = "black") +  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2")) +
   labs(title = "B",
        x = "", y = "NDWI Change (dNDWI)") +
   theme_minimal() +  
@@ -2447,7 +2447,7 @@ Burn_severity_plot <- ggplot(BS_data3, aes(x = Burn_Type, y = Percent, fill = Ty
   geom_violin(trim = FALSE, scale = "width", position = position_dodge(0.9), alpha = 0.6) +
   geom_boxplot(width = 0.2, position = position_dodge(0.9), alpha = 0.6) +
   geom_point(data = mean_points, aes(x = Burn_Type, y = mean_percent, fill = Type), 
-             shape = 8, size = 3, color = "black", position = position_dodge(0.9)) +  
+             shape = 16, size = 3, color = "black", position = position_dodge(0.9)) +  
   labs(
     #title = "Distribution of Burn Percentage by Burn Severity and Site Type",
     x = "Burn Severity Category",
@@ -2478,6 +2478,94 @@ ggsave(plot = Burn_severity_plot,
 
 
 
+
+#Try to add the entire fire data to the plot
+
+Fires_BurnSeverity_data <- read.csv("Data/Burn Severity Summaries/Fire_perims_With_burn_Severity_ExportTable.csv")
+str(Fires_BurnSeverity_data)
+
+#Transform the beaver data
+
+Fires_BurnSeverity_data <- Fires_BurnSeverity_data %>% 
+  dplyr::select(Incid_Name, Percent_Unburned, Percent_Mild_Burn, 
+                Percent_Moderate_Burn, Percent_Severe_Burn) %>% 
+  mutate(#Normalize the burn percentages to 100%. I think this is necessary for modeling. If there were no 
+    #values in any of these categories, it was due to those data being masked by MTBS for poor imagery. 
+    #There are two options, either to leave them in as NA values, or imagine they are all unburned. 
+    #I think I'll do the former, exclude them from the analysis
+    #Site_Num = seq(1,nrow(Beaver_BurnSeverity_data)),
+    Total_Percent = Percent_Unburned + Percent_Mild_Burn + Percent_Moderate_Burn + Percent_Severe_Burn,
+    Percent_Unburned = (Percent_Unburned / Total_Percent)*100,
+    Percent_Mild_Burn = (Percent_Mild_Burn / Total_Percent)*100,
+    Percent_Moderate_Burn = (Percent_Moderate_Burn / Total_Percent)*100,
+    Percent_Severe_Burn = (Percent_Severe_Burn / Total_Percent)*100,
+    New_Total_Percent = Percent_Unburned + Percent_Mild_Burn + Percent_Moderate_Burn + Percent_Severe_Burn
+    )
+
+
+sum(Fires_BurnSeverity_data$Percent_Unburned, Fires_BurnSeverity_data$Percent_Mild_Burn,
+    Fires_BurnSeverity_data$Percent_Moderate_Burn, Fires_BurnSeverity_data$Percent_Severe_Burn)/11
+
+Fires_BurnSeverity_data_LONG <- Fires_BurnSeverity_data %>%
+  pivot_longer(
+    cols = starts_with("Percent"),
+    names_to = "Burn_Type",
+    values_to = "Percent"
+  ) %>%
+  mutate(Burn_Type = recode(Burn_Type,
+                            Percent_Unburned = "Unburned",
+                            Percent_Mild_Burn = "Mild Burn",
+                            Percent_Moderate_Burn = "Moderate Burn",
+                            Percent_Severe_Burn = "Severe Burn"),
+         Type = "Entire Fire") %>% 
+  dplyr::select(Incid_Name, Burn_Type, Percent, Type) 
+  
+
+
+
+BS_data4 <- rbind(Beaver_BurnSeverity_data_LONG, Control_BurnSeverity_data_LONG, Fires_BurnSeverity_data_LONG)
+
+BS_data4$Burn_Type <- factor(BS_data4$Burn_Type, 
+                             levels = c("Unburned", "Mild Burn", "Moderate Burn", "Severe Burn"),
+                             ordered = TRUE)
+
+mean_points <- BS_data4 %>%
+  group_by(Burn_Type, Type) %>%
+  summarise(mean_percent = mean(Percent, na.rm = TRUE), .groups = "drop")
+
+# Plot with the calculated means
+Burn_severity_plot <- ggplot(BS_data4, aes(x = Burn_Type, y = Percent, fill = Type)) +
+  geom_violin(trim = FALSE, scale = "width", position = position_dodge(0.9), alpha = 0.6) +
+  geom_boxplot(width = 0.2, position = position_dodge(0.9), alpha = 0.6) +
+  geom_point(data = mean_points, aes(x = Burn_Type, y = mean_percent, fill = Type), 
+             shape = 16, size = 3, color = "black", position = position_dodge(0.9)) +  
+  labs(
+    #title = "Distribution of Burn Percentage by Burn Severity and Site Type",
+    x = "Burn Severity Category",
+    y = "Percent of Burn Severity Category"
+  ) +
+  scale_fill_manual(values = c("Control Sites" = "#FFA366", "Beaver Ponds" = "deepskyblue2", "Entire Fire" = "darkred")) +
+  theme_minimal() +  
+  theme(
+    title = element_text(face = "bold", size = 14),
+    legend.position = c(0.85, 0.85),  
+    legend.title = element_text(size = 14), 
+    legend.text = element_text(size = 12),  
+    legend.background = element_rect(fill = "white", color = "black"),  
+    axis.text.x = element_text(color = "grey20", size = 12),
+    axis.text.y = element_text(color = "grey20", size = 12),
+    axis.title.x = element_text(color = "black", size = 14),
+    axis.title.y = element_text(color = "black", size = 14)
+  )
+#coord_flip()  # Flip the axes
+Burn_severity_plot
+
+ggsave(plot = Burn_severity_plot, 
+       "Figures/beaver_density_plot_WITH_FIRE.jpeg", 
+       width = 20, 
+       height = 12,
+       units = "cm",
+       dpi = 300)
 
 
 
