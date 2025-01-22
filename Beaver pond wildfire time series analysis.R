@@ -2545,6 +2545,7 @@ Burn_severity_plot <- ggplot(BS_data4, aes(x = Burn_Type, y = Percent, fill = Ty
     y = "Percent of Burn Severity Category"
   ) +
   scale_fill_manual(values = c("Control Sites" = "#FFA366", "Beaver Ponds" = "deepskyblue2", "Entire Fire" = "darkred")) +
+  scale_y_continuous(limits = c(0, NA), expand = expansion(mult = c(0, 0.05)))+
   theme_minimal() +  
   theme(
     title = element_text(face = "bold", size = 14),
@@ -2561,7 +2562,7 @@ Burn_severity_plot <- ggplot(BS_data4, aes(x = Burn_Type, y = Percent, fill = Ty
 Burn_severity_plot
 
 ggsave(plot = Burn_severity_plot, 
-       "Figures/beaver_density_plot_WITH_FIRE.jpeg", 
+       "Figures/beaver_density_plot_WITH_FIRE2.jpeg", 
        width = 20, 
        height = 12,
        units = "cm",
