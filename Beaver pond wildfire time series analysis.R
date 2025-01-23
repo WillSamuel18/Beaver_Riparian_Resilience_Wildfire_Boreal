@@ -2311,8 +2311,13 @@ Beaver_BurnSeverity_data <- Beaver_BurnSeverity_data %>%
     Percent_Mild_Burn = (Percent_Mild_Burn / Total_Percent)*100,
     Percent_Moderate_Burn = (Percent_Moderate_Burn / Total_Percent)*100,
     Percent_Severe_Burn = (Percent_Severe_Burn / Total_Percent)*100,
-    New_Total_Percent = Percent_Unburned + Percent_Mild_Burn + Percent_Moderate_Burn + Percent_Severe_Burn
+    New_Total_Percent = Percent_Unburned + Percent_Mild_Burn + Percent_Moderate_Burn + Percent_Severe_Burn,
     
+    New_Total_Percent = ifelse(is.nan(New_Total_Percent), 0, New_Total_Percent),
+    Percent_Unburned = ifelse(is.nan(Percent_Unburned), 0, Percent_Unburned),
+    Percent_Mild_Burn = ifelse(is.nan(Percent_Mild_Burn), 0, Percent_Mild_Burn),
+    Percent_Moderate_Burn = ifelse(is.nan(Percent_Moderate_Burn), 0, Percent_Moderate_Burn),
+    Percent_Severe_Burn = ifelse(is.nan(Percent_Severe_Burn), 0, Percent_Severe_Burn)
     #Here is the other option, assuming its unburned. 
     #Total_Percent = Percent_Unburned + Percent_Mild_Burn + Percent_Moderate_Burn + Percent_Severe_Burn,
     #Percent_Mild_Burn = ifelse(Total_Percent == 0, 0, (Percent_Mild_Burn / Total_Percent)*100),
@@ -2340,7 +2345,9 @@ Beaver_BurnSeverity_data_LONG <- Beaver_BurnSeverity_data %>%
                             Percent_Mild_Burn = "Mild Burn",
                             Percent_Moderate_Burn = "Moderate Burn",
                             Percent_Severe_Burn = "Severe Burn"),
-         Type = "Beaver Ponds")
+         Type = "Beaver") %>% 
+  dplyr::select(Incid_Name, Site_Num, Burn_Type, Percent, Type) 
+
 
 
 
@@ -2362,7 +2369,13 @@ Control_BurnSeverity_data <- Control_BurnSeverity_data %>%
     Percent_Mild_Burn = (Percent_Mild_Burn / Total_Percent)*100,
     Percent_Moderate_Burn = (Percent_Moderate_Burn / Total_Percent)*100,
     Percent_Severe_Burn = (Percent_Severe_Burn / Total_Percent)*100,
-    New_Total_Percent = Percent_Unburned + Percent_Mild_Burn + Percent_Moderate_Burn + Percent_Severe_Burn
+    New_Total_Percent = Percent_Unburned + Percent_Mild_Burn + Percent_Moderate_Burn + Percent_Severe_Burn,
+    
+    New_Total_Percent = ifelse(is.nan(New_Total_Percent), 0, New_Total_Percent),
+    Percent_Unburned = ifelse(is.nan(Percent_Unburned), 0, Percent_Unburned),
+    Percent_Mild_Burn = ifelse(is.nan(Percent_Mild_Burn), 0, Percent_Mild_Burn),
+    Percent_Moderate_Burn = ifelse(is.nan(Percent_Moderate_Burn), 0, Percent_Moderate_Burn),
+    Percent_Severe_Burn = ifelse(is.nan(Percent_Severe_Burn), 0, Percent_Severe_Burn)
     
     #Here is the other option, assuming its unburned. 
     #Total_Percent = Percent_Unburned + Percent_Mild_Burn + Percent_Moderate_Burn + Percent_Severe_Burn,
@@ -2385,7 +2398,9 @@ Control_BurnSeverity_data_LONG <- Control_BurnSeverity_data %>%
                             Percent_Mild_Burn = "Mild Burn",
                             Percent_Moderate_Burn = "Moderate Burn",
                             Percent_Severe_Burn = "Severe Burn"),
-         Type = "Control Sites")
+         Type = "Control") %>% 
+  dplyr::select(Incid_Name, Site_Num, Burn_Type, Percent, Type) 
+
 
 
 str(Beaver_BurnSeverity_data_LONG)
@@ -2453,7 +2468,7 @@ Burn_severity_plot <- ggplot(BS_data3, aes(x = Burn_Type, y = Percent, fill = Ty
     x = "Burn Severity Category",
     y = "Percent of Burn Severity Category"
   ) +
-  scale_fill_manual(values = c("Control Sites" = "#FFA366", "Beaver Ponds" = "deepskyblue2")) +
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2")) +
   theme_minimal() +  
   theme(
     title = element_text(face = "bold", size = 14),
@@ -2517,10 +2532,13 @@ Fires_BurnSeverity_data_LONG <- Fires_BurnSeverity_data %>%
                             Percent_Mild_Burn = "Mild Burn",
                             Percent_Moderate_Burn = "Moderate Burn",
                             Percent_Severe_Burn = "Severe Burn"),
-         Type = "Entire Fire") %>% 
-  dplyr::select(Incid_Name, Burn_Type, Percent, Type) 
+         Type = "Entire Fire",
+         "Site_Num" = NA) %>% 
+  dplyr::select(Incid_Name, Site_Num, Burn_Type, Percent, Type) 
   
-
+str(Beaver_BurnSeverity_data_LONG)
+str(Control_BurnSeverity_data_LONG)
+str(Fires_BurnSeverity_data_LONG)
 
 
 BS_data4 <- rbind(Beaver_BurnSeverity_data_LONG, Control_BurnSeverity_data_LONG, Fires_BurnSeverity_data_LONG)
@@ -2544,7 +2562,7 @@ Burn_severity_plot <- ggplot(BS_data4, aes(x = Burn_Type, y = Percent, fill = Ty
     x = "Burn Severity Category",
     y = "Percent of Burn Severity Category"
   ) +
-  scale_fill_manual(values = c("Control Sites" = "#FFA366", "Beaver Ponds" = "deepskyblue2", "Entire Fire" = "darkred")) +
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2", "Entire Fire" = "darkred")) +
   scale_y_continuous(limits = c(0, NA), expand = expansion(mult = c(0, 0.05)))+
   theme_minimal() +  
   theme(
