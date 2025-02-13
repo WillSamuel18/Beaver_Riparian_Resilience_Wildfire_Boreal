@@ -1922,7 +1922,7 @@ NDVI_fall <- NDVI_long %>%
 
 NDVI_combined <- merge(NDVI_spring, NDVI_fall, by = "Point", suffixes = c("_spring", "_fall"))
 
-NDVI_combined$dNDVI <- NDVI_combined$NDVI_spring - NDVI_combined$NDVI_fall
+NDVI_combined$dNDVI <- NDVI_combined$NDVI_fall - NDVI_combined$NDVI_spring
 
 
 NDVI_combined <- NDVI_combined %>%
@@ -1936,6 +1936,38 @@ dim(NDVI_combined)
 which(is.nan(NDVI_combined$NDVI_fall)) # 2 Nan values
 which(is.nan(NDVI_combined$NDVI_spring)) # 9 Nan values
 which(is.nan(NDVI_combined$dNDVI)) #combined there are 11 Nan values
+
+
+mean(NDVI_combined$dNDVI[NDVI_combined$Type_spring == "Beaver"], na.rm = TRUE) #-0.08556271
+mean(NDVI_combined$dNDVI[NDVI_combined$Type_spring == "Control"], na.rm = TRUE) #-0.1174416
+
+#median(NDVI_combined$dNDVI[NDVI_combined$Type_spring == "Beaver"], na.rm = TRUE) #-0.08556
+#median(NDVI_combined$dNDVI[NDVI_combined$Type_spring == "Control"], na.rm = TRUE) #-0.11744
+
+0.1174416/0.08556 #37.26% larger decline in NDVI at control sites
+
+
+mean(NDVI_combined$NDVI_spring[NDVI_combined$Type_spring == "Beaver"], na.rm = TRUE) #0.4324068
+mean(NDVI_combined$NDVI_spring[NDVI_combined$Type_spring == "Control"], na.rm = TRUE) #0.4611531
+mean(NDVI_combined$NDVI_fall[NDVI_combined$Type_spring == "Beaver"], na.rm = TRUE) #0.3419437
+mean(NDVI_combined$NDVI_fall[NDVI_combined$Type_spring == "Control"], na.rm = TRUE) #0.3383207
+
+
+0.08556271/0.4324068 #19.78%
+0.1174416/0.4611531 #25.47%
+
+#Is the beginning of summer NDVI different between sites? 
+t.test(NDVI_spring$NDVI[NDVI_spring$Type == "Beaver"],
+       NDVI_spring$NDVI[NDVI_spring$Type == "Control"]       ) 
+#In the spring, beaver sites had significantly lower NDVI than control
+#t = -2.8388, df = 437.71, p-value = 0.004739
+
+
+#Is the END of summer NDVI different between sites? 
+t.test(NDVI_fall$NDVI[NDVI_fall$Type == "Beaver"], 
+       NDVI_fall$NDVI[NDVI_fall$Type == "Control"]) 
+#In the fall, there we no differences in NDVI
+#t = 0.28598, df = 442.11, p-value = 0.775
 
 
 
@@ -1953,6 +1985,61 @@ summary(model)
 #This relationship was statistically significant t = 2.322, p = 0.021
 
 
+
+
+
+NDVI_combined_2 <- bind_rows(
+  NDVI_spring %>% mutate(Season = "Pre-Fire"),
+  NDVI_fall %>% mutate(Season = "Post-Fire")
+) %>%
+  mutate(Season = factor(Season, levels = c("Pre-Fire", "Post-Fire")))
+
+# Plot with dodged boxplots
+Spring_vs_fall_NDVI <- ggplot(NDVI_combined_2, aes(x = Season, y = NDVI, fill = Type)) +
+  geom_violin(position = position_dodge(width = 0.75), alpha = 0.7) +
+  geom_boxplot(position = position_dodge(width = 0.75), width = 0.1) +
+  stat_summary(fun = mean, geom = "point", shape = 16, size = 3, 
+               color = "black", position = position_dodge(width = 0.75))+
+  theme_minimal() +
+  labs(title = "A",
+       x = "", y = "Normalized Difference Vegetation Index") +
+  scale_fill_manual(values = c("Beaver" = "deepskyblue2", "Control" = "#FFA366"))+  # Custom colors
+  scale_y_continuous(limits = c(0, 0.7), breaks = c(0, 0.2, 0.4, 0.6, 0.8))+
+  annotate("text", x = "Pre-Fire", y = 0, label = "*", size = 14, color = "black") +  # Large asterisk
+  theme(
+    title = element_text(face = "bold", size = 14),
+    legend.position = "none",
+    #legend.position = c(0.6, 0.89),  
+    #legend.title = element_text(size = 14), 
+    #legend.text = element_text(size = 12),  
+    #legend.background = element_rect(fill = "white", color = "black"),  
+    axis.text.x = element_text(color = "black", size = 14),
+    axis.text.y = element_text(color = "grey20", size = 12),
+    axis.title.y = element_text(size = 14))
+
+
+
+Spring_vs_fall_NDVI  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Plot the real data
 ggplot(NDVI_combined, aes(x = Type_spring, y = dNDVI, color = Type_spring)) +
   geom_jitter(alpha = 0.5, width = 0.2) +  # Adds jitter to the points
@@ -1964,19 +2051,6 @@ ggplot(NDVI_combined, aes(x = Type_spring, y = dNDVI, color = Type_spring)) +
   theme(legend.position = "bottom")+
   facet_wrap(~Fire)
 
-
-
-
-ggplot(NDVI_combined, aes(x = Type_spring, y = dNDVI, fill = Type_spring)) +
-  geom_boxplot() +
-  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2")) +
-  labs(x = "Site Type", y = "NDVI Change (dNDVI)") +
-  theme_minimal()+  
-  theme(
-    legend.position = "none",
-    axis.text.x = element_text(color = "black", size = 14),
-    axis.text.y = element_text(color = "grey20", size = 12),
-    axis.title.y = element_text(size = 14))
 
 
 
@@ -2003,12 +2077,12 @@ beaver_density_plot <- ggplot(NDVI_combined, aes(x = dNDVI, fill = Type_spring))
   )
 beaver_density_plot
 
-ggsave(plot = beaver_density_plot, 
-       "Figures/beaver_density_plot.jpeg", 
-       width = 12, 
-       height = 12,
-       units = "cm",
-       dpi = 300)
+#ggsave(plot = beaver_density_plot, 
+#       "Figures/beaver_density_plot.jpeg", 
+#       width = 12, 
+#      height = 12,
+#       units = "cm",
+#       dpi = 300)
 
 
 
@@ -2017,12 +2091,14 @@ ggsave(plot = beaver_density_plot,
 beaver_violin_NDVI <- ggplot(NDVI_combined, aes(x = Type_spring, y = dNDVI, fill = Type_spring)) +
   geom_violin(trim = FALSE, alpha = 0.6) +  
   geom_boxplot(width = 0.1, position = position_dodge(width = 0.9), color = "black", alpha = 0.7) +  # Boxplot on top
-  geom_point(aes(x = Type_spring, y = mean(dNDVI, na.rm = TRUE), fill = Type_spring), 
-             shape = 16, size = 3, color = "black") +  
+  stat_summary(fun = mean, geom = "point", shape = 16, size = 3, 
+               color = "black", position = position_dodge(width = 0.75))+ 
   scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2")) +
-  labs(title = "A",
+  labs(title = "B",
     x = "", y = "NDVI Change (dNDVI)") +
   theme_minimal() +  
+  scale_y_continuous(limits = c(-0.6, 0.3), breaks = c(-0.6, -0.4, -0.2, 0, 0.2))+
+  annotate("text", x = 1.4, y = -0.6, label = "*", size = 14, color = "black", hjust = 0.5)+
   theme(
     title = element_text(face = "bold", size = 14),
     legend.position = "none",
@@ -2031,18 +2107,18 @@ beaver_violin_NDVI <- ggplot(NDVI_combined, aes(x = Type_spring, y = dNDVI, fill
     #legend.text = element_text(size = 12),  
     #legend.background = element_rect(fill = "white", color = "black"),  
     axis.text.x = element_text(color = "black", size = 14),
-    axis.text.y = element_text(color = "grey20", size = 12),
+    axis.text.y = element_text(color = "grey20", size = 14),
     axis.title.y = element_text(size = 14))+
   coord_flip()  # Flip the axes
 
 beaver_violin_NDVI
 
-ggsave(plot = beaver_violin, 
-       "Figures/beaver_violin.jpeg", 
-       width = 12, 
-       height = 12,
-       units = "cm",
-       dpi = 300)
+#ggsave(plot = beaver_violin_NDVI, 
+#       "Figures/beaver_violin.jpeg", 
+#       width = 12, 
+#       height = 12,
+#       units = "cm",
+#       dpi = 300)
 
 
 
@@ -2052,30 +2128,16 @@ ggsave(plot = beaver_violin,
 
 
 
-
-
-
-
-
-
-ggplot(NDVI_combined, aes(x = Type_spring, y = dNDVI, color = Fire, group = Fire)) +
-  geom_line(stat = "summary", fun = mean) +
-  labs(title = "Interaction Between Fire and Site Type on NDVI Change",
-       x = "Site Type", y = "Mean NDVI Change (dNDVI)") +
-  theme_minimal()
-
-
-
-
-NDVI_change_panel <- beaver_density_plot + beaver_violin
+NDVI_change_panel <- Spring_vs_fall_NDVI / beaver_violin_NDVI + 
+  plot_layout(heights = c(3, 1))
 NDVI_change_panel
 
-ggsave(plot = NDVI_change_panel, 
-       "Figures/NDVI_change_panel.jpeg", 
-       width = 24, 
-       height = 12,
-       units = "cm",
-       dpi = 300)
+#ggsave(plot = NDVI_change_panel, 
+#       "Figures/NDVI_change_panel.jpeg", 
+#       width = 24, 
+#       height = 12,
+#       units = "cm",
+#       dpi = 300)
 
 
 ### NOW DO NDWI ________________________________________________________________
@@ -2130,7 +2192,7 @@ NDWI_fall <- NDWI_long %>%
 NDWI_combined <- merge(NDWI_spring, NDWI_fall, by = "Point", suffixes = c("_spring", "_fall"))
 
 # Calculate dNDWI
-NDWI_combined$dNDWI <- NDWI_combined$NDWI_spring - NDWI_combined$NDWI_fall
+NDWI_combined$dNDWI <- NDWI_combined$NDWI_fall - NDWI_combined$NDWI_spring
 
 
 NDWI_combined <- NDWI_combined %>%
@@ -2146,6 +2208,39 @@ which(is.nan(NDWI_combined$NDWI_spring)) # 9 Nan values
 which(is.nan(NDWI_combined$dNDWI)) #combined there are 11 Nan values
 
 
+mean(NDWI_combined$dNDWI[NDWI_combined$Type_spring == "Beaver"], na.rm = TRUE) #0.07271079
+mean(NDWI_combined$dNDWI[NDWI_combined$Type_spring == "Control"], na.rm = TRUE) #0.09245973
+
+#median(NDVI_combined$dNDVI[NDVI_combined$Type_spring == "Beaver"], na.rm = TRUE) #-0.08556
+#median(NDVI_combined$dNDVI[NDVI_combined$Type_spring == "Control"], na.rm = TRUE) #-0.11744
+
+0.09245973/0.07271079 #27.16% larger increase in NDWI at control sites, but its not statistically significant (see below)
+
+
+mean(NDWI_combined$NDWI_spring[NDWI_combined$Type_spring == "Beaver"], na.rm = TRUE) #-0.3179406
+mean(NDWI_combined$NDWI_spring[NDWI_combined$Type_spring == "Control"], na.rm = TRUE) #-0.3357708
+mean(NDWI_combined$NDWI_fall[NDWI_combined$Type_spring == "Beaver"], na.rm = TRUE) #-0.2407158
+mean(NDWI_combined$NDWI_fall[NDWI_combined$Type_spring == "Control"], na.rm = TRUE) #-0.2389653
+
+
+0.07271079/0.3179406 #22.86%
+0.09245973/0.3357708 #27.53%
+
+
+
+#Is the beginning of summer NDWI different between sites? 
+t.test(NDWI_spring$NDWI[NDWI_spring$Type == "Beaver"],
+       NDWI_spring$NDWI[NDWI_spring$Type == "Control"]       ) 
+#In the spring, beaver sites had significantly More water than control
+#t = 2.0256, df = 438.37, p-value = 0.04341
+
+
+#Is the END of summer NDVI different between sites? 
+t.test(NDWI_fall$NDWI[NDWI_fall$Type == "Beaver"], 
+       NDWI_fall$NDWI[NDWI_fall$Type == "Control"]) 
+#In the fall, there we no differences in NDWI
+#t = -0.15818, df = 444.06, p-value = 0.8744
+
 
 
 
@@ -2160,16 +2255,58 @@ summary(model)
 #smaller increase (or larger decrease) in NDWI compared to Beaver sites.
 #This relationship was not statistically significant t = -1.613, p = 0.107
 
-ggplot(NDWI_combined, aes(x = Type_spring, y = dNDWI, fill = Type_spring)) +
-  geom_boxplot() +
-  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2")) +
-  labs(x = "Site Type", y = "NDWI Change (dNDWI)") +
-  theme_minimal()+  
+
+
+
+
+
+
+
+
+
+NDWI_combined_2 <- bind_rows(
+  NDWI_spring %>% mutate(Season = "Pre-Fire"),
+  NDWI_fall %>% mutate(Season = "Post-Fire")
+) %>%
+  mutate(Season = factor(Season, levels = c("Pre-Fire", "Post-Fire")))
+
+# Plot with dodged boxplots
+Spring_vs_fall_NDWI <- ggplot(NDWI_combined_2, aes(x = Season, y = NDWI, fill = Type)) +
+  geom_violin(position = position_dodge(width = 0.75), alpha = 0.7) +
+  geom_boxplot(position = position_dodge(width = 0.75), width = 0.1) +
+  stat_summary(fun = mean, geom = "point", shape = 16, size = 3, 
+               color = "black", position = position_dodge(width = 0.75))+
+  theme_minimal() +
+  labs(title = "C",
+       x = "", y = "Normalized Difference Water Index") +
+  scale_fill_manual(values = c("Beaver" = "deepskyblue2", "Control" = "#FFA366"))+  # Custom colors
+  scale_y_continuous(limits = c(-0.6, 0.1), breaks = c(-0.6, -0.4, -0.2, 0, 0.2))+
+  annotate("text", x = "Pre-Fire", y = -0.6, label = "*", size = 14, color = "black") +  # Large asterisk
   theme(
-    legend.position = "none",
+    title = element_text(face = "bold", size = 14),
+    #legend.position = "none",
+    legend.position = c(0.27, 0.9),  
+    legend.title = element_text(size = 14), 
+    legend.text = element_text(size = 12),  
+    legend.background = element_rect(fill = "white", color = "black"),  
     axis.text.x = element_text(color = "black", size = 14),
     axis.text.y = element_text(color = "grey20", size = 12),
     axis.title.y = element_text(size = 14))
+
+
+
+Spring_vs_fall_NDWI  
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2194,12 +2331,12 @@ beaver_density_plot_NDWI <- ggplot(NDWI_combined, aes(x = dNDWI, fill = Type_spr
   )
 beaver_density_plot_NDWI
 
-ggsave(plot = beaver_density_plot_NDWI, 
-       "Figures/beaver_density_plot.jpeg", 
-       width = 12, 
-       height = 12,
-       units = "cm",
-       dpi = 300)
+#ggsave(plot = beaver_density_plot_NDWI, 
+#       "Figures/beaver_density_plot.jpeg", 
+#       width = 12, 
+#       height = 12,
+#       units = "cm",
+#       dpi = 300)
 
 
 
@@ -2208,77 +2345,60 @@ ggsave(plot = beaver_density_plot_NDWI,
 beaver_violin_NDWI <- ggplot(NDWI_combined, aes(x = Type_spring, y = dNDWI, fill = Type_spring)) +
   geom_violin(trim = FALSE, alpha = 0.6) +  
   geom_boxplot(width = 0.1, position = position_dodge(width = 0.9), color = "black", alpha = 0.7) +  # Boxplot on top
-  geom_point(aes(x = Type_spring, y = mean(dNDWI, na.rm = TRUE), fill = Type_spring), 
-             shape = 16, size = 3, color = "black") +  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2")) +
-  labs(title = "B",
+  stat_summary(fun = mean, geom = "point", shape = 16, size = 3, 
+               color = "black", position = position_dodge(width = 0.75)) +
+  scale_fill_manual(values = c("Control" = "#FFA366", "Beaver" = "deepskyblue2")) +
+  labs(title = "D",
        x = "", y = "NDWI Change (dNDWI)") +
   theme_minimal() +  
   theme(
     title = element_text(face = "bold", size = 14),
     legend.position = "none",
     axis.text.x = element_text(color = "black", size = 14),
-    axis.text.y = element_text(color = "grey20", size = 12),
+    axis.text.y = element_text(color = "grey20", size = 14),
     axis.title.y = element_text(size = 14))+
   coord_flip()  # Flip the axes
 
 beaver_violin_NDWI
 
-ggsave(plot = beaver_violin_NDWI, 
-       "Figures/beaver_violin.jpeg", 
-       width = 12, 
-       height = 12,
-       units = "cm",
-       dpi = 300)
+#ggsave(plot = beaver_violin_NDWI, 
+#       "Figures/beaver_violin.jpeg", 
+#       width = 12, 
+#       height = 12,
+#       units = "cm",
+#       dpi = 300)
 
 
 
 
-ggplot(NDWI_combined, aes(x = Type_spring, y = dNDWI, color = Fire, group = Fire)) +
-  geom_line(stat = "summary", fun = mean) +
-  labs(title = "Interaction Between Fire and Site Type on NDVI Change",
-       x = "Site Type", y = "Mean NDVI Change (dNDWI)") +
-  theme_minimal()
 
 
-
-
-NDWI_change_panel <- beaver_density_plot_NDWI + beaver_violin_NDWI
+NDWI_change_panel <- Spring_vs_fall_NDWI + beaver_violin_NDWI+ 
+  plot_layout(heights = c(3, 1))
 NDWI_change_panel
 
-ggsave(plot = NDWI_change_panel, 
-       "Figures/NDWI_change_panel.jpeg", 
-       width = 24, 
-       height = 12,
-       units = "cm",
-       dpi = 300)
+#ggsave(plot = NDWI_change_panel, 
+#       "Figures/NDWI_change_panel.jpeg", 
+#       width = 24, 
+#       height = 12,
+#       units = "cm",
+#       dpi = 300)
 
 
 
 #Now combine the two panels
-overall_change_panel <- NDVI_change_panel/NDWI_change_panel
+overall_change_panel <- NDVI_change_panel | NDWI_change_panel
 overall_change_panel
 
 
 ggsave(plot = overall_change_panel, 
-       "Figures/overall_change_panel_smooshed.jpeg", 
-       width = 24, 
-       height = 18,
+       "Figures/overall_change_panel_NEWEST.jpeg", 
+       width = 25, 
+       height = 25,
        units = "cm",
        dpi = 300)
 
 
-#One more final version
-
-Beaver_Violin <- beaver_violin_NDVI/beaver_violin_NDWI
-Beaver_Violin
-
-
-ggsave(plot = Beaver_Violin, 
-       "Figures/Beaver_Violin.jpeg", 
-       width = 20, 
-       height = 20,
-       units = "cm",
-       dpi = 300)
 
 
 
