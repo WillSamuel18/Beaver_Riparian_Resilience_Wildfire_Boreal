@@ -6,12 +6,12 @@ Beaver pond,Iniakuk Lake Fire,2016,51,Iniakuk_Lake_Fire_51,X4,,,14761.0,-152.927
 Beaver pond,Iniakuk Lake Fire,2016,52,Iniakuk_Lake_Fire_52,X5,,,7886.0,-152.929727,67.120251
 Beaver pond,Iniakuk Lake Fire,2016,53,Iniakuk_Lake_Fire_53,X6,,,8631.0,-152.928976,67.122272
 Beaver pond,Iniakuk Lake Fire,2016,54,Iniakuk_Lake_Fire_54,X7,,,10806.0,-152.928847,67.123226
-Reference site,Iniakuk Lake Fire,2016,49,Iniakuk_Lake_Fire_49,X1,,,2815.0,-152.935141,67.118424
-Reference site,Iniakuk Lake Fire,2016,50,Iniakuk_Lake_Fire_50,X2,,,2818.0,-152.933653,67.119116
-Reference site,Iniakuk Lake Fire,2016,51,Iniakuk_Lake_Fire_51,X3,,,2819.0,-152.932614,67.120703
-Reference site,Iniakuk Lake Fire,2016,52,Iniakuk_Lake_Fire_52,X4,,,2818.0,-152.931393,67.121218
-Reference site,Iniakuk Lake Fire,2016,53,Iniakuk_Lake_Fire_53,X5,,,2804.0,-152.937283,67.117571
-Reference site,Iniakuk Lake Fire,2016,54,Iniakuk_Lake_Fire_54,X6,,,2819.0,-152.932907,67.11989
+Peripheral site,Iniakuk Lake Fire,2016,49,Iniakuk_Lake_Fire_49,X1,,,2815.0,-152.935141,67.118424
+Peripheral site,Iniakuk Lake Fire,2016,50,Iniakuk_Lake_Fire_50,X2,,,2818.0,-152.933653,67.119116
+Peripheral site,Iniakuk Lake Fire,2016,51,Iniakuk_Lake_Fire_51,X3,,,2819.0,-152.932614,67.120703
+Peripheral site,Iniakuk Lake Fire,2016,52,Iniakuk_Lake_Fire_52,X4,,,2818.0,-152.931393,67.121218
+Peripheral site,Iniakuk Lake Fire,2016,53,Iniakuk_Lake_Fire_53,X5,,,2804.0,-152.937283,67.117571
+Peripheral site,Iniakuk Lake Fire,2016,54,Iniakuk_Lake_Fire_54,X6,,,2819.0,-152.932907,67.11989
 Beaver pond,Hogatza River Fire,2016,25,Hogatza_River_Fire_25,X1,Y,,8143.0,-153.71036,66.784424
 Beaver pond,Hogatza River Fire,2016,27,Hogatza_River_Fire_27,X2,Y,,4782.0,-153.716207,66.79358
 Beaver pond,Hogatza River Fire,2016,29,Hogatza_River_Fire_29,X3,Y,,5433.0,-153.770039,66.80271
@@ -37,32 +37,32 @@ Beaver pond,Hogatza River Fire,2016,23,Hogatza_River_Fire_23,X22,M,Not super con
 Beaver pond,Hogatza River Fire,2016,24,Hogatza_River_Fire_24,X23,M,Not super confident its a pond,4289.0,-153.708619,66.783813
 Beaver pond,Hogatza River Fire,2016,26,Hogatza_River_Fire_26,X24,M,Not super confident its a pond,4917.0,-153.710599,66.786669
 Beaver pond,Hogatza River Fire,2016,28,Hogatza_River_Fire_28,X25,M,Not super confident its a pond,5037.0,-153.747452,66.795308
-Reference site,Hogatza River Fire,2016,25,Hogatza_River_Fire_25,X1,,,2818.0,-153.709382,66.785103
-Reference site,Hogatza River Fire,2016,27,Hogatza_River_Fire_27,X2,,,2815.0,-153.715432,66.792826
-Reference site,Hogatza River Fire,2016,29,Hogatza_River_Fire_29,X3,,,2820.0,-153.770132,66.802272
-Reference site,Hogatza River Fire,2016,30,Hogatza_River_Fire_30,X4,,,2811.0,-153.769314,66.804226
-Reference site,Hogatza River Fire,2016,31,Hogatza_River_Fire_31,X5,,,2815.0,-153.769823,66.805192
-Reference site,Hogatza River Fire,2016,32,Hogatza_River_Fire_32,X6,,,2818.0,-153.769019,66.808081
-Reference site,Hogatza River Fire,2016,33,Hogatza_River_Fire_33,X7,,,2816.0,-153.768826,66.808277
-Reference site,Hogatza River Fire,2016,34,Hogatza_River_Fire_34,X8,,,2813.0,-153.767197,66.811012
-Reference site,Hogatza River Fire,2016,36,Hogatza_River_Fire_36,X9,,,2824.0,-153.919067,66.775871
-Reference site,Hogatza River Fire,2016,37,Hogatza_River_Fire_37,X10,,,2816.0,-153.913104,66.777803
-Reference site,Hogatza River Fire,2016,38,Hogatza_River_Fire_38,X11,,,2818.0,-153.91419,66.777415
-Reference site,Hogatza River Fire,2016,39,Hogatza_River_Fire_39,X12,,,2811.0,-153.910215,66.784244
-Reference site,Hogatza River Fire,2016,40,Hogatza_River_Fire_40,X13,,,2817.0,-153.909674,66.784694
-Reference site,Hogatza River Fire,2016,41,Hogatza_River_Fire_41,X14,,,2813.0,-153.909425,66.785178
-Reference site,Hogatza River Fire,2016,42,Hogatza_River_Fire_42,X15,,,2812.0,-153.908338,66.785709
-Reference site,Hogatza River Fire,2016,43,Hogatza_River_Fire_43,X16,,,2813.0,-153.847073,66.770831
-Reference site,Hogatza River Fire,2016,44,Hogatza_River_Fire_44,X17,,,2811.0,-153.846885,66.770236
-Reference site,Hogatza River Fire,2016,45,Hogatza_River_Fire_45,X18,,,2818.0,-153.843084,66.769059
-Reference site,Hogatza River Fire,2016,46,Hogatza_River_Fire_46,X19,,,2818.0,-153.837612,66.767138
-Reference site,Hogatza River Fire,2016,47,Hogatza_River_Fire_47,X20,,,2819.0,-153.835909,66.76689
-Reference site,Hogatza River Fire,2016,22,Hogatza_River_Fire_22,X21,,,2813.0,-153.691935,66.770219
-Reference site,Hogatza River Fire,2016,23,Hogatza_River_Fire_23,X22,,,2820.0,-153.708092,66.782742
-Reference site,Hogatza River Fire,2016,24,Hogatza_River_Fire_24,X23,,,2820.0,-153.709268,66.783137
-Reference site,Hogatza River Fire,2016,26,Hogatza_River_Fire_26,X24,,,2806.0,-153.71104,66.787633
-Reference site,Hogatza River Fire,2016,28,Hogatza_River_Fire_28,X25,,,2817.0,-153.748704,66.795961
-Reference site,Hogatza River Fire,2016,35,Hogatza_River_Fire_35,X26,,,2812.0,-153.916717,66.776949
+Peripheral site,Hogatza River Fire,2016,25,Hogatza_River_Fire_25,X1,,,2818.0,-153.709382,66.785103
+Peripheral site,Hogatza River Fire,2016,27,Hogatza_River_Fire_27,X2,,,2815.0,-153.715432,66.792826
+Peripheral site,Hogatza River Fire,2016,29,Hogatza_River_Fire_29,X3,,,2820.0,-153.770132,66.802272
+Peripheral site,Hogatza River Fire,2016,30,Hogatza_River_Fire_30,X4,,,2811.0,-153.769314,66.804226
+Peripheral site,Hogatza River Fire,2016,31,Hogatza_River_Fire_31,X5,,,2815.0,-153.769823,66.805192
+Peripheral site,Hogatza River Fire,2016,32,Hogatza_River_Fire_32,X6,,,2818.0,-153.769019,66.808081
+Peripheral site,Hogatza River Fire,2016,33,Hogatza_River_Fire_33,X7,,,2816.0,-153.768826,66.808277
+Peripheral site,Hogatza River Fire,2016,34,Hogatza_River_Fire_34,X8,,,2813.0,-153.767197,66.811012
+Peripheral site,Hogatza River Fire,2016,36,Hogatza_River_Fire_36,X9,,,2824.0,-153.919067,66.775871
+Peripheral site,Hogatza River Fire,2016,37,Hogatza_River_Fire_37,X10,,,2816.0,-153.913104,66.777803
+Peripheral site,Hogatza River Fire,2016,38,Hogatza_River_Fire_38,X11,,,2818.0,-153.91419,66.777415
+Peripheral site,Hogatza River Fire,2016,39,Hogatza_River_Fire_39,X12,,,2811.0,-153.910215,66.784244
+Peripheral site,Hogatza River Fire,2016,40,Hogatza_River_Fire_40,X13,,,2817.0,-153.909674,66.784694
+Peripheral site,Hogatza River Fire,2016,41,Hogatza_River_Fire_41,X14,,,2813.0,-153.909425,66.785178
+Peripheral site,Hogatza River Fire,2016,42,Hogatza_River_Fire_42,X15,,,2812.0,-153.908338,66.785709
+Peripheral site,Hogatza River Fire,2016,43,Hogatza_River_Fire_43,X16,,,2813.0,-153.847073,66.770831
+Peripheral site,Hogatza River Fire,2016,44,Hogatza_River_Fire_44,X17,,,2811.0,-153.846885,66.770236
+Peripheral site,Hogatza River Fire,2016,45,Hogatza_River_Fire_45,X18,,,2818.0,-153.843084,66.769059
+Peripheral site,Hogatza River Fire,2016,46,Hogatza_River_Fire_46,X19,,,2818.0,-153.837612,66.767138
+Peripheral site,Hogatza River Fire,2016,47,Hogatza_River_Fire_47,X20,,,2819.0,-153.835909,66.76689
+Peripheral site,Hogatza River Fire,2016,22,Hogatza_River_Fire_22,X21,,,2813.0,-153.691935,66.770219
+Peripheral site,Hogatza River Fire,2016,23,Hogatza_River_Fire_23,X22,,,2820.0,-153.708092,66.782742
+Peripheral site,Hogatza River Fire,2016,24,Hogatza_River_Fire_24,X23,,,2820.0,-153.709268,66.783137
+Peripheral site,Hogatza River Fire,2016,26,Hogatza_River_Fire_26,X24,,,2806.0,-153.71104,66.787633
+Peripheral site,Hogatza River Fire,2016,28,Hogatza_River_Fire_28,X25,,,2817.0,-153.748704,66.795961
+Peripheral site,Hogatza River Fire,2016,35,Hogatza_River_Fire_35,X26,,,2812.0,-153.916717,66.776949
 Beaver pond,Hog Fire,2016,8,Hog_Fire_8,X1,Y,,13997.0,-153.761746,66.64179
 Beaver pond,Hog Fire,2016,9,Hog_Fire_9,X2,M,Poor imagery,6169.0,-153.762605,66.641123
 Beaver pond,Hog Fire,2016,10,Hog_Fire_10,X3,M,Poor imagery,4695.0,-153.764538,66.638957
@@ -77,22 +77,22 @@ Beaver pond,Hog Fire,2016,18,Hog_Fire_18,X11,M,Poor imagery,4084.0,-153.922627,6
 Beaver pond,Hog Fire,2016,19,Hog_Fire_19,X12,M,Poor imagery,4156.0,-153.922433,66.629506
 Beaver pond,Hog Fire,2016,20,Hog_Fire_20,X13,M,Poor imagery,4380.0,-153.940159,66.633385
 Beaver pond,Hog Fire,2016,21,Hog_Fire_21,X14,M,Poor imagery,4678.0,-153.940994,66.63359
-Reference site,Hog Fire,2016,8,Hog_Fire_8,X1,,,2809.0,-153.763918,66.640285
-Reference site,Hog Fire,2016,9,Hog_Fire_9,X2,,,2819.0,-153.763787,66.639724
-Reference site,Hog Fire,2016,10,Hog_Fire_10,X3,,,2810.0,-153.764983,66.637905
-Reference site,Hog Fire,2016,11,Hog_Fire_11,X4,,,2808.0,-153.75364,66.646015
-Reference site,Hog Fire,2016,12,Hog_Fire_12,X5,,,2813.0,-153.758691,66.648092
-Reference site,Hog Fire,2016,13,Hog_Fire_13,X6,,,2817.0,-153.751236,66.653345
-Reference site,Hog Fire,2016,14,Hog_Fire_14,X7,,,2818.0,-153.748421,66.654614
-Reference site,Hog Fire,2016,15,Hog_Fire_15,X8,,,2820.0,-153.77175,66.638408
-Reference site,Hog Fire,2016,16,Hog_Fire_16,X9,,,2817.0,-153.919578,66.628904
-Reference site,Hog Fire,2016,17,Hog_Fire_17,X10,,,2824.0,-153.920162,66.629039
-Reference site,Hog Fire,2016,18,Hog_Fire_18,X11,,,2816.0,-153.921092,66.629143
-Reference site,Hog Fire,2016,19,Hog_Fire_19,X12,,,2808.0,-153.924128,66.629708
-Reference site,Hog Fire,2016,20,Hog_Fire_20,X13,,,2818.0,-153.936611,66.632338
-Reference site,Hog Fire,2016,21,Hog_Fire_21,X14,,,2824.0,-153.943862,66.634097
+Peripheral site,Hog Fire,2016,8,Hog_Fire_8,X1,,,2809.0,-153.763918,66.640285
+Peripheral site,Hog Fire,2016,9,Hog_Fire_9,X2,,,2819.0,-153.763787,66.639724
+Peripheral site,Hog Fire,2016,10,Hog_Fire_10,X3,,,2810.0,-153.764983,66.637905
+Peripheral site,Hog Fire,2016,11,Hog_Fire_11,X4,,,2808.0,-153.75364,66.646015
+Peripheral site,Hog Fire,2016,12,Hog_Fire_12,X5,,,2813.0,-153.758691,66.648092
+Peripheral site,Hog Fire,2016,13,Hog_Fire_13,X6,,,2817.0,-153.751236,66.653345
+Peripheral site,Hog Fire,2016,14,Hog_Fire_14,X7,,,2818.0,-153.748421,66.654614
+Peripheral site,Hog Fire,2016,15,Hog_Fire_15,X8,,,2820.0,-153.77175,66.638408
+Peripheral site,Hog Fire,2016,16,Hog_Fire_16,X9,,,2817.0,-153.919578,66.628904
+Peripheral site,Hog Fire,2016,17,Hog_Fire_17,X10,,,2824.0,-153.920162,66.629039
+Peripheral site,Hog Fire,2016,18,Hog_Fire_18,X11,,,2816.0,-153.921092,66.629143
+Peripheral site,Hog Fire,2016,19,Hog_Fire_19,X12,,,2808.0,-153.924128,66.629708
+Peripheral site,Hog Fire,2016,20,Hog_Fire_20,X13,,,2818.0,-153.936611,66.632338
+Peripheral site,Hog Fire,2016,21,Hog_Fire_21,X14,,,2824.0,-153.943862,66.634097
 Beaver pond,Chalkyitsik Complex Fire,2019,1,Chalkyitsik_Complex_Fire_1,X1,Y,,7673.0,-143.772323,66.406024
-Reference site,Chalkyitsik Complex Fire,2019,1,Chalkyitsik_Complex_Fire_1,X1,,,2805.0,-143.773238,66.40497
+Peripheral site,Chalkyitsik Complex Fire,2019,1,Chalkyitsik_Complex_Fire_1,X1,,,2805.0,-143.773238,66.40497
 Beaver pond,Sunshine Mountain Fire,2019,185,Sunshine_Mountain_Fire_185,X1,,,8498.0,-155.184095,63.298761
 Beaver pond,Sunshine Mountain Fire,2019,186,Sunshine_Mountain_Fire_186,X2,,,7500.0,-155.181911,63.296601
 Beaver pond,Sunshine Mountain Fire,2019,187,Sunshine_Mountain_Fire_187,X3,,,11340.0,-155.196089,63.31136
@@ -101,14 +101,14 @@ Beaver pond,Sunshine Mountain Fire,2019,189,Sunshine_Mountain_Fire_189,X5,,,6830
 Beaver pond,Sunshine Mountain Fire,2019,190,Sunshine_Mountain_Fire_190,X6,,,8643.0,-155.20553,63.320096
 Beaver pond,Sunshine Mountain Fire,2019,191,Sunshine_Mountain_Fire_191,X7,,,6129.0,-155.205232,63.320494
 Beaver pond,Sunshine Mountain Fire,2019,192,Sunshine_Mountain_Fire_192,X8,,,14887.0,-155.201509,63.326363
-Reference site,Sunshine Mountain Fire,2019,185,Sunshine_Mountain_Fire_185,X1,,,2814.0,-155.183118,63.298047
-Reference site,Sunshine Mountain Fire,2019,186,Sunshine_Mountain_Fire_186,X2,,,2816.0,-155.180331,63.296441
-Reference site,Sunshine Mountain Fire,2019,187,Sunshine_Mountain_Fire_187,X3,,,2818.0,-155.197363,63.311852
-Reference site,Sunshine Mountain Fire,2019,188,Sunshine_Mountain_Fire_188,X4,,,2809.0,-155.197733,63.31205
-Reference site,Sunshine Mountain Fire,2019,189,Sunshine_Mountain_Fire_189,X5,,,2818.0,-155.198453,63.315118
-Reference site,Sunshine Mountain Fire,2019,190,Sunshine_Mountain_Fire_190,X6,,,2816.0,-155.204186,63.319393
-Reference site,Sunshine Mountain Fire,2019,191,Sunshine_Mountain_Fire_191,X7,,,2804.0,-155.203809,63.318857
-Reference site,Sunshine Mountain Fire,2019,192,Sunshine_Mountain_Fire_192,X8,,,2818.0,-155.201836,63.325226
+Peripheral site,Sunshine Mountain Fire,2019,185,Sunshine_Mountain_Fire_185,X1,,,2814.0,-155.183118,63.298047
+Peripheral site,Sunshine Mountain Fire,2019,186,Sunshine_Mountain_Fire_186,X2,,,2816.0,-155.180331,63.296441
+Peripheral site,Sunshine Mountain Fire,2019,187,Sunshine_Mountain_Fire_187,X3,,,2818.0,-155.197363,63.311852
+Peripheral site,Sunshine Mountain Fire,2019,188,Sunshine_Mountain_Fire_188,X4,,,2809.0,-155.197733,63.31205
+Peripheral site,Sunshine Mountain Fire,2019,189,Sunshine_Mountain_Fire_189,X5,,,2818.0,-155.198453,63.315118
+Peripheral site,Sunshine Mountain Fire,2019,190,Sunshine_Mountain_Fire_190,X6,,,2816.0,-155.204186,63.319393
+Peripheral site,Sunshine Mountain Fire,2019,191,Sunshine_Mountain_Fire_191,X7,,,2804.0,-155.203809,63.318857
+Peripheral site,Sunshine Mountain Fire,2019,192,Sunshine_Mountain_Fire_192,X8,,,2818.0,-155.201836,63.325226
 Beaver pond,Munson Creek Fire,2021,193,Munson_Creek_Fire_193,X1,,,11622.0,-146.062091,64.95175
 Beaver pond,Munson Creek Fire,2021,194,Munson_Creek_Fire_194,X2,,,27248.0,-146.068035,64.952491
 Beaver pond,Munson Creek Fire,2021,234,Munson_Creek_Fire_234,X3,,,54139.0,-146.07504,64.953761
@@ -151,45 +151,45 @@ Beaver pond,Munson Creek Fire,2021,229,Munson_Creek_Fire_229,X39,,,11419.0,-145.
 Beaver pond,Munson Creek Fire,2021,230,Munson_Creek_Fire_230,X40,,,7902.0,-145.767604,64.997042
 Beaver pond,Munson Creek Fire,2021,231,Munson_Creek_Fire_231,X41,,,9282.0,-145.766703,64.99673
 Beaver pond,Munson Creek Fire,2021,232,Munson_Creek_Fire_232,X42,,,12091.0,-145.722032,65.007615
-Reference site,Munson Creek Fire,2021,193,Munson_Creek_Fire_193,X1,,,2824.0,-146.057963,64.951698
-Reference site,Munson Creek Fire,2021,235,Munson_Creek_Fire_235,X2,,,2818.0,-146.098601,64.955071
-Reference site,Munson Creek Fire,2021,195,Munson_Creek_Fire_195,X3,,,2809.0,-146.062178,64.955003
-Reference site,Munson Creek Fire,2021,196,Munson_Creek_Fire_196,X4,,,2817.0,-146.064402,64.960321
-Reference site,Munson Creek Fire,2021,197,Munson_Creek_Fire_197,X5,,,2813.0,-146.064101,64.961061
-Reference site,Munson Creek Fire,2021,198,Munson_Creek_Fire_198,X6,,,2816.0,-146.066323,64.965362
-Reference site,Munson Creek Fire,2021,199,Munson_Creek_Fire_199,X7,,,2805.0,-146.065818,64.965663
-Reference site,Munson Creek Fire,2021,200,Munson_Creek_Fire_200,X8,,,2813.0,-146.06591,64.965913
-Reference site,Munson Creek Fire,2021,201,Munson_Creek_Fire_201,X9,,,2816.0,-146.066106,64.966366
-Reference site,Munson Creek Fire,2021,204,Munson_Creek_Fire_204,X10,,,2822.0,-146.068984,64.968642
-Reference site,Munson Creek Fire,2021,203,Munson_Creek_Fire_203,X11,,,2824.0,-146.068387,64.969025
-Reference site,Munson Creek Fire,2021,202,Munson_Creek_Fire_202,X12,,,2811.0,-146.067831,64.969349
-Reference site,Munson Creek Fire,2021,205,Munson_Creek_Fire_205,X13,,,2809.0,-146.064252,64.981977
-Reference site,Munson Creek Fire,2021,206,Munson_Creek_Fire_206,X14,,,2825.0,-146.062548,64.98253
-Reference site,Munson Creek Fire,2021,207,Munson_Creek_Fire_207,X15,,,2811.0,-146.061723,64.984041
-Reference site,Munson Creek Fire,2021,208,Munson_Creek_Fire_208,X16,,,2818.0,-146.061309,64.983139
-Reference site,Munson Creek Fire,2021,209,Munson_Creek_Fire_209,X17,,,2819.0,-146.047235,64.990597
-Reference site,Munson Creek Fire,2021,210,Munson_Creek_Fire_210,X18,,,2818.0,-145.990762,64.955669
-Reference site,Munson Creek Fire,2021,211,Munson_Creek_Fire_211,X19,,,2811.0,-145.98971,64.955281
-Reference site,Munson Creek Fire,2021,212,Munson_Creek_Fire_212,X20,,,2809.0,-145.93905,64.968031
-Reference site,Munson Creek Fire,2021,213,Munson_Creek_Fire_213,X21,,,2820.0,-145.932849,64.972449
-Reference site,Munson Creek Fire,2021,214,Munson_Creek_Fire_214,X22,,,2819.0,-145.917593,64.986116
-Reference site,Munson Creek Fire,2021,215,Munson_Creek_Fire_215,X23,,,2818.0,-145.908088,64.991046
-Reference site,Munson Creek Fire,2021,216,Munson_Creek_Fire_216,X24,,,2809.0,-145.907181,64.991162
-Reference site,Munson Creek Fire,2021,217,Munson_Creek_Fire_217,X25,,,2822.0,-145.907522,64.991326
-Reference site,Munson Creek Fire,2021,218,Munson_Creek_Fire_218,X26,,,2820.0,-145.90566,64.993871
-Reference site,Munson Creek Fire,2021,219,Munson_Creek_Fire_219,X27,,,2807.0,-145.906765,64.993486
-Reference site,Munson Creek Fire,2021,220,Munson_Creek_Fire_220,X28,,,2816.0,-145.904426,64.99552
-Reference site,Munson Creek Fire,2021,221,Munson_Creek_Fire_221,X29,,,2818.0,-145.903843,64.995903
-Reference site,Munson Creek Fire,2021,222,Munson_Creek_Fire_222,X30,,,2822.0,-145.9034,64.996346
-Reference site,Munson Creek Fire,2021,223,Munson_Creek_Fire_223,X31,,,2815.0,-145.903401,64.996686
-Reference site,Munson Creek Fire,2021,224,Munson_Creek_Fire_224,X32,,,2817.0,-145.90352,64.997142
-Reference site,Munson Creek Fire,2021,225,Munson_Creek_Fire_225,X33,,,2820.0,-145.90187,65.000044
-Reference site,Munson Creek Fire,2021,226,Munson_Creek_Fire_226,X34,,,2819.0,-145.903498,65.002204
-Reference site,Munson Creek Fire,2021,228,Munson_Creek_Fire_228,X35,,,2819.0,-145.86211,64.958777
-Reference site,Munson Creek Fire,2021,229,Munson_Creek_Fire_229,X36,,,2819.0,-145.782798,64.996129
-Reference site,Munson Creek Fire,2021,230,Munson_Creek_Fire_230,X37,,,2819.0,-145.771306,64.998422
-Reference site,Munson Creek Fire,2021,231,Munson_Creek_Fire_231,X38,,,2822.0,-145.769744,64.998363
-Reference site,Munson Creek Fire,2021,232,Munson_Creek_Fire_232,X39,,,2813.0,-145.721649,65.006333
+Peripheral site,Munson Creek Fire,2021,193,Munson_Creek_Fire_193,X1,,,2824.0,-146.057963,64.951698
+Peripheral site,Munson Creek Fire,2021,235,Munson_Creek_Fire_235,X2,,,2818.0,-146.098601,64.955071
+Peripheral site,Munson Creek Fire,2021,195,Munson_Creek_Fire_195,X3,,,2809.0,-146.062178,64.955003
+Peripheral site,Munson Creek Fire,2021,196,Munson_Creek_Fire_196,X4,,,2817.0,-146.064402,64.960321
+Peripheral site,Munson Creek Fire,2021,197,Munson_Creek_Fire_197,X5,,,2813.0,-146.064101,64.961061
+Peripheral site,Munson Creek Fire,2021,198,Munson_Creek_Fire_198,X6,,,2816.0,-146.066323,64.965362
+Peripheral site,Munson Creek Fire,2021,199,Munson_Creek_Fire_199,X7,,,2805.0,-146.065818,64.965663
+Peripheral site,Munson Creek Fire,2021,200,Munson_Creek_Fire_200,X8,,,2813.0,-146.06591,64.965913
+Peripheral site,Munson Creek Fire,2021,201,Munson_Creek_Fire_201,X9,,,2816.0,-146.066106,64.966366
+Peripheral site,Munson Creek Fire,2021,204,Munson_Creek_Fire_204,X10,,,2822.0,-146.068984,64.968642
+Peripheral site,Munson Creek Fire,2021,203,Munson_Creek_Fire_203,X11,,,2824.0,-146.068387,64.969025
+Peripheral site,Munson Creek Fire,2021,202,Munson_Creek_Fire_202,X12,,,2811.0,-146.067831,64.969349
+Peripheral site,Munson Creek Fire,2021,205,Munson_Creek_Fire_205,X13,,,2809.0,-146.064252,64.981977
+Peripheral site,Munson Creek Fire,2021,206,Munson_Creek_Fire_206,X14,,,2825.0,-146.062548,64.98253
+Peripheral site,Munson Creek Fire,2021,207,Munson_Creek_Fire_207,X15,,,2811.0,-146.061723,64.984041
+Peripheral site,Munson Creek Fire,2021,208,Munson_Creek_Fire_208,X16,,,2818.0,-146.061309,64.983139
+Peripheral site,Munson Creek Fire,2021,209,Munson_Creek_Fire_209,X17,,,2819.0,-146.047235,64.990597
+Peripheral site,Munson Creek Fire,2021,210,Munson_Creek_Fire_210,X18,,,2818.0,-145.990762,64.955669
+Peripheral site,Munson Creek Fire,2021,211,Munson_Creek_Fire_211,X19,,,2811.0,-145.98971,64.955281
+Peripheral site,Munson Creek Fire,2021,212,Munson_Creek_Fire_212,X20,,,2809.0,-145.93905,64.968031
+Peripheral site,Munson Creek Fire,2021,213,Munson_Creek_Fire_213,X21,,,2820.0,-145.932849,64.972449
+Peripheral site,Munson Creek Fire,2021,214,Munson_Creek_Fire_214,X22,,,2819.0,-145.917593,64.986116
+Peripheral site,Munson Creek Fire,2021,215,Munson_Creek_Fire_215,X23,,,2818.0,-145.908088,64.991046
+Peripheral site,Munson Creek Fire,2021,216,Munson_Creek_Fire_216,X24,,,2809.0,-145.907181,64.991162
+Peripheral site,Munson Creek Fire,2021,217,Munson_Creek_Fire_217,X25,,,2822.0,-145.907522,64.991326
+Peripheral site,Munson Creek Fire,2021,218,Munson_Creek_Fire_218,X26,,,2820.0,-145.90566,64.993871
+Peripheral site,Munson Creek Fire,2021,219,Munson_Creek_Fire_219,X27,,,2807.0,-145.906765,64.993486
+Peripheral site,Munson Creek Fire,2021,220,Munson_Creek_Fire_220,X28,,,2816.0,-145.904426,64.99552
+Peripheral site,Munson Creek Fire,2021,221,Munson_Creek_Fire_221,X29,,,2818.0,-145.903843,64.995903
+Peripheral site,Munson Creek Fire,2021,222,Munson_Creek_Fire_222,X30,,,2822.0,-145.9034,64.996346
+Peripheral site,Munson Creek Fire,2021,223,Munson_Creek_Fire_223,X31,,,2815.0,-145.903401,64.996686
+Peripheral site,Munson Creek Fire,2021,224,Munson_Creek_Fire_224,X32,,,2817.0,-145.90352,64.997142
+Peripheral site,Munson Creek Fire,2021,225,Munson_Creek_Fire_225,X33,,,2820.0,-145.90187,65.000044
+Peripheral site,Munson Creek Fire,2021,226,Munson_Creek_Fire_226,X34,,,2819.0,-145.903498,65.002204
+Peripheral site,Munson Creek Fire,2021,228,Munson_Creek_Fire_228,X35,,,2819.0,-145.86211,64.958777
+Peripheral site,Munson Creek Fire,2021,229,Munson_Creek_Fire_229,X36,,,2819.0,-145.782798,64.996129
+Peripheral site,Munson Creek Fire,2021,230,Munson_Creek_Fire_230,X37,,,2819.0,-145.771306,64.998422
+Peripheral site,Munson Creek Fire,2021,231,Munson_Creek_Fire_231,X38,,,2822.0,-145.769744,64.998363
+Peripheral site,Munson Creek Fire,2021,232,Munson_Creek_Fire_232,X39,,,2813.0,-145.721649,65.006333
 Beaver pond,Page Mountain Fire,2019,116,Page_Mountain_Fire_116,X1,,,11581.0,-155.867881,63.171044
 Beaver pond,Page Mountain Fire,2019,117,Page_Mountain_Fire_117,X2,,,12527.0,-155.865975,63.1704
 Beaver pond,Page Mountain Fire,2019,118,Page_Mountain_Fire_118,X3,,,8560.0,-155.864653,63.169475
@@ -257,68 +257,68 @@ Beaver pond,Page Mountain Fire,2019,182,Page_Mountain_Fire_182,X64,,,6986.0,-155
 Beaver pond,Page Mountain Fire,2019,183,Page_Mountain_Fire_183,X65,,,5066.0,-155.520134,63.302595
 Beaver pond,Page Mountain Fire,2019,184,Page_Mountain_Fire_184,X66,,,6809.0,-155.523137,63.303416
 Beaver pond,Page Mountain Fire,2019,134,Page_Mountain_Fire_134,X67,M,Maybe inactive,8291.0,-155.785875,63.192274
-Reference site,Page Mountain Fire,2019,118,Page_Mountain_Fire_118,X1,,,2818.0,-155.873999,63.172827
-Reference site,Page Mountain Fire,2019,119,Page_Mountain_Fire_119,X2,,,2817.0,-155.872775,63.172888
-Reference site,Page Mountain Fire,2019,120,Page_Mountain_Fire_120,X3,,,2809.0,-155.870543,63.172127
-Reference site,Page Mountain Fire,2019,121,Page_Mountain_Fire_121,X4,,,2820.0,-155.872164,63.172148
-Reference site,Page Mountain Fire,2019,122,Page_Mountain_Fire_122,X5,,,2806.0,-155.871616,63.17253
-Reference site,Page Mountain Fire,2019,123,Page_Mountain_Fire_123,X6,,,2818.0,-155.88656,63.174911
-Reference site,Page Mountain Fire,2019,124,Page_Mountain_Fire_124,X7,,,2817.0,-155.890317,63.176321
-Reference site,Page Mountain Fire,2019,125,Page_Mountain_Fire_125,X8,,,2824.0,-155.89109,63.17664
-Reference site,Page Mountain Fire,2019,117,Page_Mountain_Fire_117,X9,,,2819.0,-155.870957,63.171525
-Reference site,Page Mountain Fire,2019,116,Page_Mountain_Fire_116,X10,,,2820.0,-155.869762,63.171499
-Reference site,Page Mountain Fire,2019,128,Page_Mountain_Fire_128,X11,,,2816.0,-155.815031,63.176109
-Reference site,Page Mountain Fire,2019,129,Page_Mountain_Fire_129,X12,,,2818.0,-155.851049,63.179476
-Reference site,Page Mountain Fire,2019,130,Page_Mountain_Fire_130,X13,,,2820.0,-155.862126,63.180372
-Reference site,Page Mountain Fire,2019,135,Page_Mountain_Fire_135,X14,,,2824.0,-155.80978,63.208531
-Reference site,Page Mountain Fire,2019,136,Page_Mountain_Fire_136,X15,,,2809.0,-155.813412,63.21019
-Reference site,Page Mountain Fire,2019,233,Page_Mountain_Fire_233,X16,,,2824.0,-155.816886,63.211634
-Reference site,Page Mountain Fire,2019,137,Page_Mountain_Fire_137,X17,,,2820.0,-155.747216,63.200921
-Reference site,Page Mountain Fire,2019,138,Page_Mountain_Fire_138,X18,,,2818.0,-155.755102,63.203142
-Reference site,Page Mountain Fire,2019,139,Page_Mountain_Fire_139,X19,,,2815.0,-155.757423,63.208503
-Reference site,Page Mountain Fire,2019,140,Page_Mountain_Fire_140,X20,,,2811.0,-155.757601,63.209146
-Reference site,Page Mountain Fire,2019,141,Page_Mountain_Fire_141,X21,,,2824.0,-155.757673,63.208804
-Reference site,Page Mountain Fire,2019,142,Page_Mountain_Fire_142,X22,,,2809.0,-155.765089,63.216183
-Reference site,Page Mountain Fire,2019,143,Page_Mountain_Fire_143,X23,,,2806.0,-155.765393,63.218917
-Reference site,Page Mountain Fire,2019,144,Page_Mountain_Fire_144,X24,,,2811.0,-155.775969,63.223635
-Reference site,Page Mountain Fire,2019,145,Page_Mountain_Fire_145,X25,,,2810.0,-155.754115,63.226074
-Reference site,Page Mountain Fire,2019,146,Page_Mountain_Fire_146,X26,,,2817.0,-155.682905,63.19467
-Reference site,Page Mountain Fire,2019,148,Page_Mountain_Fire_148,X27,,,2824.0,-155.608194,63.241633
-Reference site,Page Mountain Fire,2019,149,Page_Mountain_Fire_149,X28,,,2819.0,-155.619573,63.24298
-Reference site,Page Mountain Fire,2019,150,Page_Mountain_Fire_150,X29,,,2818.0,-155.622587,63.242547
-Reference site,Page Mountain Fire,2019,151,Page_Mountain_Fire_151,X30,,,2820.0,-155.632659,63.243357
-Reference site,Page Mountain Fire,2019,152,Page_Mountain_Fire_152,X31,,,2818.0,-155.646701,63.243907
-Reference site,Page Mountain Fire,2019,153,Page_Mountain_Fire_153,X32,,,2820.0,-155.658288,63.242605
-Reference site,Page Mountain Fire,2019,154,Page_Mountain_Fire_154,X33,,,2820.0,-155.657037,63.242908
-Reference site,Page Mountain Fire,2019,155,Page_Mountain_Fire_155,X34,,,2821.0,-155.66557,63.242287
-Reference site,Page Mountain Fire,2019,156,Page_Mountain_Fire_156,X35,,,2818.0,-155.673433,63.240439
-Reference site,Page Mountain Fire,2019,157,Page_Mountain_Fire_157,X36,,,2811.0,-155.554353,63.2977
-Reference site,Page Mountain Fire,2019,158,Page_Mountain_Fire_158,X37,,,2820.0,-155.55929,63.303135
-Reference site,Page Mountain Fire,2019,159,Page_Mountain_Fire_159,X38,,,2815.0,-155.611939,63.272866
-Reference site,Page Mountain Fire,2019,160,Page_Mountain_Fire_160,X39,,,2811.0,-155.658268,63.283052
-Reference site,Page Mountain Fire,2019,161,Page_Mountain_Fire_161,X40,,,2810.0,-155.666478,63.282876
-Reference site,Page Mountain Fire,2019,162,Page_Mountain_Fire_162,X41,,,2819.0,-155.667443,63.282946
-Reference site,Page Mountain Fire,2019,163,Page_Mountain_Fire_163,X42,,,2817.0,-155.677342,63.282663
-Reference site,Page Mountain Fire,2019,164,Page_Mountain_Fire_164,X43,,,2820.0,-155.67859,63.28262
-Reference site,Page Mountain Fire,2019,165,Page_Mountain_Fire_165,X44,,,2814.0,-155.679663,63.282299
-Reference site,Page Mountain Fire,2019,166,Page_Mountain_Fire_166,X45,,,2819.0,-155.690434,63.281088
-Reference site,Page Mountain Fire,2019,167,Page_Mountain_Fire_167,X46,,,2818.0,-155.696492,63.27923
-Reference site,Page Mountain Fire,2019,168,Page_Mountain_Fire_168,X47,,,2813.0,-155.697205,63.278997
-Reference site,Page Mountain Fire,2019,169,Page_Mountain_Fire_169,X48,,,2808.0,-155.6965,63.279658
-Reference site,Page Mountain Fire,2019,170,Page_Mountain_Fire_170,X49,,,2818.0,-155.695737,63.281158
-Reference site,Page Mountain Fire,2019,171,Page_Mountain_Fire_171,X50,,,2811.0,-155.697492,63.281402
-Reference site,Page Mountain Fire,2019,172,Page_Mountain_Fire_172,X51,,,2818.0,-155.70381,63.282061
-Reference site,Page Mountain Fire,2019,175,Page_Mountain_Fire_175,X52,,,2814.0,-155.742481,63.284189
-Reference site,Page Mountain Fire,2019,178,Page_Mountain_Fire_178,X53,,,2818.0,-155.669641,63.295817
-Reference site,Page Mountain Fire,2019,176,Page_Mountain_Fire_176,X54,,,2818.0,-155.662237,63.292026
-Reference site,Page Mountain Fire,2019,177,Page_Mountain_Fire_177,X55,,,2815.0,-155.662649,63.291397
-Reference site,Page Mountain Fire,2019,179,Page_Mountain_Fire_179,X56,,,2820.0,-155.662561,63.29076
-Reference site,Page Mountain Fire,2019,180,Page_Mountain_Fire_180,X57,,,2818.0,-155.658695,63.288826
-Reference site,Page Mountain Fire,2019,181,Page_Mountain_Fire_181,X58,,,2816.0,-155.515305,63.300292
-Reference site,Page Mountain Fire,2019,182,Page_Mountain_Fire_182,X59,,,2812.0,-155.51643,63.30103
-Reference site,Page Mountain Fire,2019,183,Page_Mountain_Fire_183,X60,,,2807.0,-155.517674,63.300857
-Reference site,Page Mountain Fire,2019,184,Page_Mountain_Fire_184,X61,,,2818.0,-155.522306,63.30267
-Reference site,Page Mountain Fire,2019,134,Page_Mountain_Fire_134,X62,,,2820.0,-155.78854,63.193201
+Peripheral site,Page Mountain Fire,2019,118,Page_Mountain_Fire_118,X1,,,2818.0,-155.873999,63.172827
+Peripheral site,Page Mountain Fire,2019,119,Page_Mountain_Fire_119,X2,,,2817.0,-155.872775,63.172888
+Peripheral site,Page Mountain Fire,2019,120,Page_Mountain_Fire_120,X3,,,2809.0,-155.870543,63.172127
+Peripheral site,Page Mountain Fire,2019,121,Page_Mountain_Fire_121,X4,,,2820.0,-155.872164,63.172148
+Peripheral site,Page Mountain Fire,2019,122,Page_Mountain_Fire_122,X5,,,2806.0,-155.871616,63.17253
+Peripheral site,Page Mountain Fire,2019,123,Page_Mountain_Fire_123,X6,,,2818.0,-155.88656,63.174911
+Peripheral site,Page Mountain Fire,2019,124,Page_Mountain_Fire_124,X7,,,2817.0,-155.890317,63.176321
+Peripheral site,Page Mountain Fire,2019,125,Page_Mountain_Fire_125,X8,,,2824.0,-155.89109,63.17664
+Peripheral site,Page Mountain Fire,2019,117,Page_Mountain_Fire_117,X9,,,2819.0,-155.870957,63.171525
+Peripheral site,Page Mountain Fire,2019,116,Page_Mountain_Fire_116,X10,,,2820.0,-155.869762,63.171499
+Peripheral site,Page Mountain Fire,2019,128,Page_Mountain_Fire_128,X11,,,2816.0,-155.815031,63.176109
+Peripheral site,Page Mountain Fire,2019,129,Page_Mountain_Fire_129,X12,,,2818.0,-155.851049,63.179476
+Peripheral site,Page Mountain Fire,2019,130,Page_Mountain_Fire_130,X13,,,2820.0,-155.862126,63.180372
+Peripheral site,Page Mountain Fire,2019,135,Page_Mountain_Fire_135,X14,,,2824.0,-155.80978,63.208531
+Peripheral site,Page Mountain Fire,2019,136,Page_Mountain_Fire_136,X15,,,2809.0,-155.813412,63.21019
+Peripheral site,Page Mountain Fire,2019,233,Page_Mountain_Fire_233,X16,,,2824.0,-155.816886,63.211634
+Peripheral site,Page Mountain Fire,2019,137,Page_Mountain_Fire_137,X17,,,2820.0,-155.747216,63.200921
+Peripheral site,Page Mountain Fire,2019,138,Page_Mountain_Fire_138,X18,,,2818.0,-155.755102,63.203142
+Peripheral site,Page Mountain Fire,2019,139,Page_Mountain_Fire_139,X19,,,2815.0,-155.757423,63.208503
+Peripheral site,Page Mountain Fire,2019,140,Page_Mountain_Fire_140,X20,,,2811.0,-155.757601,63.209146
+Peripheral site,Page Mountain Fire,2019,141,Page_Mountain_Fire_141,X21,,,2824.0,-155.757673,63.208804
+Peripheral site,Page Mountain Fire,2019,142,Page_Mountain_Fire_142,X22,,,2809.0,-155.765089,63.216183
+Peripheral site,Page Mountain Fire,2019,143,Page_Mountain_Fire_143,X23,,,2806.0,-155.765393,63.218917
+Peripheral site,Page Mountain Fire,2019,144,Page_Mountain_Fire_144,X24,,,2811.0,-155.775969,63.223635
+Peripheral site,Page Mountain Fire,2019,145,Page_Mountain_Fire_145,X25,,,2810.0,-155.754115,63.226074
+Peripheral site,Page Mountain Fire,2019,146,Page_Mountain_Fire_146,X26,,,2817.0,-155.682905,63.19467
+Peripheral site,Page Mountain Fire,2019,148,Page_Mountain_Fire_148,X27,,,2824.0,-155.608194,63.241633
+Peripheral site,Page Mountain Fire,2019,149,Page_Mountain_Fire_149,X28,,,2819.0,-155.619573,63.24298
+Peripheral site,Page Mountain Fire,2019,150,Page_Mountain_Fire_150,X29,,,2818.0,-155.622587,63.242547
+Peripheral site,Page Mountain Fire,2019,151,Page_Mountain_Fire_151,X30,,,2820.0,-155.632659,63.243357
+Peripheral site,Page Mountain Fire,2019,152,Page_Mountain_Fire_152,X31,,,2818.0,-155.646701,63.243907
+Peripheral site,Page Mountain Fire,2019,153,Page_Mountain_Fire_153,X32,,,2820.0,-155.658288,63.242605
+Peripheral site,Page Mountain Fire,2019,154,Page_Mountain_Fire_154,X33,,,2820.0,-155.657037,63.242908
+Peripheral site,Page Mountain Fire,2019,155,Page_Mountain_Fire_155,X34,,,2821.0,-155.66557,63.242287
+Peripheral site,Page Mountain Fire,2019,156,Page_Mountain_Fire_156,X35,,,2818.0,-155.673433,63.240439
+Peripheral site,Page Mountain Fire,2019,157,Page_Mountain_Fire_157,X36,,,2811.0,-155.554353,63.2977
+Peripheral site,Page Mountain Fire,2019,158,Page_Mountain_Fire_158,X37,,,2820.0,-155.55929,63.303135
+Peripheral site,Page Mountain Fire,2019,159,Page_Mountain_Fire_159,X38,,,2815.0,-155.611939,63.272866
+Peripheral site,Page Mountain Fire,2019,160,Page_Mountain_Fire_160,X39,,,2811.0,-155.658268,63.283052
+Peripheral site,Page Mountain Fire,2019,161,Page_Mountain_Fire_161,X40,,,2810.0,-155.666478,63.282876
+Peripheral site,Page Mountain Fire,2019,162,Page_Mountain_Fire_162,X41,,,2819.0,-155.667443,63.282946
+Peripheral site,Page Mountain Fire,2019,163,Page_Mountain_Fire_163,X42,,,2817.0,-155.677342,63.282663
+Peripheral site,Page Mountain Fire,2019,164,Page_Mountain_Fire_164,X43,,,2820.0,-155.67859,63.28262
+Peripheral site,Page Mountain Fire,2019,165,Page_Mountain_Fire_165,X44,,,2814.0,-155.679663,63.282299
+Peripheral site,Page Mountain Fire,2019,166,Page_Mountain_Fire_166,X45,,,2819.0,-155.690434,63.281088
+Peripheral site,Page Mountain Fire,2019,167,Page_Mountain_Fire_167,X46,,,2818.0,-155.696492,63.27923
+Peripheral site,Page Mountain Fire,2019,168,Page_Mountain_Fire_168,X47,,,2813.0,-155.697205,63.278997
+Peripheral site,Page Mountain Fire,2019,169,Page_Mountain_Fire_169,X48,,,2808.0,-155.6965,63.279658
+Peripheral site,Page Mountain Fire,2019,170,Page_Mountain_Fire_170,X49,,,2818.0,-155.695737,63.281158
+Peripheral site,Page Mountain Fire,2019,171,Page_Mountain_Fire_171,X50,,,2811.0,-155.697492,63.281402
+Peripheral site,Page Mountain Fire,2019,172,Page_Mountain_Fire_172,X51,,,2818.0,-155.70381,63.282061
+Peripheral site,Page Mountain Fire,2019,175,Page_Mountain_Fire_175,X52,,,2814.0,-155.742481,63.284189
+Peripheral site,Page Mountain Fire,2019,178,Page_Mountain_Fire_178,X53,,,2818.0,-155.669641,63.295817
+Peripheral site,Page Mountain Fire,2019,176,Page_Mountain_Fire_176,X54,,,2818.0,-155.662237,63.292026
+Peripheral site,Page Mountain Fire,2019,177,Page_Mountain_Fire_177,X55,,,2815.0,-155.662649,63.291397
+Peripheral site,Page Mountain Fire,2019,179,Page_Mountain_Fire_179,X56,,,2820.0,-155.662561,63.29076
+Peripheral site,Page Mountain Fire,2019,180,Page_Mountain_Fire_180,X57,,,2818.0,-155.658695,63.288826
+Peripheral site,Page Mountain Fire,2019,181,Page_Mountain_Fire_181,X58,,,2816.0,-155.515305,63.300292
+Peripheral site,Page Mountain Fire,2019,182,Page_Mountain_Fire_182,X59,,,2812.0,-155.51643,63.30103
+Peripheral site,Page Mountain Fire,2019,183,Page_Mountain_Fire_183,X60,,,2807.0,-155.517674,63.300857
+Peripheral site,Page Mountain Fire,2019,184,Page_Mountain_Fire_184,X61,,,2818.0,-155.522306,63.30267
+Peripheral site,Page Mountain Fire,2019,134,Page_Mountain_Fire_134,X62,,,2820.0,-155.78854,63.193201
 Beaver pond,Hurst Creek Fire,2019,55,Hurst_Creek_Fire_55,X1,,,9285.0,-157.290123,62.966759
 Beaver pond,Hurst Creek Fire,2019,56,Hurst_Creek_Fire_56,X2,,,7021.0,-157.284947,62.970285
 Beaver pond,Hurst Creek Fire,2019,57,Hurst_Creek_Fire_57,X3,,,10505.0,-157.282888,62.970624
@@ -356,43 +356,43 @@ Beaver pond,Hurst Creek Fire,2019,89,Hurst_Creek_Fire_89,X34,,,10176.0,-157.2653
 Beaver pond,Hurst Creek Fire,2019,90,Hurst_Creek_Fire_90,X35,,,5579.0,-157.257465,62.949192
 Beaver pond,Hurst Creek Fire,2019,91,Hurst_Creek_Fire_91,X36,,,5735.0,-157.296314,63.080917
 Beaver pond,Hurst Creek Fire,2019,78,Hurst_Creek_Fire_78,X37,M,Not super confident it's a pond,5457.0,-157.232888,62.975412
-Reference site,Hurst Creek Fire,2019,55,Hurst_Creek_Fire_55,X1,,,2817.0,-157.289328,62.965492
-Reference site,Hurst Creek Fire,2019,56,Hurst_Creek_Fire_56,X2,,,2804.0,-157.287731,62.97004
-Reference site,Hurst Creek Fire,2019,57,Hurst_Creek_Fire_57,X3,,,2813.0,-157.277662,62.970689
-Reference site,Hurst Creek Fire,2019,58,Hurst_Creek_Fire_58,X4,,,2811.0,-157.268383,62.97521
-Reference site,Hurst Creek Fire,2019,59,Hurst_Creek_Fire_59,X5,,,2824.0,-157.258099,62.974956
-Reference site,Hurst Creek Fire,2019,60,Hurst_Creek_Fire_60,X6,,,2820.0,-157.252621,62.97489
-Reference site,Hurst Creek Fire,2019,61,Hurst_Creek_Fire_61,X7,,,2819.0,-157.25072,62.974443
-Reference site,Hurst Creek Fire,2019,62,Hurst_Creek_Fire_62,X8,,,2816.0,-157.241359,62.974998
-Reference site,Hurst Creek Fire,2019,63,Hurst_Creek_Fire_63,X9,,,2818.0,-157.239841,62.974622
-Reference site,Hurst Creek Fire,2019,64,Hurst_Creek_Fire_64,X10,,,2813.0,-157.239237,62.973868
-Reference site,Hurst Creek Fire,2019,65,Hurst_Creek_Fire_65,X11,,,2807.0,-157.240817,62.974349
-Reference site,Hurst Creek Fire,2019,66,Hurst_Creek_Fire_66,X12,,,2821.0,-157.228917,62.969043
-Reference site,Hurst Creek Fire,2019,67,Hurst_Creek_Fire_67,X13,,,2818.0,-157.222475,62.966645
-Reference site,Hurst Creek Fire,2019,68,Hurst_Creek_Fire_68,X14,,,2824.0,-157.222186,62.965892
-Reference site,Hurst Creek Fire,2019,69,Hurst_Creek_Fire_69,X15,,,2807.0,-157.221403,62.965443
-Reference site,Hurst Creek Fire,2019,70,Hurst_Creek_Fire_70,X16,,,2818.0,-157.219264,62.964118
-Reference site,Hurst Creek Fire,2019,71,Hurst_Creek_Fire_71,X17,,,2811.0,-157.218223,62.963205
-Reference site,Hurst Creek Fire,2019,72,Hurst_Creek_Fire_72,X18,,,2819.0,-157.217262,62.962475
-Reference site,Hurst Creek Fire,2019,73,Hurst_Creek_Fire_73,X19,,,2822.0,-157.21255,62.959192
-Reference site,Hurst Creek Fire,2019,74,Hurst_Creek_Fire_74,X20,,,2816.0,-157.212608,62.958396
-Reference site,Hurst Creek Fire,2019,75,Hurst_Creek_Fire_75,X21,,,2804.0,-157.207351,62.955986
-Reference site,Hurst Creek Fire,2019,76,Hurst_Creek_Fire_76,X22,,,2813.0,-157.20716,62.955478
-Reference site,Hurst Creek Fire,2019,77,Hurst_Creek_Fire_77,X23,,,2820.0,-157.203747,62.952488
-Reference site,Hurst Creek Fire,2019,79,Hurst_Creek_Fire_79,X24,,,2810.0,-157.212762,62.980308
-Reference site,Hurst Creek Fire,2019,80,Hurst_Creek_Fire_80,X25,,,2812.0,-157.225145,62.977456
-Reference site,Hurst Creek Fire,2019,81,Hurst_Creek_Fire_81,X26,,,2812.0,-157.361431,62.947743
-Reference site,Hurst Creek Fire,2019,82,Hurst_Creek_Fire_82,X27,,,2818.0,-157.360876,62.947056
-Reference site,Hurst Creek Fire,2019,83,Hurst_Creek_Fire_83,X28,,,2822.0,-157.359317,62.946398
-Reference site,Hurst Creek Fire,2019,84,Hurst_Creek_Fire_84,X29,,,2811.0,-157.355227,62.943671
-Reference site,Hurst Creek Fire,2019,85,Hurst_Creek_Fire_85,X30,,,2815.0,-157.353097,62.940913
-Reference site,Hurst Creek Fire,2019,86,Hurst_Creek_Fire_86,X31,,,2815.0,-157.352657,62.940398
-Reference site,Hurst Creek Fire,2019,87,Hurst_Creek_Fire_87,X32,,,2809.0,-157.34097,62.925186
-Reference site,Hurst Creek Fire,2019,88,Hurst_Creek_Fire_88,X33,,,2818.0,-157.279126,62.927871
-Reference site,Hurst Creek Fire,2019,89,Hurst_Creek_Fire_89,X34,,,2817.0,-157.267384,62.953002
-Reference site,Hurst Creek Fire,2019,90,Hurst_Creek_Fire_90,X35,,,2808.0,-157.260099,62.949962
-Reference site,Hurst Creek Fire,2019,91,Hurst_Creek_Fire_91,X36,,,2816.0,-157.293262,63.080629
-Reference site,Hurst Creek Fire,2019,78,Hurst_Creek_Fire_78,X37,,,2823.0,-157.235059,62.975431
+Peripheral site,Hurst Creek Fire,2019,55,Hurst_Creek_Fire_55,X1,,,2817.0,-157.289328,62.965492
+Peripheral site,Hurst Creek Fire,2019,56,Hurst_Creek_Fire_56,X2,,,2804.0,-157.287731,62.97004
+Peripheral site,Hurst Creek Fire,2019,57,Hurst_Creek_Fire_57,X3,,,2813.0,-157.277662,62.970689
+Peripheral site,Hurst Creek Fire,2019,58,Hurst_Creek_Fire_58,X4,,,2811.0,-157.268383,62.97521
+Peripheral site,Hurst Creek Fire,2019,59,Hurst_Creek_Fire_59,X5,,,2824.0,-157.258099,62.974956
+Peripheral site,Hurst Creek Fire,2019,60,Hurst_Creek_Fire_60,X6,,,2820.0,-157.252621,62.97489
+Peripheral site,Hurst Creek Fire,2019,61,Hurst_Creek_Fire_61,X7,,,2819.0,-157.25072,62.974443
+Peripheral site,Hurst Creek Fire,2019,62,Hurst_Creek_Fire_62,X8,,,2816.0,-157.241359,62.974998
+Peripheral site,Hurst Creek Fire,2019,63,Hurst_Creek_Fire_63,X9,,,2818.0,-157.239841,62.974622
+Peripheral site,Hurst Creek Fire,2019,64,Hurst_Creek_Fire_64,X10,,,2813.0,-157.239237,62.973868
+Peripheral site,Hurst Creek Fire,2019,65,Hurst_Creek_Fire_65,X11,,,2807.0,-157.240817,62.974349
+Peripheral site,Hurst Creek Fire,2019,66,Hurst_Creek_Fire_66,X12,,,2821.0,-157.228917,62.969043
+Peripheral site,Hurst Creek Fire,2019,67,Hurst_Creek_Fire_67,X13,,,2818.0,-157.222475,62.966645
+Peripheral site,Hurst Creek Fire,2019,68,Hurst_Creek_Fire_68,X14,,,2824.0,-157.222186,62.965892
+Peripheral site,Hurst Creek Fire,2019,69,Hurst_Creek_Fire_69,X15,,,2807.0,-157.221403,62.965443
+Peripheral site,Hurst Creek Fire,2019,70,Hurst_Creek_Fire_70,X16,,,2818.0,-157.219264,62.964118
+Peripheral site,Hurst Creek Fire,2019,71,Hurst_Creek_Fire_71,X17,,,2811.0,-157.218223,62.963205
+Peripheral site,Hurst Creek Fire,2019,72,Hurst_Creek_Fire_72,X18,,,2819.0,-157.217262,62.962475
+Peripheral site,Hurst Creek Fire,2019,73,Hurst_Creek_Fire_73,X19,,,2822.0,-157.21255,62.959192
+Peripheral site,Hurst Creek Fire,2019,74,Hurst_Creek_Fire_74,X20,,,2816.0,-157.212608,62.958396
+Peripheral site,Hurst Creek Fire,2019,75,Hurst_Creek_Fire_75,X21,,,2804.0,-157.207351,62.955986
+Peripheral site,Hurst Creek Fire,2019,76,Hurst_Creek_Fire_76,X22,,,2813.0,-157.20716,62.955478
+Peripheral site,Hurst Creek Fire,2019,77,Hurst_Creek_Fire_77,X23,,,2820.0,-157.203747,62.952488
+Peripheral site,Hurst Creek Fire,2019,79,Hurst_Creek_Fire_79,X24,,,2810.0,-157.212762,62.980308
+Peripheral site,Hurst Creek Fire,2019,80,Hurst_Creek_Fire_80,X25,,,2812.0,-157.225145,62.977456
+Peripheral site,Hurst Creek Fire,2019,81,Hurst_Creek_Fire_81,X26,,,2812.0,-157.361431,62.947743
+Peripheral site,Hurst Creek Fire,2019,82,Hurst_Creek_Fire_82,X27,,,2818.0,-157.360876,62.947056
+Peripheral site,Hurst Creek Fire,2019,83,Hurst_Creek_Fire_83,X28,,,2822.0,-157.359317,62.946398
+Peripheral site,Hurst Creek Fire,2019,84,Hurst_Creek_Fire_84,X29,,,2811.0,-157.355227,62.943671
+Peripheral site,Hurst Creek Fire,2019,85,Hurst_Creek_Fire_85,X30,,,2815.0,-157.353097,62.940913
+Peripheral site,Hurst Creek Fire,2019,86,Hurst_Creek_Fire_86,X31,,,2815.0,-157.352657,62.940398
+Peripheral site,Hurst Creek Fire,2019,87,Hurst_Creek_Fire_87,X32,,,2809.0,-157.34097,62.925186
+Peripheral site,Hurst Creek Fire,2019,88,Hurst_Creek_Fire_88,X33,,,2818.0,-157.279126,62.927871
+Peripheral site,Hurst Creek Fire,2019,89,Hurst_Creek_Fire_89,X34,,,2817.0,-157.267384,62.953002
+Peripheral site,Hurst Creek Fire,2019,90,Hurst_Creek_Fire_90,X35,,,2808.0,-157.260099,62.949962
+Peripheral site,Hurst Creek Fire,2019,91,Hurst_Creek_Fire_91,X36,,,2816.0,-157.293262,63.080629
+Peripheral site,Hurst Creek Fire,2019,78,Hurst_Creek_Fire_78,X37,,,2823.0,-157.235059,62.975431
 Beaver pond,Old Grouch Top Fire,2019,92,Old_Grouch_Top_Fire_92,X1,,,20272.0,-157.373971,63.188505
 Beaver pond,Old Grouch Top Fire,2019,93,Old_Grouch_Top_Fire_93,X2,,,16651.0,-157.375577,63.188541
 Beaver pond,Old Grouch Top Fire,2019,94,Old_Grouch_Top_Fire_94,X3,,,37711.0,-157.376012,63.186294
@@ -417,39 +417,39 @@ Beaver pond,Old Grouch Top Fire,2019,112,Old_Grouch_Top_Fire_112,X21,,,7775.0,-1
 Beaver pond,Old Grouch Top Fire,2019,113,Old_Grouch_Top_Fire_113,X22,,,7953.0,-157.768264,63.274462
 Beaver pond,Old Grouch Top Fire,2019,114,Old_Grouch_Top_Fire_114,X23,,,5781.0,-157.775966,63.276858
 Beaver pond,Old Grouch Top Fire,2019,115,Old_Grouch_Top_Fire_115,X24,,,7178.0,-157.86298,63.264534
-Reference site,Old Grouch Top Fire,2019,92,Old_Grouch_Top_Fire_92,X1,,,2814.0,-157.369549,63.194482
-Reference site,Old Grouch Top Fire,2019,93,Old_Grouch_Top_Fire_93,X2,,,2819.0,-157.377943,63.194232
-Reference site,Old Grouch Top Fire,2019,94,Old_Grouch_Top_Fire_94,X3,,,2824.0,-157.375655,63.196721
-Reference site,Old Grouch Top Fire,2019,95,Old_Grouch_Top_Fire_95,X4,,,2818.0,-157.277738,63.202026
-Reference site,Old Grouch Top Fire,2019,96,Old_Grouch_Top_Fire_96,X5,,,2814.0,-157.536715,63.248585
-Reference site,Old Grouch Top Fire,2019,97,Old_Grouch_Top_Fire_97,X6,,,2819.0,-157.548937,63.253178
-Reference site,Old Grouch Top Fire,2019,98,Old_Grouch_Top_Fire_98,X7,,,2815.0,-157.553928,63.255848
-Reference site,Old Grouch Top Fire,2019,99,Old_Grouch_Top_Fire_99,X8,,,2820.0,-157.555883,63.256268
-Reference site,Old Grouch Top Fire,2019,100,Old_Grouch_Top_Fire_100,X9,,,2816.0,-157.556419,63.256566
-Reference site,Old Grouch Top Fire,2019,101,Old_Grouch_Top_Fire_101,X10,,,2811.0,-157.555074,63.256175
-Reference site,Old Grouch Top Fire,2019,102,Old_Grouch_Top_Fire_102,X11,,,2820.0,-157.554789,63.255969
-Reference site,Old Grouch Top Fire,2019,103,Old_Grouch_Top_Fire_103,X12,,,2819.0,-157.554927,63.256082
-Reference site,Old Grouch Top Fire,2019,104,Old_Grouch_Top_Fire_104,X13,,,2811.0,-157.525641,63.2494
-Reference site,Old Grouch Top Fire,2019,105,Old_Grouch_Top_Fire_105,X14,,,2808.0,-157.523189,63.249916
-Reference site,Old Grouch Top Fire,2019,106,Old_Grouch_Top_Fire_106,X15,,,2818.0,-157.520797,63.250193
-Reference site,Old Grouch Top Fire,2019,107,Old_Grouch_Top_Fire_107,X16,,,2819.0,-157.516084,63.250497
-Reference site,Old Grouch Top Fire,2019,108,Old_Grouch_Top_Fire_108,X17,,,2813.0,-157.48129,63.322869
-Reference site,Old Grouch Top Fire,2019,109,Old_Grouch_Top_Fire_109,X18,,,2816.0,-157.686374,63.355813
-Reference site,Old Grouch Top Fire,2019,110,Old_Grouch_Top_Fire_110,X19,,,2822.0,-157.747887,63.268539
-Reference site,Old Grouch Top Fire,2019,111,Old_Grouch_Top_Fire_111,X20,,,2820.0,-157.742359,63.268394
-Reference site,Old Grouch Top Fire,2019,112,Old_Grouch_Top_Fire_112,X21,,,2819.0,-157.740863,63.268756
-Reference site,Old Grouch Top Fire,2019,113,Old_Grouch_Top_Fire_113,X22,,,2820.0,-157.771333,63.274831
-Reference site,Old Grouch Top Fire,2019,114,Old_Grouch_Top_Fire_114,X23,,,2818.0,-157.777915,63.277124
-Reference site,Old Grouch Top Fire,2019,115,Old_Grouch_Top_Fire_115,X24,,,2819.0,-157.864659,63.264983
+Peripheral site,Old Grouch Top Fire,2019,92,Old_Grouch_Top_Fire_92,X1,,,2814.0,-157.369549,63.194482
+Peripheral site,Old Grouch Top Fire,2019,93,Old_Grouch_Top_Fire_93,X2,,,2819.0,-157.377943,63.194232
+Peripheral site,Old Grouch Top Fire,2019,94,Old_Grouch_Top_Fire_94,X3,,,2824.0,-157.375655,63.196721
+Peripheral site,Old Grouch Top Fire,2019,95,Old_Grouch_Top_Fire_95,X4,,,2818.0,-157.277738,63.202026
+Peripheral site,Old Grouch Top Fire,2019,96,Old_Grouch_Top_Fire_96,X5,,,2814.0,-157.536715,63.248585
+Peripheral site,Old Grouch Top Fire,2019,97,Old_Grouch_Top_Fire_97,X6,,,2819.0,-157.548937,63.253178
+Peripheral site,Old Grouch Top Fire,2019,98,Old_Grouch_Top_Fire_98,X7,,,2815.0,-157.553928,63.255848
+Peripheral site,Old Grouch Top Fire,2019,99,Old_Grouch_Top_Fire_99,X8,,,2820.0,-157.555883,63.256268
+Peripheral site,Old Grouch Top Fire,2019,100,Old_Grouch_Top_Fire_100,X9,,,2816.0,-157.556419,63.256566
+Peripheral site,Old Grouch Top Fire,2019,101,Old_Grouch_Top_Fire_101,X10,,,2811.0,-157.555074,63.256175
+Peripheral site,Old Grouch Top Fire,2019,102,Old_Grouch_Top_Fire_102,X11,,,2820.0,-157.554789,63.255969
+Peripheral site,Old Grouch Top Fire,2019,103,Old_Grouch_Top_Fire_103,X12,,,2819.0,-157.554927,63.256082
+Peripheral site,Old Grouch Top Fire,2019,104,Old_Grouch_Top_Fire_104,X13,,,2811.0,-157.525641,63.2494
+Peripheral site,Old Grouch Top Fire,2019,105,Old_Grouch_Top_Fire_105,X14,,,2808.0,-157.523189,63.249916
+Peripheral site,Old Grouch Top Fire,2019,106,Old_Grouch_Top_Fire_106,X15,,,2818.0,-157.520797,63.250193
+Peripheral site,Old Grouch Top Fire,2019,107,Old_Grouch_Top_Fire_107,X16,,,2819.0,-157.516084,63.250497
+Peripheral site,Old Grouch Top Fire,2019,108,Old_Grouch_Top_Fire_108,X17,,,2813.0,-157.48129,63.322869
+Peripheral site,Old Grouch Top Fire,2019,109,Old_Grouch_Top_Fire_109,X18,,,2816.0,-157.686374,63.355813
+Peripheral site,Old Grouch Top Fire,2019,110,Old_Grouch_Top_Fire_110,X19,,,2822.0,-157.747887,63.268539
+Peripheral site,Old Grouch Top Fire,2019,111,Old_Grouch_Top_Fire_111,X20,,,2820.0,-157.742359,63.268394
+Peripheral site,Old Grouch Top Fire,2019,112,Old_Grouch_Top_Fire_112,X21,,,2819.0,-157.740863,63.268756
+Peripheral site,Old Grouch Top Fire,2019,113,Old_Grouch_Top_Fire_113,X22,,,2820.0,-157.771333,63.274831
+Peripheral site,Old Grouch Top Fire,2019,114,Old_Grouch_Top_Fire_114,X23,,,2818.0,-157.777915,63.277124
+Peripheral site,Old Grouch Top Fire,2019,115,Old_Grouch_Top_Fire_115,X24,,,2819.0,-157.864659,63.264983
 Beaver pond,Victoria Mountain Fire,2019,6,Victoria_Mountain_Fire_6,X1,Y,,13899.0,-147.141143,65.82217
 Beaver pond,Victoria Mountain Fire,2019,7,Victoria_Mountain_Fire_7,X2,Y,,25449.0,-147.140689,65.820928
-Reference site,Victoria Mountain Fire,2019,6,Victoria_Mountain_Fire_6,X1,,,2813.0,-147.144067,65.820852
-Reference site,Victoria Mountain Fire,2019,7,Victoria_Mountain_Fire_7,X2,,,2809.0,-147.146515,65.820082
+Peripheral site,Victoria Mountain Fire,2019,6,Victoria_Mountain_Fire_6,X1,,,2813.0,-147.144067,65.820852
+Peripheral site,Victoria Mountain Fire,2019,7,Victoria_Mountain_Fire_7,X2,,,2809.0,-147.146515,65.820082
 Beaver pond,Little Mud River Fire,2019,2,Little_Mud_River_Fire_2,X1,M,Poor imagery,3709.0,-153.439686,64.84937
 Beaver pond,Little Mud River Fire,2019,4,Little_Mud_River_Fire_4,X2,M,Poor imagery,3817.0,-153.439378,64.849455
 Beaver pond,Little Mud River Fire,2019,3,Little_Mud_River_Fire_3,X3,M,Poor imagery,4291.0,-153.439407,64.849659
 Beaver pond,Little Mud River Fire,2019,5,Little_Mud_River_Fire_5,X4,M,Poor imagery,4503.0,-153.437125,64.857664
-Reference site,Little Mud River Fire,2019,2,Little_Mud_River_Fire_2,X1,,,2809.0,-153.439896,64.848795
-Reference site,Little Mud River Fire,2019,3,Little_Mud_River_Fire_3,X2,,,2816.0,-153.440237,64.848981
-Reference site,Little Mud River Fire,2019,4,Little_Mud_River_Fire_4,X3,,,2824.0,-153.439431,64.850425
-Reference site,Little Mud River Fire,2019,5,Little_Mud_River_Fire_5,X4,,,2818.0,-153.437573,64.857075
+Peripheral site,Little Mud River Fire,2019,2,Little_Mud_River_Fire_2,X1,,,2809.0,-153.439896,64.848795
+Peripheral site,Little Mud River Fire,2019,3,Little_Mud_River_Fire_3,X2,,,2816.0,-153.440237,64.848981
+Peripheral site,Little Mud River Fire,2019,4,Little_Mud_River_Fire_4,X3,,,2824.0,-153.439431,64.850425
+Peripheral site,Little Mud River Fire,2019,5,Little_Mud_River_Fire_5,X4,,,2818.0,-153.437573,64.857075

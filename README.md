@@ -4,7 +4,7 @@ Code and data for:
 
 > Samuel, W. T., K. D. Tape, E. R. Schoen, and A. V. Coulson. *Do beaver ponds reduce wildfire effects on boreal riparian areas?* Preprint (not peer reviewed). [link to be added]
 
-We compared MTBS burn severity, Sentinel-2 NDVI, and Sentinel-2 NDWI between beaver ponds and paired nearby riparian reference sites in 10 wildfires that burned in Interior Alaska from 2016 to 2021. We also compared riparian sites with the burn severity of each fire as a whole.
+We compared MTBS burn severity, Sentinel-2 NDVI, and Sentinel-2 NDWI between beaver ponds and paired peripheral sites (nearby riparian sites without visible beaver features) in 10 wildfires that burned in Interior Alaska from 2016 to 2021. We also compared riparian sites with the burn severity of each fire as a whole.
 
 ## Reproducing the results
 
@@ -29,11 +29,11 @@ Changes are marked in the revised script with `#CHANGED:` and `#NEW:` comments.
 |---|---|
 | `REVISED Beaver pond wildfire time series analysis.R` | **Analysis used in the preprint.** |
 | `Data/beavers0.csv`–`beavers10.csv`, `Data/controls0.csv`–`controls10.csv` | Google Earth Engine exports, one file per fire. See the file key below. |
-| `Data/Burn Severity Summaries/` | ArcGIS Pro exports of MTBS burn severity (percent of area in each class) for each beaver pond buffer, reference site buffer, and fire perimeter. |
+| `Data/Burn Severity Summaries/` | ArcGIS Pro exports of MTBS burn severity (percent of area in each class) for each beaver pond buffer, peripheral site buffer, and fire perimeter. |
 | `Data/beaver_fire_annual_data.csv` (+ `_metadata.csv`) | Annual NDVI/NDWI composites from 5 years before to 6 years after each fire. **Not used in the preprint.** |
 | `Newdata/` | Long-format NDVI/NDWI (one row per site and image date), made by the original script. |
-| `Spatial/beaver_and_reference_sites.gpkg` | GeoPackage (WGS84, EPSG:4326) with two layers: `site_buffers` (the polygons used for all analyses) and `site_centroids`. |
-| `Spatial/beaver_and_reference_site_centroids.csv` | The same sites as a table with `longitude` and `latitude` columns. |
+| `Spatial/beaver_and_peripheral_sites.gpkg` | GeoPackage (WGS84, EPSG:4326) with two layers: `site_buffers` (the polygons used for all analyses) and `site_centroids`. |
+| `Spatial/beaver_and_peripheral_site_centroids.csv` | The same sites as a table with `longitude` and `latitude` columns. |
 | `Figures/` | `REVISED_*` files are the preprint figures. The other files are earlier versions. |
 
 ### Legacy files (not used in the preprint)
@@ -65,22 +65,22 @@ Changes are marked in the revised script with `#CHANGED:` and `#NEW:` comments.
   - Columns ending in `_ndvi` or `_ndwi` hold the mean index for one Sentinel-2 date (`YYYY_MM_DD`).
   - The pond number is in `Beaver_P_5` in the beaver files and `Control_Po` in the control files.
   - The columns in the control files are shifted: `Beaver_P_2` holds the fire year, not the fire name.
-- **Reference sites** are called "Control" in the raw files. Each beaver pond and its reference site share a pond number within a fire.
+- **Peripheral sites** are called "Control" in the raw files. Each was placed near a beaver pond on the same stream, where no dam or pond was visible in the imagery. Because they are close to ponds, they may not be fully independent of beaver activity, so they are not true controls. Each beaver pond and its peripheral site share a pond number within a fire.
   - In `Spatial/`, the shared ID is `pair_id`.
   - Paired sites are a median of 160 m apart.
 - **Burn severity classes:** the ArcGIS exports use "Unburned", "Mild", "Moderate", and "Severe". These are the MTBS thematic classes "Unburned to Low", "Low", "Moderate", and "High".
-- **Sites with no MTBS data** (masked for poor imagery) were excluded: 10 beaver ponds and 16 reference sites.
+- **Sites with no MTBS data** (masked for poor imagery) were excluded: 10 beaver ponds and 16 peripheral sites.
 - **Pond confidence:** `pond_confidence` in `Spatial/` comes from the mapping notes. Y = confident, M = possible pond, blank = not recorded. All ponds were included in the analyses. Excluding the 26 "M" ponds does not change the conclusions.
-- **Site counts:** the GEE files contain 231 beaver and 223 reference buffers, and the burn severity tables contain 235 of each. Analyses match sites by fire and pond number.
+- **Site counts:** the GEE files contain 231 beaver and 223 peripheral buffers, and the burn severity tables contain 235 of each. Analyses match sites by fire and pond number.
 
 ## Changes from the 2025 analysis
 
-- **Burn severity model (CLMM):** each site now has weights that sum to 1. Before, weights equaled the percent of area, so each site counted about 100 times. The model also now includes a random effect for each beaver–reference pair.
+- **Burn severity model (CLMM):** each site now has weights that sum to 1. Before, weights equaled the percent of area, so each site counted about 100 times. The model also now includes a random effect for each beaver–peripheral pair.
 - **Riparian vs. entire fire:** new paired comparison across the 10 fires.
 - **Pre-fire window:** now runs from June 1 to each fire's MTBS ignition date, instead of a fixed day-of-year 175.
 - **NDVI/NDWI changes:** now analyzed with paired mixed models, with and without the pre-fire value as a covariate.
 - **Figure S1:** fixed. Each panel previously showed all fires except the one named.
-- **Terminology:** "control" sites are called "reference" sites in the preprint and figures.
+- **Terminology:** "control" sites are called "peripheral" sites in the preprint and figures.
 
 ## Contact
 

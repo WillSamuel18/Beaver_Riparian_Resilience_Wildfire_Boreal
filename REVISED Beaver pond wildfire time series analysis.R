@@ -7,7 +7,7 @@
 #The NDVI/NDWI long files in "Newdata/" were made by the "Data prep" section of
 #the original script, so run that first if those files ever need to be rebuilt.
 #Notes on what changed are flagged with "#CHANGED:" or "#NEW:" so they are easy to find.
-#CHANGED: control sites are now called "Reference" sites (in the data and figures), since they are close to beaver ponds
+#CHANGED: control sites are now called "Peripheral" sites (in the data and figures), since they are close to beaver ponds
 #and may not be fully independent of beaver activity. Some comments still say "control"; it means the same sites.
 
 
@@ -55,7 +55,7 @@ clean_burn_severity <- function(x, type) {
 }
 
 Beaver_BurnSeverity_data <- clean_burn_severity(Beaver_BurnSeverity_data, "Beaver")    #225 of 235 sites have data
-Control_BurnSeverity_data <- clean_burn_severity(Control_BurnSeverity_data, "Reference") #219 of 235 sites have data
+Control_BurnSeverity_data <- clean_burn_severity(Control_BurnSeverity_data, "Peripheral") #219 of 235 sites have data
 
 
 Fires_BurnSeverity_data <- Fires_BurnSeverity_data %>%
@@ -123,9 +123,9 @@ for (i in 0:10) {
 
 #Add Type and modify Point, same as before
 beaver_NDVI_long <- beaver_NDVI_long %>% mutate("Type" = "Beaver", Point = paste0("B_", Point))
-control_NDVI_long <- control_NDVI_long %>% mutate("Type" = "Reference", Point = paste0("C_", Point))
+control_NDVI_long <- control_NDVI_long %>% mutate("Type" = "Peripheral", Point = paste0("C_", Point))
 beaver_NDWI_long <- beaver_NDWI_long %>% mutate("Type" = "Beaver", Point = paste0("B_", Point))
-control_NDWI_long <- control_NDWI_long %>% mutate("Type" = "Reference", Point = paste0("C_", Point))
+control_NDWI_long <- control_NDWI_long %>% mutate("Type" = "Peripheral", Point = paste0("C_", Point))
 
 
 NDVI_long <- rbind(beaver_NDVI_long, control_NDVI_long) %>%
@@ -189,8 +189,8 @@ summary(model)
 #Same estimate as before (0.196), but SE = 0.19 and p = 0.30, so no detectable difference between beaver and control sites.
 #The pair random effect is estimated at ~0 (the fire effect absorbs the local variation), and the result is identical without it.
 
-exp(coef(model)["TypeReference"]) #odds ratio = 1.22
-exp(coef(model)["TypeReference"] + c(-1.96, 1.96) * sqrt(diag(vcov(model)))["TypeReference"]) #95% CI = 0.84 - 1.77
+exp(coef(model)["TypePeripheral"]) #odds ratio = 1.22
+exp(coef(model)["TypePeripheral"] + c(-1.96, 1.96) * sqrt(diag(vcov(model)))["TypePeripheral"]) #95% CI = 0.84 - 1.77
 #In plain terms: control sites had 22% higher odds of being in a higher burn severity class than beaver sites, 
 #but the confidence interval runs from 16% lower to 77% higher, so we can't tell them apart. 
 #NOTE: this is an odds ratio, not a "19% greater probability" like the original manuscript said. 
@@ -236,7 +236,7 @@ BS_data_LONG_fig <- BS_data %>%   #same as above, but keeping the entire fire da
                             Percent_Moderate_Burn = "Moderate",
                             Percent_Severe_Burn = "High"))
 
-BS_data_LONG_fig$Type <- factor(BS_data_LONG_fig$Type, levels = c("Beaver", "Reference", "Entire Fire"))  #plot order
+BS_data_LONG_fig$Type <- factor(BS_data_LONG_fig$Type, levels = c("Beaver", "Peripheral", "Entire Fire"))  #plot order
 BS_data_LONG_fig$Burn_Type <- factor(BS_data_LONG_fig$Burn_Type, 
                                      levels = c("Unburned to Low", "Low", "Moderate", "High"))
 
@@ -253,7 +253,7 @@ Burn_severity_plot <- ggplot(BS_data_LONG_fig, aes(x = Burn_Type, y = Percent, f
     x = "Burn Severity Category",
     y = "Percent of Burn Severity Category"
   ) +
-  scale_fill_manual(values = c("Reference" = "#FFA366", "Beaver" = "deepskyblue2", "Entire Fire" = "darkred")) +
+  scale_fill_manual(values = c("Peripheral" = "#FFA366", "Beaver" = "deepskyblue2", "Entire Fire" = "darkred")) +
   scale_y_continuous(limits = c(0, 100), expand = expansion(mult = c(0, 0.05)))+
   theme_minimal() +  
   theme(
@@ -295,9 +295,9 @@ BS_data_S1 <- BS_data_LONG_fig %>%
   left_join(fire_years, by = "Incid_Name") %>% 
   mutate(Panel_title = ifelse(Incid_Name == "All Fires", "K (All Fires)",
                               paste0(Panel, " (", Incid_Name, ", ", Fire_Year, ")")),
-         Type = recode(as.character(Type), "Beaver" = "Beaver Ponds", "Reference" = "Reference Sites"))
+         Type = recode(as.character(Type), "Beaver" = "Beaver Ponds", "Peripheral" = "Peripheral Sites"))
 
-BS_data_S1$Type <- factor(BS_data_S1$Type, levels = c("Beaver Ponds", "Reference Sites", "Entire Fire"))  #plot order
+BS_data_S1$Type <- factor(BS_data_S1$Type, levels = c("Beaver Ponds", "Peripheral Sites", "Entire Fire"))  #plot order
 BS_data_S1$Panel_title <- factor(BS_data_S1$Panel_title, levels = sort(unique(BS_data_S1$Panel_title)))  #keep A-K order
 BS_data_S1$Burn_Type <- factor(BS_data_S1$Burn_Type, 
                                levels = c("High", "Moderate", "Low", "Unburned to Low"))
@@ -366,10 +366,10 @@ plot_fire <- function(data, fire, index, y_limits, y_label, x_label = "") {
     annotate("rect", xmin = 225, xmax = Inf, ymin = -Inf, ymax = Inf, fill = "grey85", alpha = 0.5) +   #post-fire window
     geom_vline(xintercept = info$Ig_DOY, linetype = "dashed", color = "red3", linewidth = 1) +           #ignition date
     geom_point(aes(shape = Type, fill = Type, group = Type), size = 3, alpha = 0.6, col = "black")+
-    scale_shape_manual(values = c("Reference" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
-    scale_fill_manual(values = c("Reference" = "#FFA366", "Beaver" = "deepskyblue2"))+
+    scale_shape_manual(values = c("Peripheral" = 24, "Beaver" = 21)) +  # Different shapes for control and treatment
+    scale_fill_manual(values = c("Peripheral" = "#FFA366", "Beaver" = "deepskyblue2"))+
     geom_smooth(aes(col = Type, group = Type), method = "loess", se = FALSE, alpha = 0.8, linewidth = 2) +
-    scale_color_manual(values = c("Reference" = "#FFA366", "Beaver" = "deepskyblue2"))+
+    scale_color_manual(values = c("Peripheral" = "#FFA366", "Beaver" = "deepskyblue2"))+
     labs(title = info$Title, x = x_label, y = y_label) +
     scale_x_continuous(limits = c(150, 245), breaks = seq(150, 225, 25))+  #same x axis on every panel
     scale_y_continuous(limits = y_limits, breaks = seq(y_limits[1], y_limits[2], 0.25))+
@@ -404,10 +404,10 @@ beaver_NDVI_plot <- ggplot(filter(NDVI_long, Type == "Beaver"), aes(x = DOY, y =
   theme_cowplot()+
   theme(legend.position = "none")
 
-control_NDVI_plot <- ggplot(filter(NDVI_long, Type == "Reference"), aes(x = DOY, y = NDVI, group = Point, color = Point)) +
+control_NDVI_plot <- ggplot(filter(NDVI_long, Type == "Peripheral"), aes(x = DOY, y = NDVI, group = Point, color = Point)) +
   geom_point()+
   geom_smooth(method = "loess", se = FALSE) +
-  labs(title = "L (Reference)", x = "Day of Year", y = "", color = "Point") +
+  labs(title = "L (Peripheral)", x = "Day of Year", y = "", color = "Point") +
   scale_color_viridis(discrete = TRUE) +
   scale_x_continuous(limits = c(150, 245), breaks = seq(150, 225, 25))+
   scale_y_continuous(limits = c(0, 0.75), breaks = seq(0, 0.75, 0.25))+
@@ -455,10 +455,10 @@ beaver_NDWI_plot <- ggplot(filter(NDWI_long, Type == "Beaver"), aes(x = DOY, y =
   theme_cowplot()+
   theme(legend.position = "none")
 
-control_NDWI_plot <- ggplot(filter(NDWI_long, Type == "Reference"), aes(x = DOY, y = NDWI, group = Point, color = Point)) +
+control_NDWI_plot <- ggplot(filter(NDWI_long, Type == "Peripheral"), aes(x = DOY, y = NDWI, group = Point, color = Point)) +
   geom_point()+
   geom_smooth(method = "loess", se = FALSE) +
-  labs(title = "L (Reference)", x = "Day of Year", y = "", color = "Point") +
+  labs(title = "L (Peripheral)", x = "Day of Year", y = "", color = "Point") +
   scale_color_viridis(option="G", discrete = TRUE) +
   scale_x_continuous(limits = c(150, 245), breaks = seq(150, 225, 25))+
   scale_y_continuous(limits = c(-0.75, 0.5), breaks = seq(-0.75, 0.5, 0.25))+
@@ -530,10 +530,10 @@ NDVI_pairs <- NDVI_combined %>%
 nrow(NDVI_pairs) #219 complete pairs
 
 #Is the pre-fire NDVI different between sites? 
-t.test(NDVI_pairs$NDVI_pre_Reference, NDVI_pairs$NDVI_pre_Beaver, paired = TRUE) 
+t.test(NDVI_pairs$NDVI_pre_Peripheral, NDVI_pairs$NDVI_pre_Beaver, paired = TRUE) 
 #Before the fire, control sites were greener than their paired beaver sites: difference = 0.035, t = 7.65, df = 218, p < 0.001
 #Is the post-fire NDVI different between sites? 
-t.test(NDVI_pairs$NDVI_post_Reference, NDVI_pairs$NDVI_post_Beaver, paired = TRUE) 
+t.test(NDVI_pairs$NDVI_post_Peripheral, NDVI_pairs$NDVI_post_Beaver, paired = TRUE) 
 #After the fire there was no difference: difference = 0.001, t = 0.09, df = 218, p = 0.925
 
 
@@ -574,9 +574,9 @@ NDWI_pairs <- NDWI_combined %>%
   pivot_wider(names_from = Type, values_from = c(NDWI_pre, NDWI_post, dNDWI)) %>% 
   drop_na()
 
-t.test(NDWI_pairs$NDWI_pre_Reference, NDWI_pairs$NDWI_pre_Beaver, paired = TRUE) 
+t.test(NDWI_pairs$NDWI_pre_Peripheral, NDWI_pairs$NDWI_pre_Beaver, paired = TRUE) 
 #Before the fire, beaver sites were wetter: difference = -0.022, t = -5.75, df = 218, p < 0.001
-t.test(NDWI_pairs$NDWI_post_Reference, NDWI_pairs$NDWI_post_Beaver, paired = TRUE) 
+t.test(NDWI_pairs$NDWI_post_Peripheral, NDWI_pairs$NDWI_post_Beaver, paired = TRUE) 
 #After the fire there was no difference: difference = -0.001, t = -0.08, df = 218, p = 0.935
 
 model_NDWI_original <- lmer(dNDWI ~ Type + (1|Fire), data = NDWI_combined)
@@ -600,12 +600,12 @@ summary(model_NDWI_adj)
 
 p_star <- function(p) ifelse(p < 0.05, "*", "")  #asterisk if significant
 
-NDVI_stars <- c(Pre = p_star(t.test(NDVI_pairs$NDVI_pre_Reference, NDVI_pairs$NDVI_pre_Beaver, paired = TRUE)$p.value),
-                Post = p_star(t.test(NDVI_pairs$NDVI_post_Reference, NDVI_pairs$NDVI_post_Beaver, paired = TRUE)$p.value),
-                Change = p_star(coef(summary(model_NDVI_adj))["TypeReference", "Pr(>|t|)"]))
-NDWI_stars <- c(Pre = p_star(t.test(NDWI_pairs$NDWI_pre_Reference, NDWI_pairs$NDWI_pre_Beaver, paired = TRUE)$p.value),
-                Post = p_star(t.test(NDWI_pairs$NDWI_post_Reference, NDWI_pairs$NDWI_post_Beaver, paired = TRUE)$p.value),
-                Change = p_star(coef(summary(model_NDWI_adj))["TypeReference", "Pr(>|t|)"]))
+NDVI_stars <- c(Pre = p_star(t.test(NDVI_pairs$NDVI_pre_Peripheral, NDVI_pairs$NDVI_pre_Beaver, paired = TRUE)$p.value),
+                Post = p_star(t.test(NDVI_pairs$NDVI_post_Peripheral, NDVI_pairs$NDVI_post_Beaver, paired = TRUE)$p.value),
+                Change = p_star(coef(summary(model_NDVI_adj))["TypePeripheral", "Pr(>|t|)"]))
+NDWI_stars <- c(Pre = p_star(t.test(NDWI_pairs$NDWI_pre_Peripheral, NDWI_pairs$NDWI_pre_Beaver, paired = TRUE)$p.value),
+                Post = p_star(t.test(NDWI_pairs$NDWI_post_Peripheral, NDWI_pairs$NDWI_post_Beaver, paired = TRUE)$p.value),
+                Change = p_star(coef(summary(model_NDWI_adj))["TypePeripheral", "Pr(>|t|)"]))
 
 
 NDVI_combined_2 <- bind_rows(
@@ -622,7 +622,7 @@ Spring_vs_fall_NDVI <- ggplot(NDVI_combined_2, aes(x = Season, y = NDVI, fill = 
   theme_minimal() +
   labs(title = "A",
        x = "", y = "Normalized Difference Vegetation Index") +
-  scale_fill_manual(values = c("Beaver" = "deepskyblue2", "Reference" = "#FFA366"))+
+  scale_fill_manual(values = c("Beaver" = "deepskyblue2", "Peripheral" = "#FFA366"))+
   scale_y_continuous(limits = c(0, 0.8), breaks = c(0, 0.2, 0.4, 0.6, 0.8))+
   annotate("text", x = c("Pre-Fire", "Post-Fire"), y = 0, label = NDVI_stars[c("Pre", "Post")], size = 14, color = "black") +
   theme(
@@ -639,7 +639,7 @@ beaver_violin_NDVI <- ggplot(NDVI_combined, aes(x = Type, y = dNDVI, fill = Type
   geom_boxplot(width = 0.1, position = position_dodge(width = 0.9), color = "black", alpha = 0.7) +  # Boxplot on top
   stat_summary(fun = mean, geom = "point", shape = 16, size = 3, 
                color = "black", position = position_dodge(width = 0.75))+ 
-  scale_fill_manual(values = c("Reference" = "#FFA366", "Beaver" = "deepskyblue2")) +
+  scale_fill_manual(values = c("Peripheral" = "#FFA366", "Beaver" = "deepskyblue2")) +
   labs(title = "B",
     x = "", y = "NDVI Change (dNDVI)") +
   theme_minimal() +  
@@ -668,7 +668,7 @@ Spring_vs_fall_NDWI <- ggplot(NDWI_combined_2, aes(x = Season, y = NDWI, fill = 
   theme_minimal() +
   labs(title = "C",
        x = "", y = "Normalized Difference Water Index") +
-  scale_fill_manual(values = c("Beaver" = "deepskyblue2", "Reference" = "#FFA366"))+
+  scale_fill_manual(values = c("Beaver" = "deepskyblue2", "Peripheral" = "#FFA366"))+
   scale_y_continuous(limits = c(-0.7, 0.2), breaks = c(-0.6, -0.4, -0.2, 0, 0.2))+
   annotate("text", x = c("Pre-Fire", "Post-Fire"), y = -0.7, label = NDWI_stars[c("Pre", "Post")], size = 14, color = "black") +
   theme(
@@ -688,7 +688,7 @@ beaver_violin_NDWI <- ggplot(NDWI_combined, aes(x = Type, y = dNDWI, fill = Type
   geom_boxplot(width = 0.1, position = position_dodge(width = 0.9), color = "black", alpha = 0.7) +  # Boxplot on top
   stat_summary(fun = mean, geom = "point", shape = 16, size = 3, 
                color = "black", position = position_dodge(width = 0.75)) +
-  scale_fill_manual(values = c("Reference" = "#FFA366", "Beaver" = "deepskyblue2")) +
+  scale_fill_manual(values = c("Peripheral" = "#FFA366", "Beaver" = "deepskyblue2")) +
   labs(title = "D",
        x = "", y = "NDWI Change (dNDWI)") +
   theme_minimal() +  
@@ -727,7 +727,7 @@ ggsave(plot = overall_change_panel,
 #Re-run this after any change above so the text and the code always match.
 
 fmt_p <- function(p) ifelse(p < 0.001, "p < 0.001", paste0("p = ", formatC(p, format = "f", digits = 3)))  #p-value formatting
-pull_lmer <- function(m, term = "TypeReference") {  #estimate, t, and p for one term of a lmer model
+pull_lmer <- function(m, term = "TypePeripheral") {  #estimate, t, and p for one term of a lmer model
   x <- coef(summary(m))[term, ]
   sprintf("estimate = %.3f, t = %.2f, %s", x["Estimate"], x["t value"], fmt_p(x["Pr(>|t|)"]))
 }
@@ -760,9 +760,9 @@ pair_distance <- filter(pair_distance, Fire != "Chalkyitsik")
 
 cat("\n==== METHODS: SAMPLE SIZES ====\n")
 cat(sprintf("Wildfires: %d (%s)\n", nrow(fire_info), paste(range(fire_info$Fire_Year), collapse = "-")))
-cat(sprintf("Burn severity: %d beaver sites and %d control sites with MTBS data\n", 
-            sum(BS_data$Type == "Beaver"), sum(BS_data$Type == "Reference")))
-cat(sprintf("NDVI/NDWI: %d sites with images before ignition and after DOY 225, %d complete beaver-control pairs\n", 
+cat(sprintf("Burn severity: %d beaver sites and %d peripheral sites with MTBS data\n", 
+            sum(BS_data$Type == "Beaver"), sum(BS_data$Type == "Peripheral")))
+cat(sprintf("NDVI/NDWI: %d sites with images before ignition and after DOY 225, %d complete beaver-peripheral pairs\n", 
             nrow(NDVI_combined), nrow(NDVI_pairs)))
 cat(sprintf("Distance between paired sites: median = %.0f m, 90th percentile = %.0f m, %d of %d pairs > 1 km\n",
             median(pair_distance$Distance_m), quantile(pair_distance$Distance_m, 0.9),
@@ -774,7 +774,7 @@ image_dates <- NDVI_long %>%
   left_join(dplyr::select(fire_info, Fire, Fire_Name, Fire_Year, Ig_Date, Ig_DOY), by = "Fire") %>% 
   group_by(Fire_Name, Fire_Year, Ig_Date) %>% 
   summarize(Beaver_sites = n_distinct(Point[Type == "Beaver"]),
-            Reference_sites = n_distinct(Point[Type == "Reference"]),
+            Peripheral_sites = n_distinct(Point[Type == "Peripheral"]),
             Image_dates_pre = n_distinct(Date[DOY < Ig_DOY]),
             Image_dates_post = n_distinct(Date[DOY > 225]),
             Image_dates_all = paste(sort(unique(Date)), collapse = "; "), .groups = "drop")
@@ -790,9 +790,9 @@ BS_means <- BS_data %>%
   summarize(across(starts_with("Percent"), mean))
 print(BS_means)  #mean % of each MTBS class for beaver, control, and the entire fire
 
-x <- coef(summary(model))["TypeReference", ]
+x <- coef(summary(model))["TypePeripheral", ]
 ci <- exp(x["Estimate"] + c(-1.96, 1.96) * x["Std. Error"])
-cat(sprintf("CLMM beaver vs reference: estimate = %.3f (SE = %.3f), odds ratio = %.2f (95%% CI %.2f-%.2f), z = %.2f, %s\n",
+cat(sprintf("CLMM beaver vs peripheral: estimate = %.3f (SE = %.3f), odds ratio = %.2f (95%% CI %.2f-%.2f), z = %.2f, %s\n",
             x["Estimate"], x["Std. Error"], exp(x["Estimate"]), ci[1], ci[2], x["z value"], fmt_p(x["Pr(>|z|)"])))
 
 cat(sprintf("Moderate + high, riparian vs entire fire: %.1f%% vs %.1f%%, %s; riparian lower in %d of %d fires\n",
@@ -814,8 +814,8 @@ cat("\n==== RESULTS: NDVI ====\n")
 NDVI_combined %>% group_by(Type) %>% 
   summarize(NDVI_pre = mean(NDVI_pre), NDVI_post = mean(NDVI_post), dNDVI = mean(dNDVI),
             Percent_change = mean(dNDVI)/mean(NDVI_pre)*100) %>% print()
-cat("Pre-fire, reference minus beaver (paired t-test):", pull_t(NDVI_pairs$NDVI_pre_Reference, NDVI_pairs$NDVI_pre_Beaver), "\n")
-cat("Post-fire, reference minus beaver (paired t-test):", pull_t(NDVI_pairs$NDVI_post_Reference, NDVI_pairs$NDVI_post_Beaver), "\n")
+cat("Pre-fire, peripheral minus beaver (paired t-test):", pull_t(NDVI_pairs$NDVI_pre_Peripheral, NDVI_pairs$NDVI_pre_Beaver), "\n")
+cat("Post-fire, peripheral minus beaver (paired t-test):", pull_t(NDVI_pairs$NDVI_post_Peripheral, NDVI_pairs$NDVI_post_Beaver), "\n")
 cat("dNDVI, paired model:", pull_lmer(model_NDVI), "\n")
 cat("dNDVI, adjusted for pre-fire NDVI:", pull_lmer(model_NDVI_adj), "\n")
 cat("   pre-fire NDVI term:", pull_lmer(model_NDVI_adj, "NDVI_pre"), "\n")
@@ -823,8 +823,8 @@ cat("   pre-fire NDVI term:", pull_lmer(model_NDVI_adj, "NDVI_pre"), "\n")
 cat("\n==== RESULTS: NDWI ====\n")
 NDWI_combined %>% group_by(Type) %>% 
   summarize(NDWI_pre = mean(NDWI_pre), NDWI_post = mean(NDWI_post), dNDWI = mean(dNDWI)) %>% print()
-cat("Pre-fire, reference minus beaver (paired t-test):", pull_t(NDWI_pairs$NDWI_pre_Reference, NDWI_pairs$NDWI_pre_Beaver), "\n")
-cat("Post-fire, reference minus beaver (paired t-test):", pull_t(NDWI_pairs$NDWI_post_Reference, NDWI_pairs$NDWI_post_Beaver), "\n")
+cat("Pre-fire, peripheral minus beaver (paired t-test):", pull_t(NDWI_pairs$NDWI_pre_Peripheral, NDWI_pairs$NDWI_pre_Beaver), "\n")
+cat("Post-fire, peripheral minus beaver (paired t-test):", pull_t(NDWI_pairs$NDWI_post_Peripheral, NDWI_pairs$NDWI_post_Beaver), "\n")
 cat("dNDWI, paired model:", pull_lmer(model_NDWI), "\n")
 cat("dNDWI, adjusted for pre-fire NDWI:", pull_lmer(model_NDWI_adj), "\n")
 cat("   pre-fire NDWI term:", pull_lmer(model_NDWI_adj, "NDWI_pre"), "\n")
