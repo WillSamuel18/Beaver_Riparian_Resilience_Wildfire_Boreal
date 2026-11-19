@@ -17,7 +17,8 @@ We compared MTBS burn severity, Sentinel-2 NDVI, and Sentinel-2 NDWI between bea
    - It writes every manuscript figure to `Figures/REVISED_*.jpeg`.
    - It writes Table S1 (image dates by fire) to `Figures/REVISED_Table_image_dates_by_fire.csv`.
    - Its last section ("Summary of numbers for the manuscript") prints every statistic reported in the paper.
-3. The `Newdata/*_long.csv` files were made by the "Data prep" section of the original script, `Beaver pond wildfire time series analysis.R`. You only need to rerun that section to rebuild them from the Google Earth Engine exports.
+3. NDVI and NDWI were extracted from Sentinel-2 imagery with this Google Earth Engine script: https://code.earthengine.google.com/42a7ac3c070ca7972d55648a3ef426c5
+4. The `Newdata/*_long.csv` files were made by the "Data prep" section of the original script, `Beaver pond wildfire time series analysis.R`. You only need to rerun that section to rebuild them from the Google Earth Engine exports.
 
 Packages: tidyverse, lubridate, patchwork, cowplot, viridis, lme4, lmerTest, ordinal. Tested with R 4.3.3.
 
@@ -70,7 +71,7 @@ Changes are marked in the revised script with `#CHANGED:` and `#NEW:` comments.
   - Paired sites are a median of 160 m apart.
 - **Burn severity classes:** the ArcGIS exports use "Unburned", "Mild", "Moderate", and "Severe". These are the MTBS thematic classes "Unburned to Low", "Low", "Moderate", and "High".
 - **Sites with no MTBS data** (masked for poor imagery) were excluded: 10 beaver ponds and 16 peripheral sites.
-- **Pond confidence:** `pond_confidence` in `Spatial/` comes from the mapping notes. Y = confident, M = possible pond, blank = not recorded. All ponds were included in the analyses. Excluding the 26 "M" ponds does not change the conclusions.
+- **Pond confidence:** `pond_confidence` in `Spatial/` comes from the mapping notes. Y = confident, M = possible pond, blank = not recorded. All ponds were included in the analyses. The last section of the revised script reruns the models without the 25 "M" ponds and their paired peripheral sites; the conclusions do not change.
 - **Site counts:** the GEE files contain 231 beaver and 223 peripheral buffers, and the burn severity tables contain 235 of each. Analyses match sites by fire and pond number.
 
 ## Changes from the 2025 analysis

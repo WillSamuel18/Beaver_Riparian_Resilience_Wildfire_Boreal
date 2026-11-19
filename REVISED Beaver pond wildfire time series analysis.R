@@ -829,3 +829,37 @@ cat("dNDWI, paired model:", pull_lmer(model_NDWI), "\n")
 cat("dNDWI, adjusted for pre-fire NDWI:", pull_lmer(model_NDWI_adj), "\n")
 cat("   pre-fire NDWI term:", pull_lmer(model_NDWI_adj, "NDWI_pre"), "\n")
 
+
+
+
+# Sensitivity check: uncertain ponds ------------------------------------------
+
+#NEW: Some ponds were flagged as uncertain ("M" = maybe a pond) in the mapping notes (column Beaver_P_6 in the GEE beaver files).
+#Rerun the burn severity and adjusted NDVI/NDWI models without these ponds and their paired peripheral sites.
+fire_names <- c("Iniakuk Lake Fire", "Hogatza River Fire", "Hog Fire", "Chalkyitsik Complex Fire", "Sunshine Mountain Fire",
+                "Munson Creek Fire", "Page Mountain Fire", "Hurst Creek Fire", "Old Grouch Top Fire",
+                "Victoria Mountain Fire", "Little Mud River Fire")  #same order as files 0-10
+
+uncertain <- data.frame()
+for (i in 0:10) {
+  beaver_raw <- read.csv(paste0("Data/beavers", i, ".csv"))
+  flag <- which(beaver_raw$Beaver_P_6 %in% "M")
+  if (length(flag) > 0) uncertain <- rbind(uncertain, data.frame(Fire = fire_suffix[i+1], Fire_Name = fire_names[i+1],
+                                                                  Pair = beaver_raw$Beaver_P_5[flag]))
+}
+uncertain <- filter(uncertain, Fire != "Chalkyitsik")
+nrow(uncertain)  #number of uncertain ponds
+
+model_certain <- clmm(Burn_Type ~ Type + (1 | Incid_Name) + (1 | Pair_ID),
+                      data = filter(BS_data_LONG, Percent > 0, !(Pair_ID %in% paste(uncertain$Fire_Name, uncertain$Pair, sep = "_"))),
+                      weights = Percent/100)
+model_NDVI_adj_certain <- lmer(dNDVI ~ Type + NDVI_pre + (1|Fire) + (1|Pair_ID),
+                               data = filter(NDVI_combined, !(Pair_ID %in% paste(uncertain$Fire, uncertain$Pair, sep = "_"))))
+model_NDWI_adj_certain <- lmer(dNDWI ~ Type + NDWI_pre + (1|Fire) + (1|Pair_ID),
+                               data = filter(NDWI_combined, !(Pair_ID %in% paste(uncertain$Fire, uncertain$Pair, sep = "_"))))
+
+cat("\n==== SENSITIVITY: WITHOUT UNCERTAIN PONDS ====\n")
+x <- coef(summary(model_certain))["TypePeripheral", ]
+cat(sprintf("%d uncertain ponds removed. CLMM: odds ratio = %.2f, %s\n", nrow(uncertain), exp(x["Estimate"]), fmt_p(x["Pr(>|z|)"])))
+cat("dNDVI, adjusted for pre-fire NDVI:", pull_lmer(model_NDVI_adj_certain), "\n")
+cat("dNDWI, adjusted for pre-fire NDWI:", pull_lmer(model_NDWI_adj_certain), "\n")
