@@ -2,7 +2,7 @@
 
 Code and data for:
 
-> Samuel, W. T., K. D. Tape, E. R. Schoen, and A. V. Coulson. *Do beaver ponds reduce wildfire effects on boreal riparian areas?* Preprint (not peer reviewed). [link to be added]
+> Samuel, W. T., and E. R. Schoen. 2026. *Do beaver ponds reduce wildfire effects on boreal riparian areas?* EcoEvoRxiv preprint (not peer reviewed). [DOI to be added]
 
 We compared MTBS burn severity, Sentinel-2 NDVI, and Sentinel-2 NDWI between beaver ponds and paired peripheral sites (nearby riparian sites without visible beaver features) in 10 wildfires that burned in Interior Alaska from 2016 to 2021. We also compared riparian sites with the burn severity of each fire as a whole.
 
